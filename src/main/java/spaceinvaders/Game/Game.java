@@ -1,51 +1,59 @@
 package spaceinvaders.Game;
 
-import gameframework.drawing.DrawableImage;
+import spaceinvaders.Level;
 import gameframework.drawing.GameCanvas;
 import gameframework.drawing.GameCanvasDefaultImpl;
 import gameframework.drawing.GameUniverseViewPortDefaultImpl;
 import gameframework.game.GameConfiguration;
 import gameframework.game.GameData;
-import gameframework.gui.GameMenuBar;
+import gameframework.game.GameDefaultImpl;
 import gameframework.gui.GameWindow;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 /**
- * 
+ * @author Matthieu Lepers
  * @author Benjamin Szczapa
- *
  */
-public class Game {
+public class Game extends GameDefaultImpl {
 	
-	private static GameCanvas gameCanvas = new GameCanvasDefaultImpl();
-	private static GameData gameData = new GameData(new GameConfiguration());
-	private static GameWindow gameWindow;
-	private static GameUniverseViewPortDefaultImpl universeViewPort;
-	private static DrawableImage image;
+	private GameWindow window;
+	private GameCanvas canvas;
+	private GameUniverseViewPortDefaultImpl universe;
 	
-	public static void main (String[] args) throws IOException{
-
-		gameData.increaseLife(1);
-		gameWindow = new GameWindow("Sapce Invaders", gameCanvas, gameData);
-		universeViewPort = new GameUniverseViewPortDefaultImpl(gameData);
-		universeViewPort.paint();
+	public Game(GameData datas) {
+		super(datas);
+		//this.data.increaseLife(1);
+		this.data.getCanvas().setSize(100, 100);
 		
-		image = new DrawableImage(new File("src/main/resources/fond.png").toURI().toURL(), gameCanvas);
-		gameCanvas.setSize(840, 600);
+		this.canvas = this.data.getCanvas();
+		this.window = new GameWindow("Space Invaders", this.canvas, this.data);
 		
+		window.createGUI();
 		
+		//This is working
+		this.universe = new GameUniverseViewPortDefaultImpl(this.data);
 		
-		gameWindow.createGUI();
+		//Add the level
+		this.data.addLevel(new Level(this));
 		
+		this.universe.paint();
+		
+		this.start();
 	}
 	
-
+	public GameCanvasDefaultImpl getGameCanvas() {
+		return (GameCanvasDefaultImpl) this.canvas;
+	}
+	
+	public GameData getData() {
+		return this.data;
+	}
+	
+	public GameUniverseViewPortDefaultImpl getUniverseViewPort() {
+		return this.universe;
+	}
+	
+	public static void main (String[] args) {
+		GameData datas = new GameData(new GameConfiguration());
+		new Game(datas);
+	}
 }
