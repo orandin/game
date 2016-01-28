@@ -1,69 +1,64 @@
 package spaceinvaders.entities;
 
-import java.awt.Graphics;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
-import gameframework.game.GameEntity;
-import gameframework.motion.GameMovable;
-import gameframework.motion.MoveStrategyRandom;
+import spaceinvaders.entities.playerEntry.PlayerCommande;
 
-public class Player extends GameMovable implements GameEntity{
-	
-	/*
-	 * position de test a changer quand la taille sera fixer (à reflechir)
-	 */
-	private static final int INIT_POSX = 50;
-	private static final int INIT_POSY = 50;
-	private String name;
+import gameframework.drawing.DrawableImage;
+import gameframework.game.GameData;
+import gameframework.motion.MoveStrategyKeyboard;
+
+public class Player extends Shooter{
 	
 	//Constructor
-	public Player(String name){
-		this(name,INIT_POSX, INIT_POSY);
-	}
-	public Player(String name, int posX, int posY) {
-		super();
-		super.setPosition(new Point(posX, posY));
-		super.moveDriver.setStrategy(new MoveStrategyRandom());
-		this.name = name;	
+	
+	public Player(GameData data) {
+		super(data);
+		
+		//image du vaiseau principal
+		super.image = new DrawableImage("../../images/entite/player1.png", data.getCanvas());
+		
+		//initialisation de la position du joueur
+		int posX = this.config.getNbColumns() / 2; //position au milieu du canvas
+		int posY = this.config.getNbRows() - (this.config.getNbRows() / 6) ; //position en bas du joueur
+		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
+		
+		//initialisation de la strategy
+		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false);
+		
+		//on enleve les touche haut et bas
+		str.addKeyDirection(KeyEvent.VK_UP, new Point(0, 0));
+		str.addKeyDirection(KeyEvent.VK_DOWN, new Point(0, 0));
+		
+		//on ajoute la strategie au movedriver et on ajoute un KeyListener au canvas du jeu pour que les touches soit prises en compte
+		super.moveDriver.setStrategy(str);
+		data.getCanvas().addKeyListener(str);
+		//ajout d'un KeyListener pour la toucher tirer
+		data.getCanvas().addKeyListener(new PlayerCommande(this));
+		super.canShoot = true;
 	}
 
 	//Getter
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
 
-	/**
-	 * @return lifeBox
-	 */
-	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position);
+		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
 	
 	//Methode
 	
 	@Override
 	public void oneStepMoveAddedBehavior() {
-	
-	}
-	
-	public static void main (String[] args){
-		Player p = new Player("keke");
-		while(true){
-			System.out.println("pos : (" + p.getPosition().getX() + "," + p.getPosition().getY() + ")");
-			p.oneStepMove();
-			System.out.println("pos : (" + p.getPosition().getX() + "," + p.getPosition().getY() + ")");
-		}		
-	}
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void shoot(){
+		if(super.canShoot){
+			super.data.getUniverse().addGameEntity(new Laser(super.data, this, true));
+			super.canShoot = false;
+		}
+	}
+	
 }

@@ -1,50 +1,43 @@
 package spaceinvaders.Game;
 
-import gameframework.drawing.DrawableImage;
-import gameframework.drawing.GameCanvas;
-import gameframework.drawing.GameCanvasDefaultImpl;
 import gameframework.drawing.GameUniverseViewPortDefaultImpl;
 import gameframework.game.GameConfiguration;
 import gameframework.game.GameData;
-import gameframework.gui.GameMenuBar;
+import gameframework.game.GameDefaultImpl;
 import gameframework.gui.GameWindow;
+import gameframework.motion.blocking.MoveBlockerRulesApplier;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
+import spaceinvaders.Level;
+import spaceinvaders.entities.blockersRules.MoveBlockerRules;
+
 /**
  * 
  * @author Benjamin Szczapa
  *
  */
-public class Game {
+public class Game extends GameDefaultImpl{
 	
-	private static GameCanvas gameCanvas = new GameCanvasDefaultImpl();
-	private static GameData gameData = new GameData(new GameConfiguration());
-	private static GameWindow gameWindow;
-	private static GameUniverseViewPortDefaultImpl universeViewPort;
-	private static DrawableImage image;
+	private GameWindow gameWindow;
+	private GameUniverseViewPortDefaultImpl universeViewPort;
 	
-	public static void main (String[] args) throws IOException{
+	public Game() {
+		super(new GameData(new GameConfiguration()));
+		this.gameWindow = new GameWindow("space invaders", this.data.getCanvas(), this.data);
+		this.gameWindow.createGUI();
+		this.universeViewPort = new GameUniverseViewPortDefaultImpl(this.data);
+		this.universeViewPort.setBackgroundImage("../../fond.png");
+		
+		MoveBlockerRulesApplier applier = new MoveBlockerRules();
+		applier.setGameData(data);
+		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
+		this.data.addLevel(new Level(this.data, this.universeViewPort));
+	}
 
-		gameData.increaseLife(1);
-		gameWindow = new GameWindow("Sapce Invaders", gameCanvas, gameData);
-		universeViewPort = new GameUniverseViewPortDefaultImpl(gameData);
-		universeViewPort.paint();
-		
-		image = new DrawableImage(new File("src/main/resources/fond.png").toURI().toURL(), gameCanvas);
-		gameCanvas.setSize(840, 600);
-		
-		
-		
-		gameWindow.createGUI();
-		
+	public static void main (String[] args) throws IOException{
+		Game game = new Game();
+		game.start();
 	}
 	
 
