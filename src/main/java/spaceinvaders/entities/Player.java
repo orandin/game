@@ -1,69 +1,24 @@
 package spaceinvaders.entities;
 
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import gameframework.motion.MoveStrategyKeyboard8Dir;
+import spaceinvaders.Game.Game;
 
-import gameframework.game.GameEntity;
-import gameframework.motion.GameMovable;
-import gameframework.motion.MoveStrategyRandom;
-
-public class Player extends GameMovable implements GameEntity{
-	
-	/*
-	 * position de test a changer quand la taille sera fixer (à reflechir)
-	 */
-	private static final int INIT_POSX = 50;
-	private static final int INIT_POSY = 50;
-	private String name;
-	
-	//Constructor
-	public Player(String name){
-		this(name,INIT_POSX, INIT_POSY);
-	}
-	public Player(String name, int posX, int posY) {
-		super();
-		super.setPosition(new Point(posX, posY));
-		super.moveDriver.setStrategy(new MoveStrategyRandom());
-		this.name = name;	
-	}
-
-	//Getter
+public class Player extends AbstractEntity {
 	
 	/**
-	 * @return the name
+	 * Create the player
+	 * @param game
+	 * 		The game where the player is registered
 	 */
-	public String getName() {
-		return name;
+	public Player(Game game)
+	{
+		super(game, game.getGameCanvas().getWidth(), game.getGameCanvas().getHeight(), 4, "../../images/player.png", 64, 42);
+		super.moveDriver.setStrategy(new MoveStrategyKeyboard8Dir());
 	}
-
-	/**
-	 * @return lifeBox
-	 */
-	@Override
-	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position);
-	}
-	
-	//Methode
 	
 	@Override
 	public void oneStepMoveAddedBehavior() {
-	
+		// if player go left, decrement this.xPos by the player speed
+		// else if player go right, increment this.xPos by the player speed
 	}
-	
-	public static void main (String[] args){
-		Player p = new Player("keke");
-		while(true){
-			System.out.println("pos : (" + p.getPosition().getX() + "," + p.getPosition().getY() + ")");
-			p.oneStepMove();
-			System.out.println("pos : (" + p.getPosition().getX() + "," + p.getPosition().getY() + ")");
-		}		
-	}
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
