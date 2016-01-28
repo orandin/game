@@ -3,7 +3,6 @@ package spaceinvaders;
 import gameframework.game.GameLevelDefaultImpl;
 import spaceinvaders.Game.Game;
 import spaceinvaders.entities.Alien;
-import spaceinvaders.entities.Ennemy;
 import spaceinvaders.entities.Player;
 
 public class Level extends GameLevelDefaultImpl {
@@ -25,29 +24,38 @@ public class Level extends GameLevelDefaultImpl {
 		//ajout du joueur
 		super.universe.addGameEntity(new Player(this.game));
 		//ajout des monstres
-		for (int i = 0; i < 5; i++) {
-			Ennemy monster;
+		for (int i = 0; i < 55; i++) {
+			
+			int xPos = counter * 24;
+			int yPos;
+			int lifePoints;
+			int reward;
 			
 			if (i == 11 || i == 33)
 				counter = 0;
 			
 			//rang 1
 			if (i < 11) {
-				monster = new Alien(this.game, counter * 24, 0, 3, 50);
-				counter++;
+				yPos = 0;
+				lifePoints = 3;
+				reward = 50;
 			}
 			//rang 2 & 3
 			else if(i >= 11 && i < 32 ) {
-				monster = new Alien(this.game, counter * 24, 22, 2, 30);
-				counter++;
+				yPos = 22;
+				lifePoints = 2;
+				reward = 30;
 			}
 			//rang 4 & 5
 			else {
-				monster = new Alien(this.game, counter * 24, 44, 1, 10);
-				counter++;
+				yPos = 44;
+				lifePoints = 1;
+				reward = 10;
 			}
 			
-			super.universe.addGameEntity(monster);
+			counter++;
+			
+			super.universe.addGameEntity(new Alien(this.game, xPos, yPos, lifePoints, reward));
 		}
 	}
 }
