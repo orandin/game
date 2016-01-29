@@ -4,7 +4,7 @@ import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
 
-public class Alien1 extends Enemys {
+public class Alien1 extends Alien {
 	
 	private static final int POINT = 10;
 	
