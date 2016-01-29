@@ -11,13 +11,12 @@ public class PlayerCommande extends KeyAdapter{
 	private Player player;
 	
 	//Constructor
-	
 	public PlayerCommande(Player player) {
 		this.player = player;
 	}
 	
 	//Method
-	 
+	
 	@Override
 	public void keyPressed(KeyEvent event) {
 		keyPressed(event.getKeyCode());
