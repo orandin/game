@@ -1,43 +1,39 @@
 package spaceinvaders.entities.blockersRules;
 
-import spaceinvaders.entities.Alien1;
-import spaceinvaders.entities.Alien2;
-import spaceinvaders.entities.Alien3;
+import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.Enemies;
 import spaceinvaders.entities.Laser;
 import gameframework.motion.IllegalMoveException;
 import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
+/**
+ *
+ * @author Kévin Rico
+ * @author Simon Delberghe
+ * @author Théo Verschaeve
+ *
+ */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
 	/**
-	 * Methods that define the hitbox of the enemies. If a laser hit an enemy, the kill method is called.
+	 * Defines the action when the laser touches an enemy
 	 * @param laser
 	 * @param alien
 	 * @throws IllegalMoveException
 	 */
-	public void moveBlockerRule(Laser laser, Alien1 alien) throws IllegalMoveException {
-		kill(laser,(Enemies) alien);
+	public void moveBlockerRule(Laser laser, Alien alien) throws IllegalMoveException {
+		kill(laser, alien);
 		throw new IllegalMoveException();
 	}
-	public void moveBlockerRule(Laser laser, Alien2 alien) throws IllegalMoveException {
-		kill(laser,(Enemies) alien);
-		throw new IllegalMoveException();
-	}
-	public void moveBlockerRule(Laser laser, Alien3 alien) throws IllegalMoveException {
-		kill(laser,(Enemies) alien);
-		throw new IllegalMoveException();
-	}
-	
+
 	/**
-	 * Method that kill an enemy when he is hit by a laser's player.
+	 * Destroys the enemy
 	 * @param laser
 	 * @param alien
 	 */
-	private void kill(Laser laser, Enemies alien){
+	protected void kill(Laser laser, Enemies alien){
 		super.gameData.getUniverse().removeGameEntity(alien);
 		super.gameData.getUniverse().removeGameEntity(laser);
 		laser.getShooter().resetShoot();
 	}
-	
 }

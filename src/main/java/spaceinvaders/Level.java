@@ -1,8 +1,9 @@
 package spaceinvaders;
 
-import spaceinvaders.entities.Alien1;
-import spaceinvaders.entities.Alien2;
-import spaceinvaders.entities.Alien3;
+
+import spaceinvaders.entities.SmallAlien;
+import spaceinvaders.entities.MediumAlien;
+import spaceinvaders.entities.LargeAlien;
 import spaceinvaders.entities.Enemies;
 import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockers.LeftWall;
@@ -11,8 +12,16 @@ import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
 
-public class Level extends GameLevelDefaultImpl{
+/**
+ * @author Kévin Rico
+ * @author Simon Delberghe
+ *
+ */
+public class Level extends GameLevelDefaultImpl {
 	
+	private static final int NB_CELLS = 11;
+	private static final int NB_ROWS  = 5;
+
 	/**
 	 * Constructor
 	 * @param gameData
@@ -24,43 +33,51 @@ public class Level extends GameLevelDefaultImpl{
 	}
 
 	/**
-	 * Method that initialize the level of the game. Define the enemies's position.
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void init() {
+		Enemies enemy;
+		Player player = new Player(super.data);
 		
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
-		
-		// We add the player
-		Player p = new Player(super.data);
-		data.getUniverse().addGameEntity(p);
-		
-		// We add monsters
+		data.getUniverse().addGameEntity(player);
+
 		int posX = super.spriteSize * 5;
-		int posY = super.spriteSize * 5;
-		
-		for(int i= 1; i<= 5; i++){
-			for(int j= 1 ; j<= 11; j++){
-				Enemies alien;
-				if(i == 1){
-					alien = new Alien3(super.data,posX,posY);
-				}
-				if(i == 2 || i == 3){
-					alien = new Alien2(super.data,posX,posY);
-				}
-				else{
-					alien = new Alien1(super.data,posX,posY);
-				}
-				super.data.getUniverse().addGameEntity(alien);
+		int posY = posX;
+
+		for(int row = 1; row <= NB_ROWS; row++){
+			for(int cell = 1; cell <= NB_CELLS; cell++){
 				
-				if(j == 11)
-					posY += alien.getImage().getHeight();
-				
-				posX += alien.getImage().getWidth();
+				enemy = rulesToCreateEnemy(row, posX, posY);
+				super.data.getUniverse().addGameEntity(enemy);
+
+				if(cell == NB_CELLS)
+					posY += enemy.getImage().getHeight();
+				else
+					posX += enemy.getImage().getWidth();
 			}
 			posX = super.spriteSize * 5;
 		}		
 	}
 
+	/**
+	 * Defines the rules to create an enemy by row
+	 * @param row
+	 * @param posX
+	 * @param posY
+	 * @return Returns the enemy created
+	 */
+	protected Enemies rulesToCreateEnemy(int row, int posX, int posY) {
+		switch(row) {
+			case 1:
+				return new LargeAlien(super.data, posX, posY);
+
+			case 2:
+			case 3:
+				return new MediumAlien(super.data, posX, posY);
+		}
+		return new SmallAlien(super.data, posX, posY);
+	}
 }
