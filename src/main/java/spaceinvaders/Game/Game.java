@@ -22,6 +22,9 @@ public class Game extends GameDefaultImpl{
 	private GameWindow gameWindow;
 	private GameUniverseViewPortDefaultImpl universeViewPort;
 	
+	/**
+	 * Method that define the main features of the game.
+	 */
 	public Game() {
 		super(new GameData(new GameConfiguration()));
 		this.gameWindow = new GameWindow("space invaders", this.data.getCanvas(), this.data);
@@ -35,9 +38,24 @@ public class Game extends GameDefaultImpl{
 		this.data.addLevel(new Level(this.data, this.universeViewPort));
 	}
 
+	/**
+	 * Main method.
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main (String[] args) throws IOException{
 		Game game = new Game();
 		game.start();
+		
+		while(!game.data.getEndOfGame().getValue()) {
+			if(game.data.getLife().getValue() <= 0) {
+				game.data.getEndOfGame().setValue(true);
+			}
+			if(true) {
+				game.data.decreaseLife(1);
+			}
+		}
+		
 	}
 	
 

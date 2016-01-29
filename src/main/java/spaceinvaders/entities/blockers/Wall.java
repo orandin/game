@@ -11,11 +11,14 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 
 	protected int height;
 	
+	/**
+	 * Constructor
+	 * @param data
+	 */
 	public Wall(GameData data) {
 		this.height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
 	}
 
-	
 	@Override
 	public boolean isMovable() {
 		return false;

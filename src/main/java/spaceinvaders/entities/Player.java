@@ -10,6 +10,7 @@ import spaceinvaders.entities.playerEntry.PlayerCommande;
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
+import gameframework.motion.SpeedVector;
 
 /**
  * 
@@ -19,8 +20,10 @@ import gameframework.motion.MoveStrategyKeyboard;
  */
 public class Player extends Shooter{
 	
-	//Constructor
-
+	/**
+	 * Constructor
+	 * @param data
+	 */
 	public Player(GameData data) {
 		super(data);
 		
@@ -33,7 +36,7 @@ public class Player extends Shooter{
 		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
 		
 		// strategy initialisation
-		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false);
+		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false, new SpeedVector(new Point(0,0), 12));
 		
 		// Remove 'Up' and 'Down' keys
 		str.addKeyDirection(KeyEvent.VK_UP, new Point(0, 0));
@@ -47,8 +50,9 @@ public class Player extends Shooter{
 		super.canShoot = true;
 	}
 
-	//Getter
-
+	/**
+	 * @return The dimension of the game.
+	 */
 	public Rectangle getBoundingBox() {
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
@@ -60,6 +64,9 @@ public class Player extends Shooter{
 		// TODO
 	}
 	
+	/**
+	 * Method that allow the player to shoot at enemies.
+	 */
 	@Override
 	public void shoot(){
 		if(super.canShoot){

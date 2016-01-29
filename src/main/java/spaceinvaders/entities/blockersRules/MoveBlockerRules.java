@@ -10,7 +10,12 @@ import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
-	// When the laser hit an enemy
+	/**
+	 * Methods that define the hitbox of the enemies. If a laser hit an enemy, the kill method is called.
+	 * @param laser
+	 * @param alien
+	 * @throws IllegalMoveException
+	 */
 	public void moveBlockerRule(Laser laser, Alien1 alien) throws IllegalMoveException {
 		kill(laser,(Enemies) alien);
 		throw new IllegalMoveException();
@@ -24,7 +29,11 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		throw new IllegalMoveException();
 	}
 	
-	// When the player hit an enemy (Enemy die)
+	/**
+	 * Method that kill an enemy when he is hit by a laser's player.
+	 * @param laser
+	 * @param alien
+	 */
 	private void kill(Laser laser, Enemies alien){
 		super.gameData.getUniverse().removeGameEntity(alien);
 		super.gameData.getUniverse().removeGameEntity(laser);

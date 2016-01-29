@@ -20,19 +20,26 @@ public abstract class MovableEntity extends GameMovable implements GameEntity {
 	protected DrawableImage image;
 	protected GameConfiguration config;
 	
-	//Constructor
+	/**
+	 * Constructor
+	 * @param data
+	 */
 	public MovableEntity(GameData data) {
 		this.config = data.getConfiguration();
 		this.data = data;
 		super.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
 	}
-
-	//Method 
 	
+	/**
+	 * @return The position of the MovableEntity.
+	 */
 	public Point getPosition(){
 		return super.position;
 	}
 	
+	/**
+	 * Method that draw the image of the MovableEntity.
+	 */
 	@Override
 	public void draw(Graphics g) {
 		this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);

@@ -13,11 +13,19 @@ import gameframework.game.GameLevelDefaultImpl;
 
 public class Level extends GameLevelDefaultImpl{
 	
+	/**
+	 * Constructor
+	 * @param gameData
+	 * @param view
+	 */
 	public Level(GameData gameData, GameUniverseViewPort view){
 		super(gameData);
 		super.gameBoard = view;
 	}
 
+	/**
+	 * Method that initialize the level of the game. Define the enemies's position.
+	 */
 	@Override
 	protected void init() {
 		
