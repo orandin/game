@@ -11,32 +11,38 @@ import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
 
+/**
+ * 
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ *
+ */
 public class Player extends Shooter{
 	
 	//Constructor
-	
+
 	public Player(GameData data) {
 		super(data);
 		
-		//image du vaiseau principal
+		// Picture for the main ship
 		super.image = new DrawableImage("../../images/entite/player1.png", data.getCanvas());
 		
-		//initialisation de la position du joueur
+		// Player's position initialisation
 		int posX = this.config.getNbColumns() / 2; //position au milieu du canvas
 		int posY = this.config.getNbRows() - (this.config.getNbRows() / 6) ; //position en bas du joueur
 		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
 		
-		//initialisation de la strategy
+		// strategy initialisation
 		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false);
 		
-		//on enleve les touche haut et bas
+		// Remove 'Up' and 'Down' keys
 		str.addKeyDirection(KeyEvent.VK_UP, new Point(0, 0));
 		str.addKeyDirection(KeyEvent.VK_DOWN, new Point(0, 0));
 		
-		//on ajoute la strategie au movedriver et on ajoute un KeyListener au canvas du jeu pour que les touches soit prises en compte
+		// We add the strategy to moverider et we add a KeyListener to the game canvas for the keys to be taken in count
 		super.moveDriver.setStrategy(str);
 		data.getCanvas().addKeyListener(str);
-		//ajout d'un KeyListener pour la toucher tirer
+		// We add a KeyListener for the shot key
 		data.getCanvas().addKeyListener(new PlayerCommande(this));
 		super.canShoot = true;
 	}
@@ -47,13 +53,14 @@ public class Player extends Shooter{
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
 	
-	//Methode
+	// Methods
 	
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		
+		// TODO
 	}
 	
+	@Override
 	public void shoot(){
 		if(super.canShoot){
 			super.data.getUniverse().addGameEntity(new Laser(super.data, this, true));

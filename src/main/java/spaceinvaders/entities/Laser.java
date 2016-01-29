@@ -8,12 +8,16 @@ import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
 
-public class Laser extends EntiteMovable {
+/**
+ * 
+ * @author Kevin Rico
+ *
+ */
+public class Laser extends MovableEntity {
 
 	private Shooter shooter;
 	
 	//Constructor
-	
 	public Laser(GameData data, Shooter shooter, boolean top) {
 		super(data);
 		super.position.setLocation(shooter.getPosition());
@@ -34,15 +38,15 @@ public class Laser extends EntiteMovable {
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
 
+	public Shooter getShooter(){
+		return this.shooter;
+	}
+
 	//Method
 	
 	@Override
 	public void oneStepMoveAddedBehavior() {
 		// TODO Auto-generated method stub
-	}
-
-	public Shooter getShooter(){
-		return this.shooter;
 	}
 
 }

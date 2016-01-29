@@ -1,16 +1,20 @@
 package spaceinvaders.entities;
 
-import java.awt.Point;
-
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
-public abstract class Shooter extends EntiteMovable {
+
+/**
+ * 
+ * @author Kevin Rico
+ * @author Benjamin Szczapa
+ *
+ */
+public abstract class Shooter extends MovableEntity {
 
 	protected boolean canShoot;
 	
 	//Constructor
-	
 	public Shooter(GameData data) {
 		super(data);
 	}
@@ -21,15 +25,11 @@ public abstract class Shooter extends EntiteMovable {
 		return this.canShoot;
 	}
 	
-	public Point getPosition(){
-		return super.position;
-	}
-	
 	public DrawableImage getImage(){
 		return this.image;
 	}
 	
-	//Method
+	//Methods
 
 	public void resetShoot(){
 		this.canShoot = true;

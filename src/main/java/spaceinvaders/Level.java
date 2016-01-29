@@ -5,7 +5,7 @@ package spaceinvaders;
 import spaceinvaders.entities.Alien1;
 import spaceinvaders.entities.Alien2;
 import spaceinvaders.entities.Alien3;
-import spaceinvaders.entities.Enemys;
+import spaceinvaders.entities.Enemies;
 import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
@@ -35,7 +35,7 @@ public class Level extends GameLevelDefaultImpl{
 		int posY = super.spriteSize * 5;
 		for(int i= 1; i<= 5; i++){
 			for(int j= 1 ; j<= 11; j++){
-				Enemys alien;
+				Enemies alien;
 				if(i == 1){
 					alien = new Alien3(super.data,posX,posY);
 				}

@@ -7,13 +7,18 @@ import java.awt.Rectangle;
 import gameframework.game.GameData;
 import gameframework.motion.blocking.MoveBlocker;
 
-public abstract class Enemys extends Shooter implements MoveBlocker{
+/**
+ * 
+ * @author Kevin Rico
+ * @author Benjamin Szczapa
+ *
+ */
+public abstract class Enemies extends Shooter implements MoveBlocker{
 
 	protected int point;
 	
 	//Constructor
-	
-	public Enemys(GameData data, int posX, int posY) {
+	public Enemies(GameData data, int posX, int posY) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
 	}
@@ -29,10 +34,11 @@ public abstract class Enemys extends Shooter implements MoveBlocker{
 	
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		
+		// TODO
 	}
 
 	@Override
 	public void shoot(){
+		// TODO: Enemies can shoot too
 	}
 }
