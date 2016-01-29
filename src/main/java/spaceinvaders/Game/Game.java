@@ -20,7 +20,7 @@ import spaceinvaders.entities.blockersRules.MoveBlockerRules;
 public class Game extends GameDefaultImpl{
 	
 	private GameWindow gameWindow;
-	private GameUniverseViewPortDefaultImpl universeViewPort;
+	protected GameUniverseViewPortDefaultImpl universeViewPort;
 	
 	/**
 	 * Method that define the main features of the game.
@@ -37,6 +37,10 @@ public class Game extends GameDefaultImpl{
 		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
 		this.data.addLevel(new Level(this.data, this.universeViewPort));
 	}
+	
+	public GameUniverseViewPortDefaultImpl getUniverseViewPort() {
+		return this.universeViewPort;
+	}
 
 	/**
 	 * Main method.
@@ -48,13 +52,24 @@ public class Game extends GameDefaultImpl{
 		game.start();
 		
 		while(!game.data.getEndOfGame().getValue()) {
+			/**
+			 * End of the game if the plyer's life is 0.
+			 */
 			if(game.data.getLife().getValue() <= 0) {
 				game.data.getEndOfGame().setValue(true);
 			}
+			/**
+			 * TODO: check if the player is hit by an enemy shot and decrease his life to 1.
+			 */
 			if(true) {
 				game.data.decreaseLife(1);
 			}
 		}
+		
+		/**
+		 * Modify the background image with a game over screen.
+		 */
+		game.getUniverseViewPort().setBackgroundImage("../../game_over.png");
 		
 	}
 	
