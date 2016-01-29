@@ -35,4 +35,6 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	@Override
 	public void shoot(){
 	}
+	
+	public abstract int score();
 }
