@@ -51,7 +51,6 @@ public class Level extends GameLevelDefaultImpl {
 				
 				enemy = rulesToCreateEnemy(row, posX, posY);
 				super.data.getUniverse().addGameEntity(enemy);
-
 				if(cell == NB_CELLS)
 					posY += enemy.getImage().getHeight();
 				else

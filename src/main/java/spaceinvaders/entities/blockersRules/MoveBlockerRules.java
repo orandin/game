@@ -1,16 +1,17 @@
 package spaceinvaders.entities.blockersRules;
 
-import spaceinvaders.entities.Alien;
-import spaceinvaders.entities.Enemies;
-import spaceinvaders.entities.Laser;
 import gameframework.motion.IllegalMoveException;
 import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
+import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.LargeAlien;
+import spaceinvaders.entities.Laser;
+import spaceinvaders.entities.MediumAlien;
+import spaceinvaders.entities.SmallAlien;
 
 /**
  *
  * @author Kévin Rico
  * @author Simon Delberghe
- * @author Théo Verschaeve
  *
  */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
@@ -18,14 +19,26 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	/**
 	 * Defines the action when the laser touches an enemy
 	 * @param laser
-	 * @param alien
+	 * @param ennemy
 	 * @throws IllegalMoveException
 	 */
-	public void moveBlockerRule(Laser laser, Alien alien) throws IllegalMoveException {
-		kill(laser, alien);
+	public void moveBlockerRule(Laser laser, Enemies enemy) throws IllegalMoveException {
+		kill(laser, enemy);
 		throw new IllegalMoveException();
 	}
-
+	
+	public void moveBlockerRule(Laser laser, SmallAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Enemies) alien);
+	}
+	
+	public void moveBlockerRule(Laser laser, MediumAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Enemies) alien);
+	}
+	
+	public void moveBlockerRule(Laser laser, LargeAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Enemies) alien);
+	}
+	
 	/**
 	 * Destroys the enemy
 	 * @param laser
@@ -35,5 +48,6 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		super.gameData.getUniverse().removeGameEntity(alien);
 		super.gameData.getUniverse().removeGameEntity(laser);
 		laser.getShooter().resetShoot();
+		super.gameData.getScore().setValue(super.gameData.getScore().getValue() + alien.score());
 	}
 }

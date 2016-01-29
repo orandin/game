@@ -20,5 +20,5 @@ public abstract class Alien extends Enemies {
 	
 	protected abstract String getUriImage();
 	
-	protected abstract int score();
+	public abstract int score();
 }

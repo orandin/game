@@ -32,7 +32,7 @@ public class LargeAlien extends Alien {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected int score() {
+	public int score() {
 		return 40;
 	}
 
