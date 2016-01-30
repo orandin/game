@@ -1,9 +1,11 @@
 package spaceinvaders.entities;
 
+import java.awt.Point;
+
 import gameframework.game.GameData;
 
 /**
- * 
+ * @author Matthieu Lepers
  * @author Kevin Rico
  * @author Simon Delberghe
  *
@@ -17,8 +19,10 @@ public class SmallAlien extends Alien {
 	 * @param posX
 	 * @param posY
 	 */
-	public SmallAlien(GameData data,int posX, int posY){
-		super(data, posX,  posY);
+	public SmallAlien(GameData data,int posX, int posY, AlienArray array){
+		super(data, posX,  posY, array);
+		//Calculate the position on screen with this row and column
+		super.setPosition(new Point(posX * this.image.getWidth(), posY * this.image.getHeight()));
 	}
 
 	/**
