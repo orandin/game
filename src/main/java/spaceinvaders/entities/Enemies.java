@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  * @author Matthieu Lepers
- * @author Kévin Rico
+ * @author Kevin Rico
  * @author Simon Delberghe
  */
 public abstract class Enemies extends Shooter implements MoveBlocker{

@@ -25,7 +25,7 @@ public class EnemyLaser extends AbstractLaser {
 	 */
 	@Override
 	public DrawableImage getUrlImage() {
-		return new DrawableImage("../../images/entite/laser.png", data.getCanvas());
+		return new DrawableImage("../../images/entite/enemylaser.png", data.getCanvas());
 	}
 	
 	/* ----- Setters ----- */

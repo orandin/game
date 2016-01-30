@@ -12,7 +12,7 @@ import spaceinvaders.entities.SmallAlien;
 
 /**
  *
- * @author Kévin Rico
+ * @author Kevin Rico
  * @author Simon Delberghe
  * @author Matthieu Lepers
  */
@@ -51,7 +51,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * 		The position of the alien in the AlienArray for removing correctly
 	 */
 	protected void kill(Laser laser, Enemies enemy, Point positionInArray) {
-		enemy.getArray().removeEnemyFromPosition(positionInArray);
+		//enemy.getArray().removeEnemyFromPosition(positionInArray);
 		super.gameData.getUniverse().removeGameEntity(enemy);
 		super.gameData.getUniverse().removeGameEntity(laser);
 		laser.getShooter().resetShoot();

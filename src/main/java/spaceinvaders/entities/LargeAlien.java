@@ -6,7 +6,7 @@ import gameframework.game.GameData;
 
 /**
  * @author Matthieu Lepers
- * @author Kévin Rico
+ * @author Kevin Rico
  * @author Simon Delberghe
  *
  */

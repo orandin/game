@@ -9,7 +9,7 @@ import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
 
 /**
- * @author Kévin Rico
+ * @author Kevin Rico
  * @author Simon Delberghe
  * @author Matthieu Lepers
  */
