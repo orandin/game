@@ -10,6 +10,7 @@ import spaceinvaders.entities.playerEntry.PlayerCommande;
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
+import gameframework.motion.SpeedVector;
 
 public class Player extends Shooter{
 	
@@ -27,7 +28,7 @@ public class Player extends Shooter{
 		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
 		
 		//initialisation de la strategy
-		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false);
+		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false, new SpeedVector(new Point(0, 0), 12));
 		
 		//on enleve les touche haut et bas
 		str.addKeyDirection(KeyEvent.VK_UP, new Point(0, 0));
@@ -50,13 +51,11 @@ public class Player extends Shooter{
 	//Methode
 	
 	@Override
-	public void oneStepMoveAddedBehavior() {
-		
-	}
+	public void oneStepMoveAddedBehavior() {}
 	
 	public void shoot(){
 		if(super.canShoot){
-			super.data.getUniverse().addGameEntity(new Laser(super.data, this, true));
+			super.data.getUniverse().addGameEntity(new Laser(super.data, this));
 			super.canShoot = false;
 		}
 	}
