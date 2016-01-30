@@ -53,10 +53,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	}
 	
 	public Point getLocationInArray() {
-		Point point = new Point();
-		point.setLocation(this.getPosition().getX() / this.getImage().getWidth(), this.getPosition().getY() / this.getImage().getHeight());
-		
-		return point;
+		return new Point(this.getPosition().getX() / this.getImage().getWidth(), this.getPosition().getY() / this.getImage().getHeight());
 	}
 	
 	/* ----- Setters ----- */
