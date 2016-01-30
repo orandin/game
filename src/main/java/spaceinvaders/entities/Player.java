@@ -55,7 +55,7 @@ public class Player extends Shooter{
 	
 	public void shoot(){
 		if(super.canShoot){
-			super.data.getUniverse().addGameEntity(new Laser(super.data, this, true));
+			super.data.getUniverse().addGameEntity(new Laser(super.data, this));
 			super.canShoot = false;
 		}
 	}

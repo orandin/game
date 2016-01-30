@@ -30,21 +30,15 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	}
 	
 	public void moveBlockerRule(Laser laser, SmallAlien alien) throws IllegalMoveException {
-		Point point = new Point();
-		point.setLocation(alien.getPosition().getX() / alien.getImage().getWidth(), alien.getPosition().getY() / alien.getImage().getHeight());
-		moveBlockerRule(laser, (Enemies) alien, point);
+		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	public void moveBlockerRule(Laser laser, MediumAlien alien) throws IllegalMoveException {
-		Point point = new Point();
-		point.setLocation(alien.getPosition().getX() / alien.getImage().getWidth(), alien.getPosition().getY() / alien.getImage().getHeight());
-		moveBlockerRule(laser, (Enemies) alien, point);
+		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	public void moveBlockerRule(Laser laser, LargeAlien alien) throws IllegalMoveException {
-		Point point = new Point();
-		point.setLocation(alien.getPosition().getX() / alien.getImage().getWidth(), alien.getPosition().getY() / alien.getImage().getHeight());
-		moveBlockerRule(laser, (Enemies) alien, point);
+		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	/**
@@ -56,11 +50,11 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @param positionInArray
 	 * 		The position of the alien in the AlienArray for removing correctly
 	 */
-	protected void kill(Laser laser, Enemies alien, Point positionInArray) {
-		alien.getArray().removeEnemyFromPosition(positionInArray);
-		super.gameData.getUniverse().removeGameEntity(alien);
+	protected void kill(Laser laser, Enemies enemy, Point positionInArray) {
+		enemy.getArray().removeEnemyFromPosition(positionInArray);
+		super.gameData.getUniverse().removeGameEntity(enemy);
 		super.gameData.getUniverse().removeGameEntity(laser);
 		laser.getShooter().resetShoot();
-		super.gameData.getScore().setValue(super.gameData.getScore().getValue() + alien.score());
+		super.gameData.getScore().setValue(super.gameData.getScore().getValue() + enemy.score());
 	}
 }

@@ -23,7 +23,7 @@ public abstract class Alien extends Enemies {
 	 * @param array
 	 * 		The array when the alien is, this is for movement
 	 */
-	public Alien(GameData data,int posX, int posY, AlienArray array){
+	public Alien(GameData data,int posX, int posY, EnnemiesArray array){
 		super(data, posX, posY, array);
 		super.image = new DrawableImage(getUriImage(), super.data.getCanvas());
 		super.point = score();

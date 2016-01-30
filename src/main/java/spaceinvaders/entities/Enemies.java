@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Random;
 
 /**
  * @author Matthieu Lepers
@@ -16,7 +17,7 @@ import java.awt.Rectangle;
 public abstract class Enemies extends Shooter implements MoveBlocker{
 
 	protected int point;
-	protected AlienArray array;
+	protected EnnemiesArray array;
 	protected double xOffset = 0;
 	protected int yOffset = 0;
 	
@@ -29,9 +30,9 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * @param posY
 	 * 		The initial y position
 	 * @param array
-	 * 		The array whitch allow it to move on screen
+	 * 		The array witch allow it to move on screen
 	 */
-	public Enemies(GameData data, int posX, int posY, AlienArray array) {
+	public Enemies(GameData data, int posX, int posY, EnnemiesArray array) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
 		this.array = array;
@@ -47,8 +48,15 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * Get the array when the enemy is
 	 * @return the array
 	 */
-	public AlienArray getArray() {
+	public EnnemiesArray getArray() {
 		return this.array;
+	}
+	
+	public Point getLocationInArray() {
+		Point point = new Point();
+		point.setLocation(this.getPosition().getX() / this.getImage().getWidth(), this.getPosition().getY() / this.getImage().getHeight());
+		
+		return point;
 	}
 	
 	/* ----- Setters ----- */
@@ -69,6 +77,10 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 
 	@Override
 	public void shoot(){
+		Random rand = new Random();
+		int pos = (int) this.getLocationInArray().getY();
+		if (pos == 4 && rand.nextInt(700) == rand.nextInt(700))
+			super.data.getUniverse().addGameEntity(new EnemyLaser(super.data, this));
 	}
 	
 	public abstract int score();

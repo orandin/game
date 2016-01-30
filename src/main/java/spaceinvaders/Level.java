@@ -3,7 +3,7 @@ package spaceinvaders;
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
-import spaceinvaders.entities.AlienArray;
+import spaceinvaders.entities.EnnemiesArray;
 import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
@@ -37,6 +37,6 @@ public class Level extends GameLevelDefaultImpl {
 		data.getUniverse().addGameEntity(player);
 		
 		//Now the only thing we have to register is the array witch contains all enemies
-		data.getUniverse().addGameEntity(new AlienArray(data));	
+		data.getUniverse().addGameEntity(new EnnemiesArray(data));	
 	}
 }

@@ -18,7 +18,7 @@ public class MediumAlien extends Alien {
 	 * @param posX
 	 * @param posY
 	 */
-	public MediumAlien(GameData gameData, int posX, int posY, AlienArray array) {
+	public MediumAlien(GameData gameData, int posX, int posY, EnnemiesArray array) {
 		super(gameData, posX, posY, array);
 		//Calculate the position on screen with this row and column
 		super.setPosition(new Point(posX * this.image.getWidth(), posY * this.image.getHeight()));
