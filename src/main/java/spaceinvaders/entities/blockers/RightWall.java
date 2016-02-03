@@ -6,10 +6,15 @@ import gameframework.motion.blocking.MoveBlocker;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-
+/**
+ * this class represents the right wall of the game
+ * @author 
+ *
+ */
 public class RightWall extends Wall implements MoveBlocker{
 
 	private Point point;
+	
 	public RightWall(GameData data) {
 		super(data);
 		int posX = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();

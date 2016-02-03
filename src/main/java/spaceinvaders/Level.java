@@ -1,11 +1,5 @@
 package spaceinvaders;
 
-
-import java.awt.List;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.SmallAlien;
 import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.LargeAlien;
@@ -14,8 +8,6 @@ import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
 import gameframework.drawing.GameUniverseViewPort;
-import gameframework.drawing.GameUniverseViewPortDefaultImpl;
-import gameframework.game.GameConfiguration;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
 

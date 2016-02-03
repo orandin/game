@@ -5,7 +5,11 @@ import gameframework.game.GameData;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-
+/**
+ * this class represents the left wall of the game
+ * @author 
+ *
+ */
 public class LeftWall extends Wall {
 
 	public LeftWall(GameData data) {

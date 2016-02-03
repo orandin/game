@@ -1,14 +1,13 @@
 package spaceinvaders.entities;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Rectangle;
 
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
-import gameframework.motion.MoveStrategyStraightLine;
+import gameframework.motion.blocking.MoveBlocker;
 
-public abstract class Laser extends EntiteMovable {
+public abstract class Laser extends EntiteMovable implements MoveBlocker {
 	
 	//Constructor
 	

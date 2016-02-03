@@ -35,9 +35,14 @@ public class Game extends GameDefaultImpl{
 		this.data.addLevel(new Level(this.data, this.universeViewPort));
 	}
 
+	public void endOfGame(){
+		this.universeViewPort.setBackgroundImage("../../game_over.png");
+	}
+	
 	public static void main (String[] args) throws IOException{
 		Game game = new Game();
 		game.start();
+		game.endOfGame();
 	}
 	
 
