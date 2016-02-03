@@ -10,18 +10,26 @@ import gameframework.motion.blocking.MoveBlockerRulesApplier;
 import java.io.IOException;
 
 import spaceinvaders.Level;
+import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockersRules.MoveBlockerRules;
 
 /**
- * 
  * @author Benjamin Szczapa
- *
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
-public class Game extends GameDefaultImpl{
+public class Game extends GameDefaultImpl {
 	
-	private GameWindow gameWindow;
-	private GameUniverseViewPortDefaultImpl universeViewPort;
+	protected GameWindow gameWindow;
+	protected GameUniverseViewPortDefaultImpl universeViewPort;
+	protected Thread livesChecker;
 	
+	/**
+	 * Create the game
+	 */
 	public Game() {
 		super(new GameData(new GameConfiguration()));
 		this.gameWindow = new GameWindow("space invaders", this.data.getCanvas(), this.data);
@@ -32,13 +40,28 @@ public class Game extends GameDefaultImpl{
 		MoveBlockerRulesApplier applier = new MoveBlockerRules();
 		applier.setGameData(data);
 		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
-		this.data.addLevel(new Level(this.data, this.universeViewPort));
-	}
-
-	public static void main (String[] args) throws IOException{
-		Game game = new Game();
-		game.start();
+		this.data.addLevel(new Level(this.data, this.universeViewPort,  new Player(this, super.data)));
 	}
 	
-
+	/* ----- Getters ----- */
+	/**
+	 * Get the game data
+	 * @return the game data
+	 */
+	public GameData getData() {
+		return this.data;
+	}
+	
+	/* ----- Setters ----- */
+	/**
+	 * End the game
+	 */
+	public void endGame() {
+		this.universeViewPort.setBackgroundImage("../../game_over.png");
+		this.universeViewPort.paint();
+	}
+	
+	public static void main (String[] args) throws IOException {
+		new Game().start();
+	}
 }
