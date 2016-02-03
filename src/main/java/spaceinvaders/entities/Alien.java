@@ -26,14 +26,7 @@ public abstract class Alien extends Enemies {
 	 */
 	public Alien(GameData data,int posX, int posY, EnnemiesArray array) {
 		super(data, posX, posY, array);
-		super.image = new DrawableImage(getUriImage(), super.data.getCanvas());
+		super.image = new DrawableImage(this.getSprite(), super.data.getCanvas());
 		super.point = score();
 	}
-	
-	/* ----- Getters ----- */
-	/**
-	 * Get the image url
-	 * @return the image url
-	 */
-	protected abstract String getUriImage();
 }

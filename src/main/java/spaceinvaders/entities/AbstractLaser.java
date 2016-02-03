@@ -27,7 +27,7 @@ public abstract class AbstractLaser extends EntiteMovable {
 	 */
 	public AbstractLaser(GameData data, Shooter shooter) {
 		super(data);
-		this.image = this.getUrlImage();
+		this.image = new DrawableImage(this.getSprite(), this.data.getCanvas());
 		this.shooter = shooter;
 		
 		this.setPosition();
@@ -35,11 +35,6 @@ public abstract class AbstractLaser extends EntiteMovable {
 	}
 	
 	/* ----- Getters ----- */
-	/**
-	 * Get the sprite as a Drawable image
-	 * @return a drawable image
-	 */
-	public abstract DrawableImage getUrlImage();
 	
 	/**
 	 * Get the laser's shooter

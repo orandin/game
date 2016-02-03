@@ -1,10 +1,9 @@
 package spaceinvaders.entities;
 
-import java.awt.Graphics;
+import gameframework.game.GameData;
+
 import java.awt.Point;
 import java.awt.Rectangle;
-
-import gameframework.game.GameData;
 
 /**
  * @author Benjamin Szczapa
@@ -14,12 +13,13 @@ import gameframework.game.GameData;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
-public class EnnemiesArray extends EntiteMovable {
+public abstract class EnnemiesArray extends EntiteMovable {
 	
 	protected final Enemies[][] enemyArray = new Enemies[11][5];
 	protected double xPos = 0;
 	protected int yPos = 0;
 	protected int sign = 1;
+	protected double speed = 0.05;
 	
 	/**
 	 * Create the array witch set in movement all enemies
@@ -31,11 +31,11 @@ public class EnnemiesArray extends EntiteMovable {
 		super.setPosition(new Point(0, 0));
 		
 		//Creating all enemies
-		for (int i = 0; i < enemyArray.length; i++) {
-			for (int j = 0; j < enemyArray[0].length; j++) {
+		for (int i = 0; i < this.enemyArray.length; i++) {
+			for (int j = 0; j < this.enemyArray[0].length; j++) {
 				
-				Enemies enemy = rulesToCreateEnemy(j, i, j);
-				enemyArray[i][j] = enemy;
+				Enemies enemy = this.rulesToCreateEnemy(j, i, j);
+				this.enemyArray[i][j] = enemy;
 				data.getUniverse().addGameEntity(enemy);	
 			}
 		}
@@ -50,6 +50,14 @@ public class EnnemiesArray extends EntiteMovable {
 		return new Rectangle(0, 0, 0, 0);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected String getSprite() {
+		return "";
+	}
+	
 	/* ----- Setters ----- */
 	/**
 	 * Remove an enemy by set it to null
@@ -60,6 +68,13 @@ public class EnnemiesArray extends EntiteMovable {
 		this.enemyArray[(int) position.getX()][(int) position.getY()] = null;
 	}
 	
+	/**
+	 * Increase the speed by 0.002
+	 */
+	public void increaseSpeed() {
+		this.speed += 0.002;
+	}
+	
 	/* ----- Booleans ----- */
 	/**
 	 * Check if all enemies are dead
@@ -67,50 +82,17 @@ public class EnnemiesArray extends EntiteMovable {
 	 */
 	public boolean checkAllDead() {
 		
-		int maxEntities = enemyArray.length * enemyArray[0].length;
+		int maxEntities = this.enemyArray.length * this.enemyArray[0].length;
 		int killedEntities = 0;
 		
-		for (int i = 0; i < enemyArray.length; i++) {
-			for (int j = 0; j < enemyArray[0].length; j++) {
-				if (enemyArray[i][j] == null)
+		for (int i = 0; i < this.enemyArray.length; i++) {
+			for (int j = 0; j < this.enemyArray[0].length; j++) {
+				if (this.enemyArray[i][j] == null)
 					killedEntities++;
 			}
 		}
 		
 		return maxEntities == killedEntities;
-	}
-	
-	/* ----- Drawing ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void draw(Graphics g) {
-		
-		//Invoke a new wave if all enemies are dead
-		if (this.checkAllDead()) {
-			this.data.getUniverse().removeGameEntity(this);
-			this.data.getUniverse().addGameEntity(new EnnemiesArray(this.data));
-		}
-		
-		for (int i = 0; i < enemyArray.length; i++) {
-			for (int j = 0; j < enemyArray[0].length; j++) {
-				xPos += this.sign * 0.05;
-				if (xPos >= 100) {
-					this.sign = -1;
-					yPos += 4;
-				}
-				if (xPos <= 0) {
-					this.sign = 1;
-					yPos += 4;
-				}
-				if (enemyArray[i][j] != null) {
-					enemyArray[i][j].setOffsets(xPos, yPos);
-					enemyArray[i][j].shoot();
-					enemyArray[i][j].draw(g);
-				}
-			}
-		}
 	}
 	
 	/**
@@ -123,15 +105,5 @@ public class EnnemiesArray extends EntiteMovable {
 	 * 		The enemy initial X position
 	 * @return An enemy
 	 */
-	private Enemies rulesToCreateEnemy(int row, int posX, int posY) {
-		switch(row) {
-			case 1:
-				return new LargeAlien(super.data, posX, posY, this);
-
-			case 2:
-			case 3:
-				return new MediumAlien(super.data, posX, posY, this);
-		}
-		return new SmallAlien(super.data, posX, posY, this);
-	}
+	protected abstract Enemies rulesToCreateEnemy(int row, int posX, int posY);
 }

@@ -1,11 +1,10 @@
 package spaceinvaders.entities;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
-import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
+
+import java.awt.Graphics;
+import java.awt.Point;
 
 /**
  * @author Benjamin Szczapa
@@ -29,8 +28,8 @@ public class EnemyLaser extends AbstractLaser {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public DrawableImage getUrlImage() {
-		return new DrawableImage("../../images/entite/enemylaser.png", data.getCanvas());
+	public String getSprite() {
+		return "../../images/entite/enemylaser.png";
 	}
 	
 	/* ----- Setters ----- */

@@ -34,7 +34,7 @@ public class SmallAlien extends Alien {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected String getUriImage() {
+	protected String getSprite() {
 		return "../../images/entite/saucer1b.png";
 	}
 	

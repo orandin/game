@@ -1,6 +1,5 @@
 package spaceinvaders.entities;
 
-import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
 
@@ -29,8 +28,8 @@ public class Laser extends AbstractLaser {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public DrawableImage getUrlImage() {
-		return new DrawableImage("../../images/entite/laser.png", data.getCanvas());
+	public String getSprite() {
+		return "../../images/entite/laser.png";
 	}
 	
 	/* ----- Setters ----- */
@@ -47,10 +46,8 @@ public class Laser extends AbstractLaser {
 	 */
 	@Override
 	public void setPosition() {
-		Point location = new Point();
 		int x = (int) (this.shooter.getPosition().getX() + (this.shooter.getImage().getWidth() / 2) - (this.image.getWidth() / 2));
 		int y = (int) (this.shooter.getPosition().getY() - 20);
-		location.setLocation(x, y);
 		
 		this.position.setLocation(new Point(x, y));
 	}

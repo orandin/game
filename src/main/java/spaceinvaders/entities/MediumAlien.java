@@ -34,7 +34,7 @@ public class MediumAlien extends Alien {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected String getUriImage() {
+	protected String getSprite() {
 		return "../../images/entite/saucer2a.png";
 	}
 

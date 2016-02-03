@@ -31,10 +31,10 @@ public class Player extends Shooter {
 		super(data);
 		
 		//Main ship sprite
-		super.image = new DrawableImage("../../images/entite/player1.png", data.getCanvas());
+		super.image = new DrawableImage(this.getSprite(), data.getCanvas());
 		
 		//Initializing initial player position
-		int posX = this.config.getNbColumns() / 2; //Player is positionned on the middle of the canvas
+		int posX = (this.config.getNbColumns() / 2) - 1; //Player is positionned on the middle of the canvas
 		int posY = this.config.getNbRows() - (this.config.getNbRows() / 6) ; //And in the bottom of the screen
 		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
 		
@@ -59,6 +59,14 @@ public class Player extends Shooter {
 	 */
 	public Rectangle getBoundingBox() {
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected String getSprite() {
+		return "../../images/entite/player1.png";
 	}
 	
 	/* ----- Actions ----- */

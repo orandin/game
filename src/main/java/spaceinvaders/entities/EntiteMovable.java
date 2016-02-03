@@ -33,6 +33,13 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		super.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
 	}
 	
+	/* ----- Getters ----- */
+	/**
+	 * Get the entity sprite
+	 * @return the entity sprite
+	 */
+	protected abstract String getSprite();
+	
 	/* ----- Drawing ----- */
 	/**
 	 * Draw the entity to the canvas
