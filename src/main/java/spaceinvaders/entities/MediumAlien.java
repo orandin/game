@@ -1,5 +1,6 @@
 package spaceinvaders.entities;
 
+import spaceinvaders.Level;
 import gameframework.game.GameData;
 
 /**
@@ -16,8 +17,8 @@ public class MediumAlien extends Alien {
 	 * @param posX
 	 * @param posY
 	 */
-	public MediumAlien(GameData gameData, int posX, int posY) {
-		super(gameData, posX, posY);
+	public MediumAlien(GameData gameData, int posX, int posY, Level lvl) {
+		super(gameData, posX, posY, lvl);
 	}
 
 	/**

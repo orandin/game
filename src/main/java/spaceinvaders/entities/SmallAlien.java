@@ -1,5 +1,6 @@
 package spaceinvaders.entities;
 
+import spaceinvaders.Level;
 import gameframework.game.GameData;
 
 /**
@@ -17,8 +18,8 @@ public class SmallAlien extends Alien {
 	 * @param posX
 	 * @param posY
 	 */
-	public SmallAlien(GameData data,int posX, int posY){
-		super(data, posX,  posY);
+	public SmallAlien(GameData data,int posX, int posY, Level lvl){
+		super(data, posX,  posY, lvl);
 	}
 
 	/**

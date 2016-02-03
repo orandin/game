@@ -8,23 +8,13 @@ import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
 
-public class Laser extends EntiteMovable {
-
-	private Shooter shooter;
+public abstract class Laser extends EntiteMovable {
 	
 	//Constructor
 	
-	public Laser(GameData data, Shooter shooter, boolean top) {
+	public Laser(GameData data, Shooter shooter) {
 		super(data);
-		super.position.setLocation(shooter.getPosition());
-		if(!top){
-			super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())));
-		}
-		else{
-			super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, 0)));
-		}
 		super.image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
-		this.shooter = shooter;
 	}
 
 	//Getter
@@ -41,8 +31,6 @@ public class Laser extends EntiteMovable {
 		// TODO Auto-generated method stub
 	}
 
-	public Shooter getShooter(){
-		return this.shooter;
-	}
+	public abstract Shooter getShooter();
 
 }

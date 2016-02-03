@@ -13,6 +13,8 @@ import gameframework.motion.MoveStrategyKeyboard;
 
 public class Player extends Shooter{
 	
+	protected boolean canShoot = true;
+	
 	//Constructor
 	
 	public Player(GameData data) {
@@ -38,11 +40,18 @@ public class Player extends Shooter{
 		data.getCanvas().addKeyListener(str);
 		//ajout d'un KeyListener pour la toucher tirer
 		data.getCanvas().addKeyListener(new PlayerCommande(this));
-		super.canShoot = true;
 	}
 
 	//Getter
 
+	public boolean canShoot(){
+		return this.canShoot;
+	}
+	
+	public void resetShoot(){
+	 this.canShoot = true;	
+	}
+	
 	public Rectangle getBoundingBox() {
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
@@ -55,9 +64,9 @@ public class Player extends Shooter{
 	}
 	
 	public void shoot(){
-		if(super.canShoot){
-			super.data.getUniverse().addGameEntity(new Laser(super.data, this, true));
-			super.canShoot = false;
+		if(this.canShoot){
+			super.data.getUniverse().addGameEntity(new PlayerLaser(super.data, this));
+		
 		}
 	}
 	

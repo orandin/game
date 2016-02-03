@@ -3,6 +3,7 @@
  */
 package spaceinvaders.entities;
 
+import spaceinvaders.Level;
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
@@ -12,8 +13,8 @@ import gameframework.game.GameData;
  */
 public abstract class Alien extends Enemies {
 	
-	public Alien(GameData data,int posX, int posY){
-		super(data, posX, posY);
+	public Alien(GameData data,int posX, int posY, Level lvl){
+		super(data, posX, posY, lvl);
 		super.image = new DrawableImage(getUriImage(), super.data.getCanvas());
 		super.point = score();
 	}

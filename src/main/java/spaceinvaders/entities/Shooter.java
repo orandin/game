@@ -7,8 +7,6 @@ import gameframework.game.GameData;
 
 public abstract class Shooter extends EntiteMovable {
 
-	protected boolean canShoot;
-	
 	//Constructor
 	
 	public Shooter(GameData data) {
@@ -16,10 +14,6 @@ public abstract class Shooter extends EntiteMovable {
 	}
 
 	//Getter
-	
-	public boolean canShoot(){
-		return this.canShoot;
-	}
 	
 	public Point getPosition(){
 		return super.position;
@@ -30,10 +24,6 @@ public abstract class Shooter extends EntiteMovable {
 	}
 	
 	//Method
-
-	public void resetShoot(){
-		this.canShoot = true;
-	}
-	
+	public abstract boolean canShoot();
 	public abstract void shoot();
 }

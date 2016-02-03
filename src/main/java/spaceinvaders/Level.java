@@ -1,5 +1,11 @@
 package spaceinvaders;
 
+
+import java.awt.List;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.SmallAlien;
 import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.LargeAlien;
@@ -8,6 +14,8 @@ import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
 import gameframework.drawing.GameUniverseViewPort;
+import gameframework.drawing.GameUniverseViewPortDefaultImpl;
+import gameframework.game.GameConfiguration;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
 
@@ -20,7 +28,7 @@ public class Level extends GameLevelDefaultImpl {
 	
 	private static final int NB_CELLS = 11;
 	private static final int NB_ROWS  = 5;
-
+	private EnemiesArray enemiesArray;
 	/**
 	 * Constructor
 	 * @param gameData
@@ -29,6 +37,7 @@ public class Level extends GameLevelDefaultImpl {
 	public Level(GameData gameData, GameUniverseViewPort view){
 		super(gameData);
 		super.gameBoard = view;
+		this.enemiesArray = new EnemiesArray(gameData);
 	}
 
 	/**
@@ -48,19 +57,22 @@ public class Level extends GameLevelDefaultImpl {
 
 		for(int row = 1; row <= NB_ROWS; row++){
 			for(int cell = 1; cell <= NB_CELLS; cell++){
-				
 				enemy = rulesToCreateEnemy(row, posX, posY);
-				super.data.getUniverse().addGameEntity(enemy);
-
+				this.enemiesArray.add(enemy);
 				if(cell == NB_CELLS)
 					posY += enemy.getImage().getHeight();
 				else
 					posX += enemy.getImage().getWidth();
 			}
 			posX = super.spriteSize * 5;
-		}		
+		}
+		
 	}
 
+	public EnemiesArray getEnemiesArray(){
+		return this.enemiesArray;
+	}
+	
 	/**
 	 * Defines the rules to create an enemy by row
 	 * @param row
@@ -71,12 +83,12 @@ public class Level extends GameLevelDefaultImpl {
 	protected Enemies rulesToCreateEnemy(int row, int posX, int posY) {
 		switch(row) {
 			case 1:
-				return new LargeAlien(super.data, posX, posY);
+				return new LargeAlien(super.data, posX, posY, this);
 
 			case 2:
 			case 3:
-				return new MediumAlien(super.data, posX, posY);
+				return new MediumAlien(super.data, posX, posY, this);
 		}
-		return new SmallAlien(super.data, posX, posY);
+		return new SmallAlien(super.data, posX, posY, this);
 	}
 }
