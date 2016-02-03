@@ -5,20 +5,32 @@ import gameframework.game.GameData;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+
 /**
- * this class represents the left wall of the game
- * @author 
- *
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
 public class LeftWall extends Wall {
 
+	/**
+	 * Create the left wall
+	 * @param data
+	 * 		The game data
+	 */
 	public LeftWall(GameData data) {
 		super(data);
 	}
-
+	
+	/* ----- Getters ----- */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Rectangle getBoundingBox() {
 		return new Rectangle(new Point(-1,0), new Dimension(1, super.height));
 	}
-
 }

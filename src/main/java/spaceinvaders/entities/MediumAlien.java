@@ -1,40 +1,32 @@
 package spaceinvaders.entities;
 
 import spaceinvaders.Level;
+import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
 /**
- * 
+ * @author Benjamin Szczapa
  * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
  * @author Simon Delberghe
- *
  */
 public class MediumAlien extends Alien {
 	
 	/**
-	 * Constructor
+	 * Create a medium alien
 	 * @param gameData
+	 * 		The game data
 	 * @param posX
+	 * 		The initial x position
 	 * @param posY
+	 * 		The initial y position
 	 */
 	public MediumAlien(GameData gameData, int posX, int posY, Level lvl) {
 		super(gameData, posX, posY, lvl);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getUriImage() {
-		return "../../images/entite/saucer2a.png";
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected int score() {
-		return 20;
+		super.image = new DrawableImage("../../images/entite/saucer2a.png", data.getCanvas());
+		super.point = 20;
 	}
 
 }

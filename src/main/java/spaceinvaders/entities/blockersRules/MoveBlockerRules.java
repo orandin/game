@@ -15,18 +15,21 @@ import gameframework.motion.IllegalMoveException;
 import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 /**
- *
- * @author Kévin Rico
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
  * @author Simon Delberghe
- * @author Théo Verschaeve
- *
  */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
-	
+		
 	/**
 	 * Defines the action when the player laser touches an enemy
 	 * @param laser
-	 * @param alien
+	 * 		The laser witch hit something
+	 * @param ennemy
+	 * 		The enemy witch is hit
 	 * @throws IllegalMoveException
 	 */
 	public void moveBlockerRule(PlayerLaser laser, Alien alien) throws IllegalMoveException {
@@ -45,15 +48,18 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	public void moveBlockerRule(PlayerLaser laser, LargeAlien alien) throws IllegalMoveException {
 		moveBlockerRule(laser, (Alien) alien);
 	}
+
 	/**
-	 * Destroys the enemy
+	 * Destroy the enemy
 	 * @param laser
+	 * 		The laser witch is the destroyer
 	 * @param alien
+	 * 		The alien witch is destroy
+	 * @param positionInArray
+	 * 		The position of the alien in the AlienArray for removing correctly
 	 */
 	protected void kill(PlayerLaser laser, Enemies alien){
 		super.gameData.getUniverse().removeGameEntity(laser);
-		
-		System.out.println(alien.getLevel().getEnemiesArray().getEnemiesPositionInArray(alien));
 		alien.getLevel().getEnemiesArray().remove(alien);
 		laser.getShooter().resetShoot();
 	}

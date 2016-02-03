@@ -6,9 +6,12 @@ import gameframework.game.GameEntity;
 import gameframework.motion.blocking.MoveBlocker;
 
 /**
- * this class represents the walls (left and right)
- * @author 
- *
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
 public abstract class Wall implements MoveBlocker, GameEntity {
 
@@ -19,26 +22,27 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 	protected int height;
 	
 	/**
-	 * constructor
-	 * @param data : game data
+	 * Create a wall
+	 * @param data
+	 * 		The game data
 	 */
 	public Wall(GameData data) {
 		this.height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
 	}
 
+	/* ----- Boolean ----- */
 	/**
-	 * getter for know if this entitie is movable or not
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isMovable() {
 		return false;
 	}
 
+	/* ----- Drawing ----- */
 	/**
-	 * method unused because the wall have to be invisible
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void draw(Graphics g) {
-	}
-	
+	public void draw(Graphics g) {}
 }

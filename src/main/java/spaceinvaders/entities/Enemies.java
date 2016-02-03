@@ -1,15 +1,17 @@
 package spaceinvaders.entities;
 
+import gameframework.game.GameData;
+import gameframework.motion.blocking.MoveBlocker;
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
 
+
 import spaceinvaders.Level;
 
-import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
-import gameframework.motion.blocking.MoveBlocker;
 
 /**
  * this class represent the differents type of enemies in the game
@@ -23,6 +25,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * - lvl : the current level ( to access enemies array principally)  
 	 */
 	protected int point;
+
 	protected Level lvl;
 	
 	//Constructor
@@ -41,15 +44,13 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 		this.lvl = lvl;
 	}
 	
-	//Getter
-	
 	/**
-	 * getter for the bounding box
-	 * @return the bounding box
+	 * Get the bounding box of this entity
+	 * @return the bounding box as a rectangle
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position, new Dimension(super.image.getWidth(), super.image.getHeight()));
+		return new Rectangle(new Point(position.x, position.y), new Dimension(super.image.getWidth(), super.image.getHeight()));
 	}
 	
 	/**
@@ -88,5 +89,6 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 		if(this.canShoot() && (rand.nextInt(1000) % 350 == 0)){
 			super.data.getUniverse().addGameEntity(new EnemyLaser(super.data, this));
 		}
+
 	}
 }

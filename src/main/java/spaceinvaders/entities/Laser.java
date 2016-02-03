@@ -16,20 +16,9 @@ public abstract class Laser extends EntiteMovable implements MoveBlocker {
 		super.image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
 	}
 
-	//Getter
-	
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
+		return new Rectangle(super.position, new Dimension(image.getWidth(), image.getHeight()));
 	}
-
-	//Method
-	
-	@Override
-	public void oneStepMoveAddedBehavior() {
-		// TODO Auto-generated method stub
-	}
-
 	public abstract Shooter getShooter();
-
 }

@@ -5,40 +5,54 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import spaceinvaders.Game.Game;
 import spaceinvaders.entities.playerEntry.PlayerCommande;
-
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
+import gameframework.motion.SpeedVector;
 
-public class Player extends Shooter{
+/**
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
+ */
+public class Player extends Shooter {
 	
 	protected boolean canShoot = true;
 	
 	//Constructor
 	
+	/**
+	 * Create the player
+	 * @param data
+	 * 		The game data
+	 */
 	public Player(GameData data) {
 		super(data);
 		
-		//image du vaiseau principal
+		//Main ship sprite
 		super.image = new DrawableImage("../../images/entite/player1.png", data.getCanvas());
 		
-		//initialisation de la position du joueur
-		int posX = this.config.getNbColumns() / 2; //position au milieu du canvas
-		int posY = this.config.getNbRows() - (this.config.getNbRows() / 6) ; //position en bas du joueur
+		//Initializing initial player position
+		int posX = (this.config.getNbColumns() / 2) - 1; //Player is positionned on the middle of the canvas
+		int posY = this.config.getNbRows() - (this.config.getNbRows() / 6) ; //And in the bottom of the screen
 		super.setPosition(new Point(posX * super.config.getSpriteSize(), posY * super.config.getSpriteSize()));
 		
-		//initialisation de la strategy
-		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false);
+		//Seting the moveStrategy
+		MoveStrategyKeyboard str = new MoveStrategyKeyboard(false, new SpeedVector(new Point(0, 0), 12));
 		
-		//on enleve les touche haut et bas
+		//Deletion UP and DOWN keys
 		str.addKeyDirection(KeyEvent.VK_UP, new Point(0, 0));
 		str.addKeyDirection(KeyEvent.VK_DOWN, new Point(0, 0));
 		
 		//on ajoute la strategie au movedriver et on ajoute un KeyListener au canvas du jeu pour que les touches soit prises en compte
 		super.moveDriver.setStrategy(str);
 		data.getCanvas().addKeyListener(str);
-		//ajout d'un KeyListener pour la toucher tirer
+		//Add KeyListener for shooting key
 		data.getCanvas().addKeyListener(new PlayerCommande(this));
 	}
 
@@ -54,13 +68,6 @@ public class Player extends Shooter{
 	
 	public Rectangle getBoundingBox() {
 		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
-	}
-	
-	//Methode
-	
-	@Override
-	public void oneStepMoveAddedBehavior() {
-		
 	}
 	
 	public void shoot(){

@@ -26,9 +26,10 @@ public class GameUniverseViewPortDefaultImpl implements GameUniverseViewPort {
 	}
 
 	protected URL backgroundImage() {
-		return backgroundImage("../../images/black_background.png");
+		return backgroundImage("/images/black_background.png");
 	}
 	
+	@Override
 	public void setBackgroundImage(String path) {
 		this.background = new BackgroundImage(path, getCanvas());
 	}

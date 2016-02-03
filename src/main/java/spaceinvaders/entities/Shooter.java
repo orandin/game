@@ -4,30 +4,33 @@ import java.awt.Point;
 
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
+
 /**
- * this class represents the differents type of entities who can shoot in the game
- * @author 
- *
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
+
 public abstract class Shooter extends EntiteMovable {
 
-	//Constructor
-	
 	/**
-	 * constructor
-	 * @param data : game data
+	 * Create a shooter
+	 * @param data
+	 * 		The game data
 	 */
 	public Shooter(GameData data) {
 		super(data);
 	}
 
-	//Getter
-	
+	/* ----- Getters ----- */
 	/**
-	 * getter for shooter position
-	 * @return the position of the shooter
+	 * Get the entity position
+	 * @return the position
 	 */
-	public Point getPosition(){
+	public Point getPosition() {
 		return super.position;
 	}
 	
