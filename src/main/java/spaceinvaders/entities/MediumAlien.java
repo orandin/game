@@ -13,23 +13,19 @@ import gameframework.game.GameData;
  * @author Simon Delberghe
  */
 public class MediumAlien extends Alien {
-	
+
 	/**
 	 * Create a medium alien
-	 * @param gameData
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
+	 * @param gameData	The game data
+	 * @param posX	The initial x position
+	 * @param posY	The initial y position
 	 */
-	public MediumAlien(GameData gameData, int posX, int posY, EnnemiesArray array) {
+	public MediumAlien(GameData gameData, int posX, int posY, EnemiesArray array) {
 		super(gameData, posX, posY, array);
 		//Calculate the position on screen with this row and column
-		super.setPosition(new Point(posX * this.image.getWidth(), posY * this.image.getHeight()));
+		super.setPosition(new Point(posX * image.getWidth(), posY * image.getHeight()));
 	}
-	
-	/* ----- Getters ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */

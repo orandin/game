@@ -2,9 +2,7 @@ package spaceinvaders.entities.blockers;
 
 import gameframework.game.GameData;
 
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 /**
  * @author Benjamin Szczapa
@@ -16,25 +14,13 @@ import java.awt.Rectangle;
  */
 public class RightWall extends Wall {
 
-	private Point point;
-	
 	/**
 	 * Create the right wall
-	 * @param data
-	 * 		The game data
+	 * @param data The game data
 	 */
 	public RightWall(GameData data) {
 		super(data);
-		int posX = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
-		this.point = new Point(posX, 0);
-	}
-
-	/* ----- Getters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Rectangle getBoundingBox() {
-		return new Rectangle(this.point, new Dimension(1, super.height));
+		int posX       = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
+		this.pointWall = new Point(posX, 0);
 	}
 }

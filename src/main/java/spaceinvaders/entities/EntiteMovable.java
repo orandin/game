@@ -21,7 +21,7 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	protected GameData data;
 	protected DrawableImage image;
 	protected GameConfiguration config;
-	
+
 	/**
 	 * Create an EntiteMovable
 	 * @param data
@@ -29,27 +29,24 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	 */
 	public EntiteMovable(GameData data) {
 		this.config = data.getConfiguration();
-		this.data = data;
-		super.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
+		this.data   = data;
+		this.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
 	}
-	
-	/* ----- Getters ----- */
+
 	/**
 	 * Get the entity sprite
 	 * @return the entity sprite
 	 */
 	protected abstract String getSprite();
-	
-	/* ----- Drawing ----- */
+
 	/**
 	 * Draw the entity to the canvas
 	 */
 	@Override
 	public void draw(Graphics g) {
-		this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);
+		data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 	}
-	
-	/* ----- Unused ----- */
+
 	@Override
 	public void oneStepMoveAddedBehavior() {}
 }

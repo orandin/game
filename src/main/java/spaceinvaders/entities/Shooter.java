@@ -26,13 +26,12 @@ public abstract class Shooter extends EntiteMovable {
 		super(data);
 	}
 
-	/* ----- Getters ----- */
 	/**
 	 * Get the entity position
 	 * @return the position
 	 */
 	public Point getPosition() {
-		return super.position;
+		return position;
 	}
 	
 	/**
@@ -40,27 +39,24 @@ public abstract class Shooter extends EntiteMovable {
 	 * @return the sprite
 	 */
 	public DrawableImage getImage() {
-		return this.image;
+		return image;
 	}
 	
-	/* ----- Setters ----- */
 	/**
 	 * Allow the shooter to shoot again
 	 */
 	public void resetShoot() {
-		this.canShoot = true;
+		canShoot = true;
 	}
 	
-	/* ----- Booleans ----- */
 	/**
 	 * Check if the shooter can shoot
-	 * @return {@code true} if he can, {@code false] else
+	 * @return {@code true} if he can, else {@code false}
 	 */
 	public boolean canShoot() {
-		return this.canShoot;
+		return canShoot;
 	}
 	
-	/* ----- Actions ----- */
 	/**
 	 * Define how the shooter shoot
 	 */

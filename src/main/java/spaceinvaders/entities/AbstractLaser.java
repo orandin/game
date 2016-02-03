@@ -17,43 +17,38 @@ import java.awt.Rectangle;
 public abstract class AbstractLaser extends EntiteMovable {
 
 	protected Shooter shooter;
-	
+
 	/**
 	 * Create a laser
-	 * @param data
-	 * 		The game data
-	 * @param shooter
-	 * 		The laser's shooter
+	 * @param data The game data
+	 * @param shooter The laser's shooter
 	 */
 	public AbstractLaser(GameData data, Shooter shooter) {
 		super(data);
-		this.image = new DrawableImage(this.getSprite(), this.data.getCanvas());
+		image = new DrawableImage(this.getSprite(), this.data.getCanvas());
 		this.shooter = shooter;
 		
-		this.setPosition();
-		this.setMoveStrategy();
+		setPosition();
+		setMoveStrategy();
 	}
-	
-	/* ----- Getters ----- */
-	
+
 	/**
 	 * Get the laser's shooter
 	 * @return the shooter
 	 */
 	public Shooter getShooter() {
-		return this.shooter;
+		return shooter;
 	}
-	
+
 	/**
 	 * Get the bounding box of the laser
 	 * @return the bounding box
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
+		return new Rectangle(position, new Dimension(image.getWidth(), image.getHeight()));
 	}
-	
-	/* ----- Setters ----- */
+
 	/**
 	 * Define how the laser move
 	 */

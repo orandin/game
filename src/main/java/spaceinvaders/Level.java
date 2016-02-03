@@ -17,21 +17,18 @@ import spaceinvaders.entities.blockers.RightWall;
  * @author Simon Delberghe
  */
 public class Level extends GameLevelDefaultImpl {
-	
-	private Player player;
-	
+
+	protected Player player;
+
 	/**
 	 * Create the Level
-	 * @param gameData
-	 * 		The game data
-	 * @param view
-	 * 		The game universe
-	 * @param player
-	 * 		The player
+	 * @param gameData The game data
+	 * @param view The game universe
+	 * @param player The player
 	 */
 	public Level(GameData gameData, GameUniverseViewPort view, Player player) {
 		super(gameData);
-		super.gameBoard = view;
+		gameBoard = view;
 		this.player = player;
 	}
 
@@ -41,11 +38,11 @@ public class Level extends GameLevelDefaultImpl {
 	@Override
 	protected void init() {
 		Player player = this.player;
-		
+
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
-		
+
 		//Now the only thing we have to register is the array witch contains all enemies
 		data.getUniverse().addGameEntity(new AliensArray(data));	
 	}

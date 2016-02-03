@@ -15,8 +15,8 @@ import spaceinvaders.entities.Player;
  */
 public class PlayerCommande extends KeyAdapter {
 
-	private Player player;
-	
+	protected Player player;
+
 	/**
 	 * Create a PlayerCommande
 	 * @param player
@@ -25,8 +25,7 @@ public class PlayerCommande extends KeyAdapter {
 	public PlayerCommande(Player player) {
 		this.player = player;
 	}
-	
-	/* ----- Actions ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -34,13 +33,13 @@ public class PlayerCommande extends KeyAdapter {
 	public void keyPressed(KeyEvent event) {
 		keyPressed(event.getKeyCode());
 	}
-	
+
 	/**
 	 * The player shoot if the pressed key is the space bar
 	 * @param keyCode
 	 */
 	public void keyPressed(int keyCode){
 		if(keyCode == KeyEvent.VK_SPACE)
-			this.player.shoot();
+			player.shoot();
 	}
 }

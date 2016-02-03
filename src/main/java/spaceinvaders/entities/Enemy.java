@@ -17,93 +17,91 @@ import java.util.Random;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
-public abstract class Enemies extends Shooter implements MoveBlocker {
+public abstract class Enemy extends Shooter implements MoveBlocker {
 
 	protected int point;
-	protected EnnemiesArray array;
+	protected EnemiesArray enemiesArray;
 	protected double xOffset = 0;
-	protected int yOffset = 0;
-	
+	protected int yOffset 	 = 0;
+
 	/**
 	 * Create an enemy
-	 * @param data
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
-	 * @param array
-	 * 		The array witch allow it to move on screen
+	 * @param data The game data
+	 * @param posX The initial x position
+	 * @param posY The initial y position
+	 * @param enemiesArray The array witch allow it to move on screen
 	 */
-	public Enemies(GameData data, int posX, int posY, EnnemiesArray array) {
+	public Enemy(GameData data, int posX, int posY, EnemiesArray enemiesArray) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
-		this.array = array;
+		this.enemiesArray = enemiesArray;
 	}
-	
-	/* ----- Getters ----- */
+
+
 	/**
 	 * Get the amount of points you win when the entity die
 	 * @return the amount of points
 	 */
 	public abstract int score();
-	
+
 	/**
 	 * Get the bounding box of this entity
 	 * @return the bounding box as a rectangle
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point((int) Math.floor(this.xOffset + super.position.x), this.yOffset + super.position.y), new Dimension(super.image.getWidth(), super.image.getHeight()));
+		return new Rectangle(
+				new Point((int) Math.floor(xOffset + position.x), yOffset + position.y), 
+				new Dimension(image.getWidth(), image.getHeight())
+			);
 	}
-	
+
 	/**
 	 * Get the array when the enemy is
 	 * @return the array
 	 */
-	public EnnemiesArray getArray() {
-		return this.array;
+	public EnemiesArray getArray() {
+		return enemiesArray;
 	}
-	
+
 	/**
 	 * Get the location in the EnemiesArray of the entity
 	 * @return a point witch x is the row in the array and y is the column in the array
 	 */
 	public Point getLocationInArray() {
-		return new Point((int) (this.getPosition().getX() / this.getImage().getWidth()), (int) (this.getPosition().getY() / this.getImage().getHeight()));
+		return new Point(
+				(int) (getPosition().getX() / getImage().getWidth()), 
+				(int) (getPosition().getY() / getImage().getHeight())
+			);
 	}
-	
-	/* ----- Setters ----- */
+
 	/**
 	 * Set the position offsets
-	 * @param x
-	 * 		The x position offset
-	 * @param y
-	 * 		The y position offset
+	 * @param x The x position offset
+	 * @param y	The y position offset
 	 */
 	public void setOffsets(double x, int y) {
-		this.xOffset = x;
-		this.yOffset = y;
+		xOffset = x;
+		yOffset = y;
 	}
-	
-	/* ----- Actions ----- */
+
 	/**
 	 * Allow the entity to shoot
 	 */
 	@Override
 	public void shoot() {
 		Random rand = new Random();
-		int pos = (int) this.getLocationInArray().getY();
+		int pos 	= (int) getLocationInArray().getY();
+
 		if (pos == 4 && rand.nextInt(700) % 350 == 0)
-			super.data.getUniverse().addGameEntity(new EnemyLaser(super.data, this));
+			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
 	}
-	
-	/* ----- Drawing ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void draw(Graphics g) {
-		this.data.getCanvas().drawImage(g, this.image.getImage(), (int) Math.floor(this.xOffset + super.position.x), this.yOffset + super.position.y);
+		data.getCanvas().drawImage(g, image.getImage(), (int) Math.floor(xOffset + position.x), yOffset + position.y);
 	}
 }

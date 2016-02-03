@@ -23,7 +23,6 @@ public class Laser extends AbstractLaser {
 		super(data, shooter);
 	}
 
-	/* ----- Getters ----- */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -31,38 +30,36 @@ public class Laser extends AbstractLaser {
 	public String getSprite() {
 		return "../../images/entite/laser.png";
 	}
-	
-	/* ----- Setters ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setMoveStrategy() {
-		super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, 0), 16));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0), 16));
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPosition() {
-		int x = (int) (this.shooter.getPosition().getX() + (this.shooter.getImage().getWidth() / 2) - (this.image.getWidth() / 2));
-		int y = (int) (this.shooter.getPosition().getY() - 20);
+		int x = (int) (shooter.getPosition().getX() + (shooter.getImage().getWidth() - image.getWidth()) / 2);
+		int y = (int) (shooter.getPosition().getY() - 20);
 		
-		this.position.setLocation(new Point(x, y));
+		position.setLocation(new Point(x, y));
 	}
-	
-	/* ----- Drawing ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void draw(Graphics g) {
-		if (super.position.y <= 0) {
-			this.data.getUniverse().removeGameEntity(this);
-			this.shooter.resetShoot();
+		if (position.y <= 0) {
+			data.getUniverse().removeGameEntity(this);
+			shooter.resetShoot();
+		} else {
+			data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 		}
-		else
-			this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);
 	}
 }

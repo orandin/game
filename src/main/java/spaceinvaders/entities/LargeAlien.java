@@ -16,20 +16,16 @@ public class LargeAlien extends Alien {
 
 	/**
 	 * Create a large alien
-	 * @param gameData
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
+	 * @param gameData The game data
+	 * @param posX	The initial x position
+	 * @param posY	The initial y position
 	 */
-	public LargeAlien(GameData gameData, int posX, int posY, EnnemiesArray array) {
-		super(gameData, posX, posY, array);
+	public LargeAlien(GameData gameData, int posX, int posY, EnemiesArray enemiesArray) {
+		super(gameData, posX, posY, enemiesArray);
 		//Calculate the position on screen with this row and column
-		super.setPosition(new Point(posX * this.image.getWidth(), posY * this.image.getHeight()));
+		super.setPosition(new Point(posX * image.getWidth(), posY * image.getHeight()));
 	}
-	
-	/* ----- Getters ----- */
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -37,7 +33,7 @@ public class LargeAlien extends Alien {
 	protected String getSprite() {
 		return "../../images/entite/saucer3a.png";
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
