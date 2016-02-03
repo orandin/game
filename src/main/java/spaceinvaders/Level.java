@@ -18,14 +18,21 @@ import spaceinvaders.entities.blockers.RightWall;
  */
 public class Level extends GameLevelDefaultImpl {
 	
+	private Player player;
+	
 	/**
-	 * Constructor
+	 * Create the Level
 	 * @param gameData
+	 * 		The game data
 	 * @param view
+	 * 		The game universe
+	 * @param player
+	 * 		The player
 	 */
-	public Level(GameData gameData, GameUniverseViewPort view) {
+	public Level(GameData gameData, GameUniverseViewPort view, Player player) {
 		super(gameData);
 		super.gameBoard = view;
+		this.player = player;
 	}
 
 	/**
@@ -33,7 +40,7 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	@Override
 	protected void init() {
-		Player player = new Player(super.data);
+		Player player = this.player;
 		
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));

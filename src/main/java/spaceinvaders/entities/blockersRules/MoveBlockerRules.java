@@ -1,13 +1,16 @@
 package spaceinvaders.entities.blockersRules;
 
-import java.awt.Point;
-
 import gameframework.motion.IllegalMoveException;
 import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
+
+import java.awt.Point;
+
 import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.EnemyLaser;
 import spaceinvaders.entities.LargeAlien;
 import spaceinvaders.entities.Laser;
 import spaceinvaders.entities.MediumAlien;
+import spaceinvaders.entities.Player;
 import spaceinvaders.entities.SmallAlien;
 
 /**
@@ -20,6 +23,14 @@ import spaceinvaders.entities.SmallAlien;
  */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
+	//This is not working
+	public void moveBlockerRule(EnemyLaser laser, Player player) throws IllegalMoveException {
+		//TODO Check if the player has been hit by an enemy laser
+		super.gameData.getUniverse().removeGameEntity(laser);
+		player.hurt();
+		throw new IllegalMoveException();
+	}
+	
 	/**
 	 * Defines the action when the laser touches an enemy
 	 * @param laser
@@ -29,7 +40,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @throws IllegalMoveException
 	 */
 	public void moveBlockerRule(Laser laser, Enemies enemy, Point position) throws IllegalMoveException {
-		kill(laser, enemy, position);
+		this.kill(laser, enemy, position);
 		throw new IllegalMoveException();
 	}
 	
@@ -42,7 +53,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @throws IllegalMoveException
 	 */
 	public void moveBlockerRule(Laser laser, SmallAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
+		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	/**
@@ -54,7 +65,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @throws IllegalMoveException
 	 */
 	public void moveBlockerRule(Laser laser, MediumAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
+		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	/**
@@ -66,7 +77,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @throws IllegalMoveException
 	 */
 	public void moveBlockerRule(Laser laser, LargeAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
+		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
 	}
 	
 	/**

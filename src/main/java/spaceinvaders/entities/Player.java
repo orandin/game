@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import spaceinvaders.Game.Game;
 import spaceinvaders.entities.playerEntry.PlayerCommande;
-
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyKeyboard;
@@ -22,12 +22,14 @@ import gameframework.motion.SpeedVector;
  */
 public class Player extends Shooter {
 	
+	private Game game;
+	
 	/**
 	 * Create the player
 	 * @param data
 	 * 		The game data
 	 */
-	public Player(GameData data) {
+	public Player(Game game, GameData data) {
 		super(data);
 		
 		//Main ship sprite
@@ -78,5 +80,15 @@ public class Player extends Shooter {
 			super.data.getUniverse().addGameEntity(new Laser(super.data, this));
 			super.canShoot = false;
 		}
+	}
+	
+	/**
+	 * Hurt the player by one life point
+	 */
+	public void hurt() {
+		this.data.decreaseLife(1);
+		
+		if (this.data.getLife().getValue() <= 0)
+			this.game.endGame();
 	}
 }
