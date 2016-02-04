@@ -35,4 +35,5 @@ public class LeftWall extends Wall {
 	public Rectangle getBoundingBox() {
 		return new Rectangle(new Point(0,0), new Dimension(1, height));
 	}
+
 }

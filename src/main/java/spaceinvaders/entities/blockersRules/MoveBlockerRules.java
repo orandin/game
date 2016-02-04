@@ -1,5 +1,8 @@
 package spaceinvaders.entities.blockersRules;
 
+import gameframework.motion.IllegalMoveException;
+import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
+
 import spaceinvaders.Level;
 import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.EnemiesShooter;
@@ -8,8 +11,6 @@ import spaceinvaders.entities.Player;
 import spaceinvaders.entities.PlayerLaser;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
-import gameframework.motion.IllegalMoveException;
-import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 /**
  * @author Benjamin Szczapa
@@ -20,8 +21,6 @@ import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
  * @author Simon Delberghe
  */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
-
-	/* ----- Methods -----*/
 
 	/**
 	 * Destroy the enemy touch by the player
@@ -153,3 +152,4 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		throw new IllegalMoveException();
 	}
 }
+

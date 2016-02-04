@@ -12,8 +12,6 @@ import gameframework.motion.MoveStrategyStraightLine;
  */
 public class EnemyLaser extends Laser{
 
-	/* ----- Attributes ----- */
-	
 	/**
 	 * this class had 1 attribute
 	 * - enemy : the enemy who shoot this laser
@@ -30,11 +28,10 @@ public class EnemyLaser extends Laser{
 	public EnemyLaser(GameData data , EnemiesShooter enemy) {
 		super(data, enemy);
 		position = new Point((enemy.getPosition().x + enemy.image.getWidth() / 2), (enemy.getPosition().y + enemy.image.getHeight()/2));
-		moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()),15));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()),15));
 		enem = enemy;
 	}
 
-	/* ----- Getter ----- */
 	/**
 	 * getter for enemy
 	 * @return the shooter

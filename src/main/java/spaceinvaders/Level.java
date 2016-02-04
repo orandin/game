@@ -3,6 +3,7 @@ package spaceinvaders;
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
+
 import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.EnemiesShooter;
 import spaceinvaders.entities.Player;
@@ -18,9 +19,7 @@ import spaceinvaders.entities.blockers.RightWall;
  * @author Simon Delberghe
  */
 public class Level extends GameLevelDefaultImpl {
-	
-	/* ---- Attributes ----- */
-	
+
 	/**
 	 * this class had 3 attributes
 	 * NB_CELLS : the default number of cell
@@ -31,16 +30,11 @@ public class Level extends GameLevelDefaultImpl {
 	private final int NB_ROWS  = 5;
 	private EnemiesArray enemiesArray;
 
-	/* ----- Constructor ----- */
-	
 	/**
 	 * Create the Level
-	 * @param gameData
-	 * 		The game data
-	 * @param view
-	 * 		The game universe
-	 * @param player
-	 * 		The player
+	 * @param gameData The game data
+	 * @param view The game universe
+	 * @param player The player
 	 */
 	public Level(GameData gameData, GameUniverseViewPort view) {
 		super(gameData);
@@ -48,8 +42,6 @@ public class Level extends GameLevelDefaultImpl {
 		enemiesArray = new EnemiesArray(gameData);
 	}
 
-	/* ----- Getters ----- */
-	
 	/**
 	 * getter for enemiesArray
 	 * @return the enemies array
@@ -57,9 +49,7 @@ public class Level extends GameLevelDefaultImpl {
 	public EnemiesArray getEnemiesArray(){
 		return enemiesArray;
 	}
-	
-	/* ----- Methods ----- */
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -67,7 +57,7 @@ public class Level extends GameLevelDefaultImpl {
 	protected void init() {
 		
 		Player player = new Player(data);
-		
+
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
@@ -98,12 +88,12 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	protected EnemiesShooter rulesToCreateEnemy(int row, int posX, int posY) {
 		if(row == 1){
-			return new Alien(super.data, 40, posX, posY, this);
+			return new Alien(data, 40, posX, posY, this);
 		}
 		if(row == 2 || row == 3){
-			return new Alien(super.data, 20, posX, posY, this);
+			return new Alien(data, 20, posX, posY, this);
 		}
-		return new Alien(super.data, 10, posX, posY, this);
+		return new Alien(data, 10, posX, posY, this);
 	}
 	
 	//methode pour reset le lvl pour l'instant non fonctionnel

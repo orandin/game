@@ -20,8 +20,6 @@ import gameframework.motion.GameMovable;
  */
 public abstract class EntiteMovable extends GameMovable implements GameEntity {
 
-	/* ----- Attributes ----- */
-	
 	/**
 	 * this class had 3 attributes
 	 * - data : game data
@@ -31,10 +29,7 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	protected GameData data;
 	protected DrawableImage image;
 	protected GameConfiguration config;
-	
 
-	/* ----- Constructor ------ */
-	
 	/**
 	 * Create an EntiteMovable
 	 * @param data
@@ -45,9 +40,7 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		config = gameData.getConfiguration();
 		data = gameData;
 	}
-	
-	/* ---- Getter ----- */
-	
+
 	/**
 	 * @return the bounding box
 	 */
@@ -72,7 +65,7 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		return image;
 	}
 	/* ----- Methods ----- */
-	
+
 	/**
 	 * method to draw an entitie on the canvas
 	 */
@@ -80,5 +73,4 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	public void draw(Graphics g) {
 		data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 	}
-	
 }
