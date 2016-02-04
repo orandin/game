@@ -10,7 +10,6 @@ import gameframework.motion.blocking.MoveBlockerRulesApplier;
 import java.io.IOException;
 
 import spaceinvaders.Level;
-import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockersRules.MoveBlockerRules;
 
 /**

@@ -16,6 +16,8 @@ import gameframework.game.GameData;
 
 public abstract class Shooter extends EntiteMovable {
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create a shooter
 	 * @param data
@@ -26,12 +28,13 @@ public abstract class Shooter extends EntiteMovable {
 	}
 
 	/* ----- Getters ----- */
+	
 	/**
 	 * Get the entity position
 	 * @return the position
 	 */
 	public Point getPosition() {
-		return super.position;
+		return position;
 	}
 	
 	/**
@@ -39,11 +42,18 @@ public abstract class Shooter extends EntiteMovable {
 	 * @return the entitie image
 	 */
 	public DrawableImage getImage(){
-		return super.image;
+		return image;
 	}
 	
-	//Method
-	
+	/**
+	 * @return <code>true</code> if the shooter can shoot <code>false</code> else
+	 */
 	public abstract boolean canShoot();
+	
+	/* ---- Methods ----- */
+	
+	/**
+	 * method call by the shooter to shoot
+	 */
 	public abstract void shoot();
 }

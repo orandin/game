@@ -21,10 +21,20 @@ import spaceinvaders.entities.blockers.RightWall;
  */
 public class Level extends GameLevelDefaultImpl {
 	
-	private static final int NB_CELLS = 11;
-	private static final int NB_ROWS  = 5;
+	/* ---- Attributes ----- */
+	
+	/**
+	 * this class had 3 attributes
+	 * NB_CELLS : the default number of cell
+	 * NB_ROWS : the default number of rows
+	 * enemiesArray : the enemies array
+	 */
+	private final int NB_CELLS = 11;
+	private final int NB_ROWS  = 5;
 	private EnemiesArray enemiesArray;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the Level
 	 * @param gameData
@@ -36,40 +46,48 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	public Level(GameData gameData, GameUniverseViewPort view) {
 		super(gameData);
-		super.gameBoard = view;
-		this.enemiesArray = new EnemiesArray(gameData);
+		gameBoard = view;
+		enemiesArray = new EnemiesArray(gameData);
 	}
 
+	/* ----- Getters ----- */
+	
+	/**
+	 * getter for enemiesArray
+	 * @return the enemies array
+	 */
+	public EnemiesArray getEnemiesArray(){
+		return enemiesArray;
+	}
+	
+	/* ----- Methods ----- */
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected void init() {
-		Player player = new Player(this.data);
+		Player player = new Player(data);
 		
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
 
-		int posX = super.spriteSize * 5;
+		int posX = spriteSize * 5;
 		int posY = posX;
 
 		for(int row = 1; row <= NB_ROWS; row++){
 			for(int cell = 1; cell <= NB_CELLS; cell++){
 				Enemies enemy = rulesToCreateEnemy(row, posX, posY);
-				this.enemiesArray.add(enemy);
+				enemiesArray.add(enemy);
 				if(cell == NB_CELLS)
 					posY += enemy.getImage().getHeight();
 				else
 					posX += enemy.getImage().getWidth();
 			}
-			posX = super.spriteSize * 5;
+			posX = spriteSize * 5;
 		}
 		
-	}
-
-	public EnemiesArray getEnemiesArray(){
-		return this.enemiesArray;
 	}
 	
 	/**

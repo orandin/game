@@ -1,34 +1,32 @@
 package spaceinvaders.entities;
 
 import gameframework.game.GameData;
+import gameframework.game.GameLevel;
+import gameframework.motion.MoveStrategyStraightLine;
 import gameframework.motion.blocking.MoveBlocker;
 
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.Random;
-
 
 import spaceinvaders.Level;
 
-import gameframework.motion.MoveStrategyStraightLine;
-
 /**
- * this class represent the differents type of enemies in the game
+ * this class represent the different type of enemies in the game
  * @author 
  */
 public abstract class Enemies extends Shooter implements MoveBlocker{
 
+	/* ---- attributes ----- */
+	
 	/**
 	 * this class had 2 attributes
 	 * - point : the point win by the player if he is kill
 	 * - lvl : the current level ( to access enemies array principally)  
 	 */
 	protected int point;
-
 	protected Level lvl;
 	
-	//Constructor
+	/* ----- constructor ----- */
 	
 	/**
 	 * Constructor
@@ -37,57 +35,49 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * @param posY : the position y of this enemy
 	 * @param lvl : the current level
 	 */
-	public Enemies(GameData data, int posX, int posY, Level lvl) {
+	public Enemies(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
-		super.moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(super.data.getConfiguration().getNbColumns() * super.data.getConfiguration().getSpriteSize() ,position.y)));
-		this.lvl = lvl;
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
+		lvl = level;
 	}
 	
-	/**
-	 * Get the bounding box of this entity
-	 * @return the bounding box as a rectangle
-	 */
-	@Override
-	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point(position.x, position.y), new Dimension(super.image.getWidth(), super.image.getHeight()));
-	}
+	/* ----- getters ----- */
 	
 	/**
-	 * getter to know if an enemy can shoot or not
-	 * @return <code>true</code> if he can shoot <code>false</code> else
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean canShoot(){
-		return this.lvl.getEnemiesArray().EnemieCanShoot(this);
+		return lvl.getEnemiesArray().EnemieCanShoot(this);
 	}
 
 	/**
 	 * getter for lvl
 	 * @return the current level
 	 */
-	public Level getLevel(){
-		return (Level) this.lvl;
+	public GameLevel getLevel(){
+		return lvl;
 	}
 	
-	//Method
+	/* ---- Methods ---- */
 	
 	/**
 	 * action to do after a move
 	 */
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		this.shoot();
+		shoot();
 	}
 
 	/**
-	 * method to shoot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void shoot(){
 		Random rand = new Random();
 		if(this.canShoot() && (rand.nextInt(1000) % 350 == 0)){
-			super.data.getUniverse().addGameEntity(new EnemyLaser(super.data, this));
+			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
 		}
 
 	}

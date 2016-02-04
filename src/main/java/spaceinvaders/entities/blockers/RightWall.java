@@ -17,14 +17,17 @@ import java.awt.Rectangle;
  */
 public class RightWall extends Wall {
 
+	/* ----- Attributes ----- */
+	
 	private Point point;
+	
+	/* ----- constructor ----- */
 	
 	/**
 	 * Create the right wall
 	 * @param data
 	 * 		The game data
 	 */
-
 	public RightWall(GameData data) {
 		super(data);
 		int posX = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
@@ -37,6 +40,6 @@ public class RightWall extends Wall {
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(this.point, new Dimension(1, super.height));
+		return new Rectangle(point, new Dimension(1, height));
 	}
 }

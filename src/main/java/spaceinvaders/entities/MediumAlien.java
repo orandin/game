@@ -25,8 +25,8 @@ public class MediumAlien extends Alien {
 	 */
 	public MediumAlien(GameData gameData, int posX, int posY, Level lvl) {
 		super(gameData, posX, posY, lvl);
-		super.image = new DrawableImage("../../images/entite/saucer2a.png", data.getCanvas());
-		super.point = 20;
+		image = new DrawableImage("../../images/entite/saucer2a.png", data.getCanvas());
+		point = 20;
 	}
 
 }

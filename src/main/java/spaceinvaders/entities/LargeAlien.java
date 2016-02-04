@@ -25,7 +25,7 @@ public class LargeAlien extends Alien {
 	 */
 	public LargeAlien(GameData gameData, int posX, int posY, Level lvl){
 		super(gameData, posX, posY, lvl);
-		super.image = new DrawableImage("../../images/entite/saucer3a.png", data.getCanvas());
-		super.point = 40;
+		image = new DrawableImage("../../images/entite/saucer3a.png", data.getCanvas());
+		point = 40;
 	}
 }

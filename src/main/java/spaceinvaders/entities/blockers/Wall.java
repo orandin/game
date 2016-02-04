@@ -27,7 +27,7 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 	 * 		The game data
 	 */
 	public Wall(GameData data) {
-		this.height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
+		height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
 	}
 
 	/* ----- Boolean ----- */
