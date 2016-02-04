@@ -32,12 +32,11 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @param alien
 	 * 		The alien which is touch by the laser
 	 */
-	private void kill(PlayerLaser laser, EnemiesShooter alien){
+	protected void kill(PlayerLaser laser, EnemiesShooter alien){
 		gameData.getUniverse().removeGameEntity(laser);
 		((Level) alien.getLevel()).getEnemiesArray().remove(alien);
 		laser.getShooter().getData().getScore().setValue(laser.getShooter().getData().getScore().getValue() + alien.getPoint());
 		if(((Level) alien.getLevel()).getEnemiesArray().allDead()){
-			System.out.println("you win");
 			((Level) alien.getLevel()).resetLevel();
 			laser.getShooter().getData().increaseLife(1);
 		}
@@ -49,7 +48,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @param laser
 	 * 		the laser which touch the player
 	 */
-	private void PlayerTouch(EnemyLaser laser){
+	protected void PlayerTouch(EnemyLaser laser){
 		gameData.decreaseLife(1);
 		gameData.getUniverse().removeGameEntity(laser);
 	}
@@ -61,13 +60,13 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @param player
 	 * 		the Player laser
 	 */
-	private void lasersColisions(EnemyLaser alien, PlayerLaser player){
+	protected void lasersColisions(EnemyLaser alien, PlayerLaser player){
 		gameData.getUniverse().removeGameEntity(alien);
 		gameData.getUniverse().removeGameEntity(player);
 		player.getShooter().resetShoot();
 	}
 	
-	private void enemyChangeDirection(Alien alien, int nextGoal){
+	protected void enemyChangeDirection(Alien alien, int nextGoal){
 		((Level) alien.getLevel()).getEnemiesArray().ReverseMoveStrategyForAll(nextGoal);
 	}
 	/* ----- Rules ----- */
@@ -190,7 +189,6 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	/* ----- LeftWall -----*/
 	
 	public void moveBlockerRule(Alien alien, LeftWall wall) throws IllegalMoveException{
-		System.out.println("l");
 		enemyChangeDirection(alien,gameData.getConfiguration().getNbColumns() * gameData.getConfiguration().getSpriteSize());
 		throw new IllegalMoveException();
 	}
