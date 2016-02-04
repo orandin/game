@@ -1,51 +1,65 @@
 package spaceinvaders.entities;
 
+import java.awt.Point;
+
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
-
 /**
- * 
- * @author Kevin Rico
  * @author Benjamin Szczapa
- *
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
+
 public abstract class Shooter extends MovableEntity {
 
-	protected boolean canShoot;
+	/* ----- Constructor ----- */
 	
 	/**
-	 * Constructor
+	 * Create a shooter
 	 * @param data
+	 * 		The game data
 	 */
 	public Shooter(GameData data) {
 		super(data);
 	}
 	
 	/**
-	 * Boolean that say if the shooter can shoot or not
-	 * @return 
+	 * @return the image of the shooter
+
+	/* ----- Getters ----- */
+	
+	/**
+	 * Get the entity position
+	 * @return the position
 	 */
-	public boolean canShoot(){
-		return this.canShoot;
+	public Point getPosition() {
+		return position;
 	}
 	
 	/**
-	 * @return the image of the shooter
+	 * getter for the entitie image
+	 * @return the entitie image
 	 */
 	public DrawableImage getImage(){
-		return this.image;
-	}
-
-	/**
-	 * Method that reset the shoot of the shooter. The player can shoot again.
-	 */
-	public void resetShoot(){
-		this.canShoot = true;
+		return image;
 	}
 	
 	/**
 	 * Method that allow a shooter to shoot.
+	
+	/**
+	 * @return <code>true</code> if the shooter can shoot <code>false</code> else
+	 */
+	public abstract boolean canShoot();
+	
+	/* ---- Methods ----- */
+	
+	/**
+	 * method call by the shooter to shoot
 	 */
 	public abstract void shoot();
 }

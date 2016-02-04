@@ -1,19 +1,32 @@
 package spaceinvaders.entities.blockers;
 
 import gameframework.game.GameData;
-import gameframework.motion.blocking.MoveBlocker;
 
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class RightWall extends Wall implements MoveBlocker{
 
+/**
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
+ */
+public class RightWall extends Wall {
+
+	/* ----- Attributes ----- */
+	
 	private Point point;
 	
+	/* ----- constructor ----- */
+	
 	/**
-	 * Constructor
+	 * Create the right wall
 	 * @param data
+	 * 		The game data
 	 */
 	public RightWall(GameData data) {
 		super(data);
@@ -21,12 +34,12 @@ public class RightWall extends Wall implements MoveBlocker{
 		this.point = new Point(posX, 0);
 	}
 
+	/* ----- Getters ----- */
 	/**
-	 * @return The bound of the right wall.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(this.point, new Dimension(1, super.height));
+		return new Rectangle(point, new Dimension(1, height));
 	}
-
 }

@@ -1,7 +1,9 @@
 package spaceinvaders.entities;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameConfiguration;
@@ -10,19 +12,31 @@ import gameframework.game.GameEntity;
 import gameframework.motion.GameMovable;
 
 /**
- * 
+ * @author Benjamin Szczapa
  * @author Kevin Rico
- *
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
 public abstract class MovableEntity extends GameMovable implements GameEntity {
 
+	/* ----- Attributes ----- */
+	
+	/**
+	 * this class had 3 attributes
+	 * - data : game data
+	 * - image : image of this entities
+	 * - config : game configuration
+	 */
 	protected GameData data;
 	protected DrawableImage image;
 	protected GameConfiguration config;
 	
 	/**
-	 * Constructor
+	 * Create an EntiteMovable
 	 * @param data
+	 * 		The game data
 	 */
 	public MovableEntity(GameData data) {
 		this.config = data.getConfiguration();
@@ -35,14 +49,29 @@ public abstract class MovableEntity extends GameMovable implements GameEntity {
 	 */
 	public Point getPosition(){
 		return super.position;
-	}
+	}	
+	
+	/* ---- Getter ----- */
 	
 	/**
-	 * Method that draw the image of the MovableEntity.
+	 * @return the bounding box
+	 */
+	@Override
+	public Rectangle getBoundingBox() {
+		return new Rectangle(position, new Dimension(image.getWidth(), image.getHeight()));
+	}
+	
+	/* ----- Methods ----- */
+	
+	/**
+	 * method to draw an entitie on the canvas
 	 */
 	@Override
 	public void draw(Graphics g) {
-		this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);
+		data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 	}
-
+	
+	/* ----- Unused ----- */
+	@Override
+	public void oneStepMoveAddedBehavior() {}
 }

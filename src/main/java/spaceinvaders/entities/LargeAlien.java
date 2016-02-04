@@ -1,39 +1,31 @@
 package spaceinvaders.entities;
 
+import spaceinvaders.Level;
+import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
 /**
- * 
- * @author Kévin Rico
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
  * @author Simon Delberghe
- *
  */
 public class LargeAlien extends Alien {
 
 	/**
-	 * Constructor
+	 * Create a large alien
 	 * @param gameData
+	 * 		The game data
 	 * @param posX
+	 * 		The initial x position
 	 * @param posY
+	 * 		The initial y position
 	 */
-	public LargeAlien(GameData gameData, int posX, int posY){
-		super(gameData, posX, posY);
+	public LargeAlien(GameData gameData, int posX, int posY, Level lvl){
+		super(gameData, posX, posY, lvl);
+		image = new DrawableImage("../../images/entite/saucer3a.png", data.getCanvas());
+		point = 40;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getUriImage() {
-		return "../../images/entite/saucer3a.png";
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected int score() {
-		return 40;
-	}
-
 }

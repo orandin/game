@@ -1,11 +1,8 @@
 package spaceinvaders.entities;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
+import gameframework.motion.blocking.MoveBlocker;
 import gameframework.motion.MoveStrategyStraightLine;
 
 /**
@@ -13,33 +10,18 @@ import gameframework.motion.MoveStrategyStraightLine;
  * @author Kevin Rico
  *
  */
-public class Laser extends MovableEntity {
-
-	private Shooter shooter;
+public abstract class Laser extends MovableEntity {
 	
-	//Constructor
-	public Laser(GameData data, Shooter shooter, boolean top) {
+	/* ----- constructor ----- */
+	
+	/**
+	 * Laser constructor
+	 * @param data ; game data
+	 * @param shooter : the shooter
+	 */
+	public Laser(GameData data, Shooter shooter) {
 		super(data);
-		super.position.setLocation(shooter.getPosition());
-		if(!top){
-			super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())));
-		}
-		else{
-			super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, 0)));
-		}
-		super.image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
-		this.shooter = shooter;
-	}
-
-	//Getter
-	
-	@Override
-	public Rectangle getBoundingBox() {
-		return new Rectangle(super.position, new Dimension(this.image.getWidth(), this.image.getHeight()));
-	}
-
-	public Shooter getShooter(){
-		return this.shooter;
+		image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
 	}
 
 	//Method
@@ -49,4 +31,11 @@ public class Laser extends MovableEntity {
 		// TODO Auto-generated method stub
 	}
 
+	/* ----- getter ----- */
+	
+	/**
+	 * getter for the shooter
+	 * @return the entitie who shoot
+	 */
+	public abstract Shooter getShooter();
 }

@@ -5,21 +5,30 @@ import java.awt.event.KeyEvent;
 
 import spaceinvaders.entities.Player;
 
-
-public class PlayerCommande extends KeyAdapter{
+/**
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
+ */
+public class PlayerCommande extends KeyAdapter {
 
 	private Player player;
 	
 	/**
-	 * Constructor
+	 * Create a PlayerCommande
 	 * @param player
+	 * 		The player
 	 */
 	public PlayerCommande(Player player) {
 		this.player = player;
 	}
 	
+	/* ----- Actions ----- */
 	/**
-	 * Method that check the keys press by the player.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void keyPressed(KeyEvent event) {
@@ -27,12 +36,11 @@ public class PlayerCommande extends KeyAdapter{
 	}
 	
 	/**
-	 * Method that allow a player to shoot if the right is press.
+	 * The player shoot if the pressed key is the space bar
 	 * @param keyCode
 	 */
 	public void keyPressed(int keyCode){
 		if(keyCode == KeyEvent.VK_SPACE)
 			this.player.shoot();
 	}
-
 }

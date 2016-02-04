@@ -13,17 +13,21 @@ import spaceinvaders.Level;
 import spaceinvaders.entities.blockersRules.MoveBlockerRules;
 
 /**
- * 
  * @author Benjamin Szczapa
- *
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
  */
-public class Game extends GameDefaultImpl{
-	
-	private GameWindow gameWindow;
+public class Game extends GameDefaultImpl {
+
+	protected GameWindow gameWindow;
 	protected GameUniverseViewPortDefaultImpl universeViewPort;
+	protected Thread livesChecker;
 	
 	/**
-	 * Method that define the main features of the game.
+	 * Create the game
 	 */
 	public Game() {
 		super(new GameData(new GameConfiguration()));
@@ -42,36 +46,14 @@ public class Game extends GameDefaultImpl{
 		return this.universeViewPort;
 	}
 
-	/**
-	 * Main method.
-	 * @param args
-	 * @throws IOException
-	 */
+	public void endOfGame(){
+		this.universeViewPort.setBackgroundImage("../../game_over.png");
+		this.universeViewPort.paint();
+	}
+	
 	public static void main (String[] args) throws IOException{
 		Game game = new Game();
 		game.start();
-		
-		while(!game.data.getEndOfGame().getValue()) {
-			/**
-			 * End of the game if the plyer's life is 0.
-			 */
-			if(game.data.getLife().getValue() <= 0) {
-				game.data.getEndOfGame().setValue(true);
-			}
-			/**
-			 * TODO: check if the player is hit by an enemy shot and decrease his life to 1.
-			 */
-			if(true) {
-				game.data.decreaseLife(1);
-			}
-		}
-		
-		/**
-		 * Modify the background image with a game over screen.
-		 */
-		game.getUniverseViewPort().setBackgroundImage("../../game_over.png");
-		
+		game.endOfGame();
 	}
-	
-
 }

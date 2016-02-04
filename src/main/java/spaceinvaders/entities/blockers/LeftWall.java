@@ -6,22 +6,33 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+/**
+ * @author Benjamin Szczapa
+ * @author Kevin Rico
+ * @author Matthieu Lepers
+ * @author Guillaume Maitrot
+ * @author Theo Verschaeve
+ * @author Simon Delberghe
+ */
 public class LeftWall extends Wall {
 
+	/* ----- Constructor ----- */
+	
 	/**
-	 * Constructor
+	 * Create the left wall
 	 * @param data
+	 * 		The game data
 	 */
 	public LeftWall(GameData data) {
 		super(data);
 	}
-
+	
+	/* ----- Getters ----- */
 	/**
-	 * @return The bound of the left wall.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point(-1,0), new Dimension(1, super.height));
+		return new Rectangle(new Point(-1,0), new Dimension(1, height));
 	}
-
 }
