@@ -1,6 +1,8 @@
 package spaceinvaders.entities;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameConfiguration;
@@ -18,6 +20,12 @@ import gameframework.motion.GameMovable;
  */
 public abstract class EntiteMovable extends GameMovable implements GameEntity {
 
+	/**
+	 * this class had 3 attributes
+	 * - data : game data
+	 * - image : image of this entities
+	 * - config : game configuration
+	 */
 	protected GameData data;
 	protected DrawableImage image;
 	protected GameConfiguration config;
@@ -27,20 +35,22 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	 * @param data
 	 * 		The game data
 	 */
-	public EntiteMovable(GameData data) {
-		this.config = data.getConfiguration();
-		this.data   = data;
-		this.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
+	public EntiteMovable(GameData gameData) {
+		moveDriver.setmoveBlockerChecker(gameData.getMoveBlockerChecker());
+		config = gameData.getConfiguration();
+		data = gameData;
 	}
 
 	/**
-	 * Get the entity sprite
-	 * @return the entity sprite
+	 * @return the bounding box
 	 */
-	protected abstract String getSprite();
+	@Override
+	public Rectangle getBoundingBox() {
+		return new Rectangle(position, new Dimension(image.getWidth(), image.getHeight()));
+	}
 
 	/**
-	 * Draw the entity to the canvas
+	 * method to draw an entitie on the canvas
 	 */
 	@Override
 	public void draw(Graphics g) {

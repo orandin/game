@@ -64,7 +64,6 @@ public class MoveBlockerCheckerDefaultImpl implements MoveBlockerChecker {
 		Vector<MoveBlocker> moveBlockersInIntersection = new Vector<MoveBlocker>();
 		Area intersectArea = new Area(intersectShape);
 		Rectangle tmpIntersec = (intersectShape.getBounds());
-
 		for (MoveBlocker moveBlocker : moveBlockers) {
 			Rectangle tmpB = moveBlocker.getBoundingBox();
 			if (m != moveBlocker && tmpIntersec.intersects(tmpB)) {

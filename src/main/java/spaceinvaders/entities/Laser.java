@@ -1,65 +1,24 @@
 package spaceinvaders.entities;
 
+import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
-import gameframework.motion.MoveStrategyStraightLine;
+import gameframework.motion.blocking.MoveBlocker;
 
-import java.awt.Graphics;
-import java.awt.Point;
+public abstract class Laser extends EntiteMovable implements MoveBlocker {
 
-/**
- * @author Benjamin Szczapa
- * @author Kevin Rico
- * @author Matthieu Lepers
- * @author Guillaume Maitrot
- * @author Theo Verschaeve
- * @author Simon Delberghe
- */
-public class Laser extends AbstractLaser {
-	
 	/**
-	 * {@inheritDoc}
+	 * Laser constructor
+	 * @param data ; game data
+	 * @param shooter : the shooter
 	 */
 	public Laser(GameData data, Shooter shooter) {
-		super(data, shooter);
+		super(data);
+		image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * getter for the shooter
+	 * @return the entitie who shoot
 	 */
-	@Override
-	public String getSprite() {
-		return "../../images/entite/laser.png";
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMoveStrategy() {
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0), 16));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPosition() {
-		int x = (int) (shooter.getPosition().getX() + (shooter.getImage().getWidth() - image.getWidth()) / 2);
-		int y = (int) (shooter.getPosition().getY() - 20);
-		
-		position.setLocation(new Point(x, y));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void draw(Graphics g) {
-		if (position.y <= 0) {
-			data.getUniverse().removeGameEntity(this);
-			shooter.resetShoot();
-		} else {
-			data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
-		}
-	}
+	public abstract Shooter getShooter();
 }

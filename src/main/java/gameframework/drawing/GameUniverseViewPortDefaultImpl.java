@@ -68,4 +68,5 @@ public class GameUniverseViewPortDefaultImpl implements GameUniverseViewPort {
 	public void refresh() {
 		getCanvas().drawFullSizeImage(buffer);
 	}
+	
 }

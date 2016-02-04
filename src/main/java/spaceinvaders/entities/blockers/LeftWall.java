@@ -14,6 +14,8 @@ import java.awt.Point;
  */
 public class LeftWall extends Wall {
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the left wall
 	 * @param data

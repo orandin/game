@@ -64,6 +64,7 @@ public class MoveStrategyConfigurableKeyboard extends KeyAdapter implements Move
 	 *  the key for direction (0, -1) and the key for (1, 0) then this will result in moving in the direction (1, -1))
 	 */
 	public MoveStrategyConfigurableKeyboard(Boolean alwaysMove, SpeedVector speedVector, Boolean combineDirections) {
+		super();
 		this.alwaysMove = alwaysMove;
 		this.speedVector = speedVector;
 		this.directions = new HashMap<Integer, Point>();

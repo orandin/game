@@ -19,6 +19,10 @@ import gameframework.motion.blocking.MoveBlocker;
  */
 public abstract class Wall implements MoveBlocker, GameEntity {
 
+	/**
+	 * this class had 1 attribute
+	 * - height : the height of the wall
+	 */
 	protected int height;
 	protected Point pointWall;
 
@@ -27,7 +31,7 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 	 * @param data The game data
 	 */
 	public Wall(GameData data) {
-		this.height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
+		height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
 	}
 
 	/**

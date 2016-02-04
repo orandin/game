@@ -4,6 +4,7 @@ import gameframework.game.GameData;
 
 import java.awt.Point;
 
+
 /**
  * @author Benjamin Szczapa
  * @author Kevin Rico
@@ -13,7 +14,7 @@ import java.awt.Point;
  * @author Simon Delberghe
  */
 public class RightWall extends Wall {
-
+	
 	/**
 	 * Create the right wall
 	 * @param data The game data
