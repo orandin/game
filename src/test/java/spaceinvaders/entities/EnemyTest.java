@@ -31,13 +31,6 @@ public abstract class EnemyTest {
 	protected abstract Enemy creatEnemy();
 	
 	@Test
-	public void canShootTest() {
-		EnemiesArray array = new EnemiesArray(gameData);
-		array.add(enemy);
-		assertTrue(this.enemy.canShoot());
-	}
-	
-	@Test
 	public void getLevelTest() {
 		assertSame(this.level, this.enemy.getLevel());
 	}
