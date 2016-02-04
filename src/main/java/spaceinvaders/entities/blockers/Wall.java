@@ -1,6 +1,10 @@
 package spaceinvaders.entities.blockers;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+
 import gameframework.game.GameData;
 import gameframework.game.GameEntity;
 import gameframework.motion.blocking.MoveBlocker;
@@ -20,17 +24,16 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 	 * - height : the height of the wall
 	 */
 	protected int height;
-	
+	protected Point pointWall;
+
 	/**
 	 * Create a wall
-	 * @param data
-	 * 		The game data
+	 * @param data The game data
 	 */
 	public Wall(GameData data) {
 		height = data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize();
 	}
 
-	/* ----- Boolean ----- */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -39,7 +42,14 @@ public abstract class Wall implements MoveBlocker, GameEntity {
 		return false;
 	}
 
-	/* ----- Drawing ----- */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Rectangle getBoundingBox() {
+		return new Rectangle(pointWall, new Dimension(1, height));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */

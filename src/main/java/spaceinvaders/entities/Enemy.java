@@ -13,10 +13,8 @@ import spaceinvaders.Level;
  * @author Benjamin Szczapa
  */
 
-public abstract class Enemies extends Shooter implements MoveBlocker{
+public abstract class Enemy extends Shooter implements MoveBlocker {
 
-	/* ---- attributes ----- */
-	
 	/**
 	 * this class had 2 attributes
 	 * - point : the point win by the player if he is kill
@@ -24,10 +22,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 */
 	protected int point;
 	protected Level lvl;
-	
 
-	/* ----- constructor ----- */
-	
 	/**
 	 * Constructor
 	 * @param data : game data
@@ -35,15 +30,13 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * @param posY : the position y of this enemy
 	 * @param lvl : the current level
 	 */
-	public Enemies(GameData data, int posX, int posY, Level level) {
+	public Enemy(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
 		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
 		lvl = level;
 	}
-	
-	/* ----- getters ----- */
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -59,9 +52,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	public GameLevel getLevel(){
 		return lvl;
 	}
-	
-	/* ---- Methods ---- */
-	
+
 	/**
 	 * action to do after a move
 	 */
@@ -76,9 +67,8 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	@Override
 	public void shoot(){
 		Random rand = new Random();
-		if(this.canShoot() && (rand.nextInt(1000) % 350 == 0)){
+		if(canShoot() && (rand.nextInt(1000) % 350 == 0)){
 			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
 		}
-
 	}
 }

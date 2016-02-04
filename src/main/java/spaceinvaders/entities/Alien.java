@@ -11,10 +11,18 @@ import gameframework.game.GameData;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
-public abstract class Alien extends Enemies {
-	
+
+public abstract class Alien extends Enemy {
+
+	/**
+	 * Create an alien
+	 * @param data	The game data
+	 * @param posX	The initial x position where it spawn
+	 * @param posY	The initial y position where it spawn
+	 * @param array	The array when the alien is, this is for movement
+	 */	
 	public Alien(GameData data,int posX, int posY, Level lvl){
 		super(data, posX, posY, lvl);
 	}
-	
+
 }

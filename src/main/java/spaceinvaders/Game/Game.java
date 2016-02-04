@@ -25,21 +25,21 @@ public class Game extends GameDefaultImpl {
 	protected GameWindow gameWindow;
 	protected GameUniverseViewPortDefaultImpl universeViewPort;
 	protected Thread livesChecker;
-	
+
 	/**
 	 * Create the game
 	 */
 	public Game() {
 		super(new GameData(new GameConfiguration()));
-		this.gameWindow = new GameWindow("space invaders", this.data.getCanvas(), this.data);
-		this.gameWindow.createGUI();
-		this.universeViewPort = new GameUniverseViewPortDefaultImpl(this.data);
-		this.universeViewPort.setBackgroundImage("../../fond.png");
-		
+		gameWindow = new GameWindow("space invaders", data.getCanvas(), data);
+		gameWindow.createGUI();
+		universeViewPort = new GameUniverseViewPortDefaultImpl(data);
+		universeViewPort.setBackgroundImage("../../fond.png");
+
 		MoveBlockerRulesApplier applier = new MoveBlockerRules();
 		applier.setGameData(data);
-		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
-		this.data.addLevel(new Level(this.data, this.universeViewPort));
+		data.getMoveBlockerChecker().setMoveBlockerRules(applier);
+		data.addLevel(new Level(data, universeViewPort));
 	}
 	
 	public GameUniverseViewPortDefaultImpl getUniverseViewPort() {

@@ -19,20 +19,15 @@ import gameframework.motion.SpeedVector;
  */
 public class Player extends Shooter {
 
-	/* ----- Attributes ----- */
-	
 	/**
 	 * this class had 1 attributes
 	 * - canShoot : boolean to know if the player can shoot or not
 	 */
 	private boolean canShoot = true;
 
-	/* ----- Constructor ----- */
-	
 	/**
 	 * Create the player
-	 * @param data
-	 * 		The game data
+	 * @param data	The game data
 	 */
 	public Player(GameData data) {
 		super(data);
@@ -58,9 +53,7 @@ public class Player extends Shooter {
 		//Add KeyListener for shooting key
 		data.getCanvas().addKeyListener(new PlayerCommande(this));
 	}
-	
-	/* ----- Methods ----- */
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -84,5 +77,4 @@ public class Player extends Shooter {
 			canShoot = false;
 		}
 	}
-
 }

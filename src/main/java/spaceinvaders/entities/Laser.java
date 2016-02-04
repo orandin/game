@@ -10,10 +10,8 @@ import gameframework.motion.MoveStrategyStraightLine;
  * @author Kevin Rico
  *
  */
-public abstract class Laser extends MovableEntity {
-	
-	/* ----- constructor ----- */
-	
+public abstract class Laser extends MovableEntity implements MoveBlocker {
+
 	/**
 	 * Laser constructor
 	 * @param data ; game data
