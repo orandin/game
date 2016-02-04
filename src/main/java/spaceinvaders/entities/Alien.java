@@ -1,8 +1,11 @@
 package spaceinvaders.entities;
 
+import java.awt.Point;
+
 import spaceinvaders.Level;
-import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
+import gameframework.motion.MoveStrategyStraightLine;
+import gameframework.motion.blocking.MoveBlocker;
 
 /**
  * @author Benjamin Szczapa
@@ -12,40 +15,11 @@ import gameframework.game.GameData;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
-public class Alien extends EnemiesShooter{
+public abstract class Alien extends EnemiesShooter  implements MoveBlocker{
 
-	/* ----- constructor ----- */
-	
-	/**
-	 * Alien constructor
-	 * @param data ; the game data
-	 * @param enemyPoint : point win by the player if he touch his
-	 * @param posX : x position on the screen
-	 * @param posY : y position on the screen
-	 * @param lvl : the actually game Level
-	 */
-	public Alien(GameData data, int enemyPoint, int posX, int posY, Level lvl){
+	public Alien(GameData data,int posX, int posY, Level lvl){
 		super(data, posX, posY, lvl);
-		point = enemyPoint;
-		setImage();
-	}
-	
-	/* ----- Setter ----- */
-	
-	/**
-	 * this method is use by the constructor for initialised the alien image
-	 * because all aliens in space invaders game are not the same image
-	 */
-	private void setImage(){
-		if(point == 10){
-			image = new DrawableImage("../../images/entite/saucer1b.png", data.getCanvas());
-		}
-		if(point == 20){
-			image = new DrawableImage("../../images/entite/saucer2a.png", data.getCanvas());
-		}
-		if(point == 40){
-			image = new DrawableImage("../../images/entite/saucer3a.png", data.getCanvas());
-		}
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() , position.y)));
 	}
 	/* ----- Method ----- */
 

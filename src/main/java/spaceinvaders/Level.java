@@ -4,9 +4,11 @@ import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
 
-import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.EnemiesShooter;
+import spaceinvaders.entities.LargeAlien;
+import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.Player;
+import spaceinvaders.entities.SmallAlien;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
 
@@ -88,12 +90,12 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	protected EnemiesShooter rulesToCreateEnemy(int row, int posX, int posY) {
 		if(row == 1){
-			return new Alien(data, 40, posX, posY, this);
+			return new LargeAlien(data, posX, posY, this);
 		}
 		if(row == 2 || row == 3){
-			return new Alien(data, 20, posX, posY, this);
+			return new MediumAlien(data, posX, posY, this);
 		}
-		return new Alien(data, 10, posX, posY, this);
+		return new SmallAlien(data, posX, posY, this);
 	}
 	
 	//methode pour reset le lvl pour l'instant non fonctionnel
