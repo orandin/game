@@ -8,9 +8,8 @@ import gameframework.game.GameData;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import spaceinvaders.EnemiesArray;
 import spaceinvaders.Level;
+import spaceinvaders.entities.Enemy;
 
 
 public abstract class EnemyTest {

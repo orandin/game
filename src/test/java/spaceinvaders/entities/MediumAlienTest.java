@@ -3,6 +3,7 @@ package spaceinvaders.entities;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import spaceinvaders.entities.Enemy;
 
 public class MediumAlienTest extends EnemyTest {
 
