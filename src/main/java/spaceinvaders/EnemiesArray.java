@@ -14,8 +14,6 @@ import spaceinvaders.entities.Enemies;
  */
 public class EnemiesArray {
 
-	/* ----- Attributes ----- */
-
 	/**
 	 * this class had 5 attributes
 	 * - data : the game data
@@ -31,8 +29,6 @@ public class EnemiesArray {
 	private final Enemies[][] enemiesArray = new Enemies[5][11];
 	private int nbEnemies = 0;
 
-	/* ----- Constructor ----- */
-
 	/**
 	 * Constructor
 	 * @param data : data game
@@ -40,8 +36,6 @@ public class EnemiesArray {
 	public EnemiesArray(GameData gameData) {
 		data = gameData;
 	}
-
-	/* ----- Getter ----- */
 
 	/**
 	 * 
@@ -76,8 +70,6 @@ public class EnemiesArray {
 			return true;
 		}
 	}
-
-	/* ----- Methods ----- */
 
 	/**
 	 * method to add an enemy in the enemies array
