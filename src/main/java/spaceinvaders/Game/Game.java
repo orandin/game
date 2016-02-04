@@ -10,7 +10,6 @@ import gameframework.motion.blocking.MoveBlockerRulesApplier;
 import java.io.IOException;
 
 import spaceinvaders.Level;
-import spaceinvaders.entities.Player;
 import spaceinvaders.entities.blockersRules.MoveBlockerRules;
 
 /**
@@ -40,28 +39,17 @@ public class Game extends GameDefaultImpl {
 		MoveBlockerRulesApplier applier = new MoveBlockerRules();
 		applier.setGameData(data);
 		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
-		this.data.addLevel(new Level(this.data, this.universeViewPort,  new Player(this, super.data)));
+		this.data.addLevel(new Level(this.data, this.universeViewPort));
 	}
-	
-	/* ----- Getters ----- */
-	/**
-	 * Get the game data
-	 * @return the game data
-	 */
-	public GameData getData() {
-		return this.data;
-	}
-	
-	/* ----- Setters ----- */
-	/**
-	 * End the game
-	 */
-	public void endGame() {
+
+	public void endOfGame(){
 		this.universeViewPort.setBackgroundImage("../../game_over.png");
 		this.universeViewPort.paint();
 	}
 	
-	public static void main (String[] args) throws IOException {
-		new Game().start();
+	public static void main (String[] args) throws IOException{
+		Game game = new Game();
+		game.start();
+		game.endOfGame();
 	}
 }

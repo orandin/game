@@ -1,71 +1,47 @@
 package spaceinvaders.entities;
 
+import java.awt.Point;
+
 import gameframework.game.GameData;
 import gameframework.motion.MoveStrategyStraightLine;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
 /**
- * @author Benjamin Szczapa
- * @author Kevin Rico
- * @author Matthieu Lepers
- * @author Guillaume Maitrot
- * @author Theo Verschaeve
- * @author Simon Delberghe
+ * this class represents the enemy laser
+ * @author 
+ *
  */
-public class EnemyLaser extends AbstractLaser {
+public class EnemyLaser extends Laser{
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public EnemyLaser(GameData data, Shooter shooter) {
-		super(data, shooter);
-	}
-	
-	/* ----- Getters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getSprite() {
-		return "../../images/entite/enemylaser.png";
-	}
-	
-	/* ----- Setters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMoveStrategy() {
-		super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, 0), -12));
-	}
+	/* ----- Attributes ----- */
 	
 	/**
-	 * {@inheritDoc}
+	 * this class had 1 attribute
+	 * - enemy : the enemy who shoot this laser
 	 */
-	@Override
-	public void setPosition() {
-		
-		Enemies enemy = (Enemies) this.shooter;
-		
-		Point location = new Point();
-		int x = (int) (enemy.xOffset + enemy.getPosition().getX() + (enemy.getImage().getWidth() / 2) - (this.image.getWidth() / 2));
-		int y = (int) (enemy.yOffset + enemy.getPosition().getY() + this.image.getHeight() + 20);
-		location.setLocation(x, y);
-		
-		this.position.setLocation(new Point(x, y));
-	}
+	private Enemies enem;
 	
-	/* ----- Drawing ----- */
+	/* ----- constructor ----- */
+	
 	/**
-	 * {@inheritDoc}
+	 * constructor
+	 * @param data : game data
+	 * @param enemy : the enemy who shoot
+	 */
+	public EnemyLaser(GameData data , Enemies enemy) {
+		super(data, enemy);
+		position = new Point((enemy.getPosition().x + enemy.image.getWidth() / 2), (enemy.getPosition().y + enemy.image.getHeight()/2));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())));
+		enem = enemy;
+	}
+
+	/* ----- Getter ----- */
+	/**
+	 * getter for enemy
+	 * @return the shooter
 	 */
 	@Override
-	public void draw(Graphics g) {
-		if (super.position.y >= super.data.getCanvas().getHeight())
-			this.data.getUniverse().removeGameEntity(this);
-		else
-			this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);
+	public Shooter getShooter() {
+		return this.enem;
 	}
+
 }

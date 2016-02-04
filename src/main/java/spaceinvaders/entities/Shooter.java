@@ -13,9 +13,10 @@ import gameframework.game.GameData;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
+
 public abstract class Shooter extends EntiteMovable {
 
-	protected boolean canShoot;
+	/* ----- Constructor ----- */
 	
 	/**
 	 * Create a shooter
@@ -27,42 +28,32 @@ public abstract class Shooter extends EntiteMovable {
 	}
 
 	/* ----- Getters ----- */
+	
 	/**
 	 * Get the entity position
 	 * @return the position
 	 */
 	public Point getPosition() {
-		return super.position;
+		return position;
 	}
 	
 	/**
-	 * Get the entity sprite
-	 * @return the sprite
+	 * getter for the entitie image
+	 * @return the entitie image
 	 */
-	public DrawableImage getImage() {
-		return this.image;
+	public DrawableImage getImage(){
+		return image;
 	}
 	
-	/* ----- Setters ----- */
 	/**
-	 * Allow the shooter to shoot again
+	 * @return <code>true</code> if the shooter can shoot <code>false</code> else
 	 */
-	public void resetShoot() {
-		this.canShoot = true;
-	}
+	public abstract boolean canShoot();
 	
-	/* ----- Booleans ----- */
-	/**
-	 * Check if the shooter can shoot
-	 * @return {@code true} if he can, {@code false] else
-	 */
-	public boolean canShoot() {
-		return this.canShoot;
-	}
+	/* ---- Methods ----- */
 	
-	/* ----- Actions ----- */
 	/**
-	 * Define how the shooter shoot
+	 * method call by the shooter to shoot
 	 */
 	public abstract void shoot();
 }

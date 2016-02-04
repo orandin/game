@@ -1,109 +1,84 @@
 package spaceinvaders.entities;
 
 import gameframework.game.GameData;
+import gameframework.game.GameLevel;
+import gameframework.motion.MoveStrategyStraightLine;
 import gameframework.motion.blocking.MoveBlocker;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.Random;
 
-/**
- * @author Benjamin Szczapa
- * @author Kevin Rico
- * @author Matthieu Lepers
- * @author Guillaume Maitrot
- * @author Theo Verschaeve
- * @author Simon Delberghe
- */
-public abstract class Enemies extends Shooter implements MoveBlocker {
+import spaceinvaders.Level;
 
-	protected int point;
-	protected EnnemiesArray array;
-	protected double xOffset = 0;
-	protected int yOffset = 0;
+/**
+ * this class represent the different type of enemies in the game
+ * @author 
+ */
+public abstract class Enemies extends Shooter implements MoveBlocker{
+
+	/* ---- attributes ----- */
 	
 	/**
-	 * Create an enemy
-	 * @param data
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
-	 * @param array
-	 * 		The array witch allow it to move on screen
+	 * this class had 2 attributes
+	 * - point : the point win by the player if he is kill
+	 * - lvl : the current level ( to access enemies array principally)  
 	 */
-	public Enemies(GameData data, int posX, int posY, EnnemiesArray array) {
+	protected int point;
+	protected Level lvl;
+	
+	/* ----- constructor ----- */
+	
+	/**
+	 * Constructor
+	 * @param data : game data
+	 * @param posX : the position x of this enemy
+	 * @param posY : the position y of this enemy
+	 * @param lvl : the current level
+	 */
+	public Enemies(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
-		this.array = array;
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
+		lvl = level;
 	}
 	
-	/* ----- Getters ----- */
-	/**
-	 * Get the amount of points you win when the entity die
-	 * @return the amount of points
-	 */
-	public abstract int score();
+	/* ----- getters ----- */
 	
-	/**
-	 * Get the bounding box of this entity
-	 * @return the bounding box as a rectangle
-	 */
-	@Override
-	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point((int) Math.floor(this.xOffset + super.position.x), this.yOffset + super.position.y), new Dimension(super.image.getWidth(), super.image.getHeight()));
-	}
-	
-	/**
-	 * Get the array when the enemy is
-	 * @return the array
-	 */
-	public EnnemiesArray getArray() {
-		return this.array;
-	}
-	
-	/**
-	 * Get the location in the EnemiesArray of the entity
-	 * @return a point witch x is the row in the array and y is the column in the array
-	 */
-	public Point getLocationInArray() {
-		return new Point((int) (this.getPosition().getX() / this.getImage().getWidth()), (int) (this.getPosition().getY() / this.getImage().getHeight()));
-	}
-	
-	/* ----- Setters ----- */
-	/**
-	 * Set the position offsets
-	 * @param x
-	 * 		The x position offset
-	 * @param y
-	 * 		The y position offset
-	 */
-	public void setOffsets(double x, int y) {
-		this.xOffset = x;
-		this.yOffset = y;
-	}
-	
-	/* ----- Actions ----- */
-	/**
-	 * Allow the entity to shoot
-	 */
-	@Override
-	public void shoot() {
-		Random rand = new Random();
-		int pos = (int) this.getLocationInArray().getY();
-		if (pos == 4 && rand.nextInt(700) % 350 == 0)
-			super.data.getUniverse().addGameEntity(new EnemyLaser(super.data, this));
-	}
-	
-	/* ----- Drawing ----- */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void draw(Graphics g) {
-		this.data.getCanvas().drawImage(g, this.image.getImage(), (int) Math.floor(this.xOffset + super.position.x), this.yOffset + super.position.y);
+	public boolean canShoot(){
+		return lvl.getEnemiesArray().EnemieCanShoot(this);
+	}
+
+	/**
+	 * getter for lvl
+	 * @return the current level
+	 */
+	public GameLevel getLevel(){
+		return lvl;
+	}
+	
+	/* ---- Methods ---- */
+	
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		shoot();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void shoot(){
+		Random rand = new Random();
+		if(this.canShoot() && (rand.nextInt(1000) % 350 == 0)){
+			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
+		}
+
 	}
 }

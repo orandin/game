@@ -3,8 +3,11 @@ package spaceinvaders;
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
-import spaceinvaders.entities.AliensArray;
+import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.LargeAlien;
+import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.Player;
+import spaceinvaders.entities.SmallAlien;
 import spaceinvaders.entities.blockers.LeftWall;
 import spaceinvaders.entities.blockers.RightWall;
 
@@ -18,7 +21,19 @@ import spaceinvaders.entities.blockers.RightWall;
  */
 public class Level extends GameLevelDefaultImpl {
 	
-	private Player player;
+	/* ---- Attributes ----- */
+	
+	/**
+	 * this class had 3 attributes
+	 * NB_CELLS : the default number of cell
+	 * NB_ROWS : the default number of rows
+	 * enemiesArray : the enemies array
+	 */
+	private final int NB_CELLS = 11;
+	private final int NB_ROWS  = 5;
+	private EnemiesArray enemiesArray;
+
+	/* ----- Constructor ----- */
 	
 	/**
 	 * Create the Level
@@ -29,24 +44,68 @@ public class Level extends GameLevelDefaultImpl {
 	 * @param player
 	 * 		The player
 	 */
-	public Level(GameData gameData, GameUniverseViewPort view, Player player) {
+	public Level(GameData gameData, GameUniverseViewPort view) {
 		super(gameData);
-		super.gameBoard = view;
-		this.player = player;
+		gameBoard = view;
+		enemiesArray = new EnemiesArray(gameData);
 	}
 
+	/* ----- Getters ----- */
+	
+	/**
+	 * getter for enemiesArray
+	 * @return the enemies array
+	 */
+	public EnemiesArray getEnemiesArray(){
+		return enemiesArray;
+	}
+	
+	/* ----- Methods ----- */
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected void init() {
-		Player player = this.player;
+		Player player = new Player(data);
 		
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
+
+		int posX = spriteSize * 5;
+		int posY = posX;
+
+		for(int row = 1; row <= NB_ROWS; row++){
+			for(int cell = 1; cell <= NB_CELLS; cell++){
+				Enemies enemy = rulesToCreateEnemy(row, posX, posY);
+				enemiesArray.add(enemy);
+				if(cell == NB_CELLS)
+					posY += enemy.getImage().getHeight();
+				else
+					posX += enemy.getImage().getWidth();
+			}
+			posX = spriteSize * 5;
+		}
 		
-		//Now the only thing we have to register is the array witch contains all enemies
-		data.getUniverse().addGameEntity(new AliensArray(data));	
+	}
+	
+	/**
+	 * Defines the rules to create an enemy by row
+	 * @param row
+	 * @param posX
+	 * @param posY
+	 * @return Returns the enemy created
+	 */
+	protected Enemies rulesToCreateEnemy(int row, int posX, int posY) {
+		switch(row) {
+			case 1:
+				return new LargeAlien(super.data, posX, posY, this);
+
+			case 2:
+			case 3:
+				return new MediumAlien(super.data, posX, posY, this);
+		}
+		return new SmallAlien(super.data, posX, posY, this);
 	}
 }

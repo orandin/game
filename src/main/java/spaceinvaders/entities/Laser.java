@@ -1,68 +1,28 @@
 package spaceinvaders.entities;
 
+import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
-import gameframework.motion.MoveStrategyStraightLine;
+import gameframework.motion.blocking.MoveBlocker;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
-/**
- * @author Benjamin Szczapa
- * @author Kevin Rico
- * @author Matthieu Lepers
- * @author Guillaume Maitrot
- * @author Theo Verschaeve
- * @author Simon Delberghe
- */
-public class Laser extends AbstractLaser {
+public abstract class Laser extends EntiteMovable implements MoveBlocker {
+	
+	/* ----- constructor ----- */
 	
 	/**
-	 * {@inheritDoc}
+	 * Laser constructor
+	 * @param data ; game data
+	 * @param shooter : the shooter
 	 */
 	public Laser(GameData data, Shooter shooter) {
-		super(data, shooter);
+		super(data);
+		image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
 	}
 
-	/* ----- Getters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getSprite() {
-		return "../../images/entite/laser.png";
-	}
-	
-	/* ----- Setters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMoveStrategy() {
-		super.moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, 0), 16));
-	}
+	/* ----- getter ----- */
 	
 	/**
-	 * {@inheritDoc}
+	 * getter for the shooter
+	 * @return the entitie who shoot
 	 */
-	@Override
-	public void setPosition() {
-		int x = (int) (this.shooter.getPosition().getX() + (this.shooter.getImage().getWidth() / 2) - (this.image.getWidth() / 2));
-		int y = (int) (this.shooter.getPosition().getY() - 20);
-		
-		this.position.setLocation(new Point(x, y));
-	}
-	
-	/* ----- Drawing ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void draw(Graphics g) {
-		if (super.position.y <= 0) {
-			this.data.getUniverse().removeGameEntity(this);
-			this.shooter.resetShoot();
-		}
-		else
-			this.data.getCanvas().drawImage(g, this.image.getImage(), super.position.x, super.position.y);
-	}
+	public abstract Shooter getShooter();
 }

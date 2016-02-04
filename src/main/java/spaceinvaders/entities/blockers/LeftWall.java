@@ -16,6 +16,8 @@ import java.awt.Rectangle;
  */
 public class LeftWall extends Wall {
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the left wall
 	 * @param data
@@ -31,6 +33,6 @@ public class LeftWall extends Wall {
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point(-1,0), new Dimension(1, super.height));
+		return new Rectangle(new Point(-1,0), new Dimension(1, height));
 	}
 }

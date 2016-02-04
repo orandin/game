@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+
 /**
  * @author Benjamin Szczapa
  * @author Kevin Rico
@@ -16,7 +17,11 @@ import java.awt.Rectangle;
  */
 public class RightWall extends Wall {
 
+	/* ----- Attributes ----- */
+	
 	private Point point;
+	
+	/* ----- constructor ----- */
 	
 	/**
 	 * Create the right wall
@@ -35,6 +40,6 @@ public class RightWall extends Wall {
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(this.point, new Dimension(1, super.height));
+		return new Rectangle(point, new Dimension(1, height));
 	}
 }

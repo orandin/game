@@ -1,7 +1,7 @@
 package spaceinvaders.entities;
 
-import java.awt.Point;
-
+import spaceinvaders.Level;
+import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 
 /**
@@ -23,26 +23,11 @@ public class SmallAlien extends Alien {
 	 * @param posY
 	 * 		The initial y position
 	 */
-	public SmallAlien(GameData data,int posX, int posY, EnnemiesArray array){
-		super(data, posX,  posY, array);
-		//Calculate the position on screen with this row and column
-		super.setPosition(new Point(posX * this.image.getWidth(), posY * this.image.getHeight()));
+	
+	public SmallAlien(GameData data,int posX, int posY, Level lvl){
+		super(data, posX,  posY, lvl);
+		point = 10;
+		image = new DrawableImage("../../images/entite/saucer2a.png", data.getCanvas());
 	}
 	
-	/* ----- Getters ----- */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getSprite() {
-		return "../../images/entite/saucer1b.png";
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int score() {
-		return 10;
-	}
 }

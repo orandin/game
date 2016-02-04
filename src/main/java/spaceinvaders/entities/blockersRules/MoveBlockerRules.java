@@ -1,17 +1,18 @@
 package spaceinvaders.entities.blockersRules;
 
-import gameframework.motion.IllegalMoveException;
-import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
-
-import java.awt.Point;
-
+import spaceinvaders.Level;
+import spaceinvaders.entities.Alien;
 import spaceinvaders.entities.Enemies;
 import spaceinvaders.entities.EnemyLaser;
 import spaceinvaders.entities.LargeAlien;
-import spaceinvaders.entities.Laser;
 import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.Player;
+import spaceinvaders.entities.PlayerLaser;
 import spaceinvaders.entities.SmallAlien;
+import spaceinvaders.entities.blockers.RightWall;
+import spaceinvaders.entities.blockers.Wall;
+import gameframework.motion.IllegalMoveException;
+import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
 /**
  * @author Benjamin Szczapa
@@ -22,64 +23,34 @@ import spaceinvaders.entities.SmallAlien;
  * @author Simon Delberghe
  */
 public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
-	
-	//This is not working
-	public void moveBlockerRule(EnemyLaser laser, Player player) throws IllegalMoveException {
-		//TODO Check if the player has been hit by an enemy laser
-		super.gameData.getUniverse().removeGameEntity(laser);
-		player.hurt();
+
+	/* ----- Methods -----*/
+
+	/**
+	 * Defines the action when the player laser touches an enemy
+	 * @param laser
+	 * 		The laser witch hit something
+	 * @param ennemy
+	 * 		The enemy witch is hit
+	 * @throws IllegalMoveException
+	 */
+	public void moveBlockerRule(PlayerLaser laser, Alien alien) throws IllegalMoveException {
+		kill(laser, alien);
 		throw new IllegalMoveException();
 	}
-	
-	/**
-	 * Defines the action when the laser touches an enemy
-	 * @param laser
-	 * 		The laser witch hit something
-	 * @param ennemy
-	 * 		The enemy witch is hit
-	 * @throws IllegalMoveException
-	 */
-	public void moveBlockerRule(Laser laser, Enemies enemy, Point position) throws IllegalMoveException {
-		this.kill(laser, enemy, position);
-		throw new IllegalMoveException();
+
+	public void moveBlockerRule(PlayerLaser laser, SmallAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
 	}
-	
-	/**
-	 * Collision detector for SmallAlien
-	 * @param laser
-	 * 		The laser witch hit something
-	 * @param ennemy
-	 * 		The enemy witch is hit
-	 * @throws IllegalMoveException
-	 */
-	public void moveBlockerRule(Laser laser, SmallAlien alien) throws IllegalMoveException {
-		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
+
+	public void moveBlockerRule(PlayerLaser laser, MediumAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
 	}
-	
-	/**
-	 * Collision detector for MediumAlien
-	 * @param laser
-	 * 		The laser witch hit something
-	 * @param ennemy
-	 * 		The enemy witch is hit
-	 * @throws IllegalMoveException
-	 */
-	public void moveBlockerRule(Laser laser, MediumAlien alien) throws IllegalMoveException {
-		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
+
+	public void moveBlockerRule(PlayerLaser laser, LargeAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
 	}
-	
-	/**
-	 * Collision detector for LargeAlien
-	 * @param laser
-	 * 		The laser witch hit something
-	 * @param ennemy
-	 * 		The enemy witch is hit
-	 * @throws IllegalMoveException
-	 */
-	public void moveBlockerRule(Laser laser, LargeAlien alien) throws IllegalMoveException {
-		this.moveBlockerRule(laser, (Enemies) alien, alien.getLocationInArray());
-	}
-	
+
 	/**
 	 * Destroy the enemy
 	 * @param laser
@@ -89,12 +60,63 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 * @param positionInArray
 	 * 		The position of the alien in the AlienArray for removing correctly
 	 */
-	protected void kill(Laser laser, Enemies enemy, Point positionInArray) {
-		enemy.getArray().increaseSpeed();
-		enemy.getArray().removeEnemyFromPosition(positionInArray);
-		super.gameData.getUniverse().removeGameEntity(enemy);
-		super.gameData.getUniverse().removeGameEntity(laser);
+	protected void kill(PlayerLaser laser, Enemies alien){
+		gameData.getUniverse().removeGameEntity(laser);
+		((Level) alien.getLevel()).getEnemiesArray().remove(alien);
 		laser.getShooter().resetShoot();
-		super.gameData.getScore().setValue(super.gameData.getScore().getValue() + enemy.score());
 	}
+	/**
+	 * Defines the action when the enemy laser touches an enemy
+	 * @param laser
+	 * @param alien
+	 * @throws IllegalMoveException
+	 */
+	public void moveBlockerRule(EnemyLaser laser, Alien alien){
+
+	}
+	public void moveBlockerRule(EnemyLaser laser, SmallAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+
+	public void moveBlockerRule(EnemyLaser laser, MediumAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+
+	public void moveBlockerRule(EnemyLaser laser, LargeAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+
+	/**
+	 * Defines the action when the enemies laser touches a player
+	 * @param player
+	 * @param laser
+	 * @throws IllegalMoveException
+	 */
+	public void moveBlockerRule(Player player, EnemyLaser laser) throws IllegalMoveException {
+		gameData.decreaseLife(1);
+		gameData.getUniverse().removeGameEntity(laser);
+		throw new IllegalMoveException();
+	}
+
+	/**
+	 * Defines the action when the enemies touches a wall
+	 * @param player
+	 * @param laser
+	 * @throws IllegalMoveException
+	 */
+	public void moveBlockerRule(Alien alien, Wall wall) throws IllegalMoveException{
+		throw new IllegalMoveException();
+	}
+	public void moveBlockerRule(SmallAlien alien, RightWall wall) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, wall);
+	}
+
+	public void moveBlockerRule(MediumAlien alien, RightWall wall) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, wall);
+	}
+
+	public void moveBlockerRule(LargeAlien alien, RightWall wall) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, wall);
+	}
+
 }
