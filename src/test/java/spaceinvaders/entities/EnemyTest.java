@@ -9,6 +9,7 @@ import gameframework.game.GameData;
 import org.junit.Before;
 import org.junit.Test;
 
+import spaceinvaders.EnemiesArray;
 import spaceinvaders.Level;
 
 
@@ -31,6 +32,8 @@ public abstract class EnemyTest {
 	
 	@Test
 	public void canShootTest() {
+		EnemiesArray array = new EnemiesArray(gameData);
+		array.add(enemy);
 		assertTrue(this.enemy.canShoot());
 	}
 	
