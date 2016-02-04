@@ -30,7 +30,7 @@ public class Game extends GameDefaultImpl {
 	 * Create the game
 	 */
 	public Game() {
-		super(new GameData(new GameConfiguration()));
+		super(new GameData(new GameConfiguration(30,40,16,3)));
 		this.gameWindow = new GameWindow("space invaders", this.data.getCanvas(), this.data);
 		this.gameWindow.createGUI();
 		this.universeViewPort = new GameUniverseViewPortDefaultImpl(this.data);
@@ -43,8 +43,9 @@ public class Game extends GameDefaultImpl {
 	}
 
 	public void endOfGame(){
-		this.universeViewPort.setBackgroundImage("../../game_over.png");
-		this.universeViewPort.paint();
+		data.getUniverse().removeAllGameEntities();
+		universeViewPort.setBackgroundImage("../../game_over.png");
+		universeViewPort.paint();
 	}
 	
 	public static void main (String[] args) throws IOException{

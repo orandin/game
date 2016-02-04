@@ -56,6 +56,21 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		return new Rectangle(position, new Dimension(image.getWidth(), image.getHeight()));
 	}
 	
+	/**
+	 * getter for game data
+	 * @return
+	 */
+	public GameData getData(){
+		return data;
+	}
+	
+	/**
+	 * getter for entity image
+	 * @return
+	 */
+	public DrawableImage getImage(){
+		return image;
+	}
 	/* ----- Methods ----- */
 	
 	/**
@@ -66,7 +81,4 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 	}
 	
-	/* ----- Unused ----- */
-	@Override
-	public void oneStepMoveAddedBehavior() {}
 }

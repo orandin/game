@@ -5,7 +5,7 @@ import gameframework.motion.MoveStrategyStraightLine;
 
 import java.awt.Point;
 
-import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.EnemiesShooter;
 
 /**
  * this class represent enemies array, all the enemies present in the level
@@ -28,7 +28,7 @@ public class EnemiesArray {
 	private GameData data;
 	private int x = 0;
 	private int y = 0;
-	private final Enemies[][] enemiesArray = new Enemies[5][11];
+	private final EnemiesShooter[][] enemiesArray = new EnemiesShooter[5][11];
 	private int nbEnemies = 0;
 
 	/* ----- Constructor ----- */
@@ -48,7 +48,7 @@ public class EnemiesArray {
 	 * @param enemy : the enemy which search in the enemies array
 	 * @return the position of this enemy in the array
 	 */
-	public Point getEnemiesPositionInArray(Enemies enemy){
+	public Point getEnemiesPositionInArray(EnemiesShooter enemy){
 		Point p = null;
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 11 ; j++){
@@ -68,7 +68,7 @@ public class EnemiesArray {
 	 * @param enemy : the enemy which want to shoot
 	 * @return <code>true</code> true if he can <code>false</code> else
 	 */
-	public boolean EnemieCanShoot(Enemies enemy){
+	public boolean EnemieCanShoot(EnemiesShooter enemy){
 		try{
 			Point p = getEnemiesPositionInArray(enemy);
 			return enemiesArray[p.y + 1][p.x] == null;
@@ -77,13 +77,21 @@ public class EnemiesArray {
 		}
 	}
 
+	/**
+	 * getter for know if all enemies are dead
+	 * @return <code>true</code> if all enemies are dead <code>false</code> else
+	 */
+	public boolean allDead(){
+		return nbEnemies == 0;
+	}
+	
 	/* ----- Methods ----- */
 
 	/**
 	 * method to add an enemy in the enemies array
 	 * @param enemy : he enemy which want to be add in the array
 	 */
-	public void add(Enemies enemy){
+	public void add(EnemiesShooter enemy){
 		if(nbEnemies < 55){
 			enemiesArray[y][x] = enemy;
 			data.getUniverse().addGameEntity(enemy);
@@ -102,7 +110,7 @@ public class EnemiesArray {
 	 * method for remove an enemy in the enemies array (replace by <code>null</code>)
 	 * @param enemy : the enemy which want to be remove
 	 */
-	public void remove(Enemies enemy){
+	public void remove(EnemiesShooter enemy){
 		Point p = getEnemiesPositionInArray(enemy);
 		enemiesArray[p.y][p.x] = null;
 		nbEnemies --;
@@ -110,13 +118,18 @@ public class EnemiesArray {
 	}
 
 	// pas encore sur pour cette methode elle sert a inverser la strategy de déplacement pour tout les enemies 
-	public void ReverseMoveStrategyForAll(MoveStrategyStraightLine line){
-		for(int i = 0 ; i < 5 ; i++){
-			for(int j = 0 ; j < 11 ; j++){
-				if(enemiesArray[i][j] != null){
-					Enemies alien = enemiesArray[i][j];
-					alien.getPosition().y += alien.getImage().getHeight();
-					alien.getDriver().setStrategy(line);
+	public void ReverseMoveStrategyForAll(int posX){
+		if(posX == 0 || (posX + 42 >= data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize())){
+			for(int i = 0 ; i < 5 ; i++){
+				for(int j = 0 ; j < 11 ; j++){
+					if(enemiesArray[i][j] != null){
+						int nextGoal = 0;
+						if(posX == 0)
+							nextGoal = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
+						EnemiesShooter alien = enemiesArray[i][j];
+						alien.getPosition().y += 10;
+						alien.getDriver().setStrategy(new MoveStrategyStraightLine(alien.getPosition(), new Point(nextGoal, alien.getPosition(). y)));
+					}
 				}
 			}
 		}

@@ -42,7 +42,7 @@ public class Player extends Shooter {
 
 		//Initializing initial player position
 		int posX = (config.getNbColumns() / 2) - 1; //Player is positionned on the middle of the canvas
-		int posY = config.getNbRows() - (config.getNbRows() / 6) ; //And in the bottom of the screen
+		int posY = config.getNbRows() - (config.getNbRows() / 4) ; //And in the bottom of the screen
 		super.setPosition(new Point(posX * config.getSpriteSize(), posY * config.getSpriteSize()));
 
 		//Seting the moveStrategy
@@ -82,7 +82,14 @@ public class Player extends Shooter {
 		if(canShoot()){
 			data.getUniverse().addGameEntity(new PlayerLaser(data, this));
 			canShoot = false;
-		}
+		}		
 	}
+
+	/* ----- unused ----- */
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {}
 
 }

@@ -18,7 +18,7 @@ public class EnemyLaser extends Laser{
 	 * this class had 1 attribute
 	 * - enemy : the enemy who shoot this laser
 	 */
-	private Enemies enem;
+	private EnemiesShooter enem;
 	
 	/* ----- constructor ----- */
 	
@@ -27,10 +27,10 @@ public class EnemyLaser extends Laser{
 	 * @param data : game data
 	 * @param enemy : the enemy who shoot
 	 */
-	public EnemyLaser(GameData data , Enemies enemy) {
+	public EnemyLaser(GameData data , EnemiesShooter enemy) {
 		super(data, enemy);
 		position = new Point((enemy.getPosition().x + enemy.image.getWidth() / 2), (enemy.getPosition().y + enemy.image.getHeight()/2));
-		moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(super.position, new Point(super.position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()),15));
 		enem = enemy;
 	}
 
@@ -44,4 +44,12 @@ public class EnemyLaser extends Laser{
 		return this.enem;
 	}
 
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		if(position.y >= data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())
+			data.getUniverse().removeGameEntity(this);
+	}
 }

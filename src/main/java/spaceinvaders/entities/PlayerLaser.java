@@ -30,7 +30,7 @@ public class PlayerLaser extends Laser{
 		super(data, player);
 		p = player;
 		position = new Point((player.getPosition().x + player.image.getWidth() / 2) -2, (player.getPosition().y - player.image.getHeight() / 2) -2);
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0)));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0),15));
 	}
 
 	/* ----- getter ----- */
@@ -42,5 +42,16 @@ public class PlayerLaser extends Laser{
 	@Override
 	public Player getShooter(){
 		return p;
+	}
+	
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		if(position.y <= 30){
+			data.getUniverse().removeGameEntity(this);
+			p.resetShoot();
+		}
 	}
 }

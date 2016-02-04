@@ -14,7 +14,7 @@ import spaceinvaders.Level;
  * this class represent the different type of enemies in the game
  * @author 
  */
-public abstract class Enemies extends Shooter implements MoveBlocker{
+public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 
 	/* ---- attributes ----- */
 	
@@ -35,10 +35,11 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 * @param posY : the position y of this enemy
 	 * @param lvl : the current level
 	 */
-	public Enemies(GameData data, int posX, int posY, Level level) {
+	public EnemiesShooter(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
+		//mis entre commentaire pour tester sans avoir le probleme de deplacement
+		/*moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));*/
 		lvl = level;
 	}
 	
@@ -60,15 +61,16 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 		return lvl;
 	}
 	
+	/**
+	 * getter for enemies point
+	 * @return the enemy point
+	 */
+	public int getPoint(){
+		return point;
+	}
+	
 	/* ---- Methods ---- */
 	
-	/**
-	 * action to do after a move
-	 */
-	@Override
-	public void oneStepMoveAddedBehavior() {
-		shoot();
-	}
 
 	/**
 	 * {@inheritDoc}
