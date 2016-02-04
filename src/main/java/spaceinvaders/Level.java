@@ -3,7 +3,8 @@ package spaceinvaders;
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
-import spaceinvaders.entities.Enemy;
+
+import spaceinvaders.entities.EnemiesShooter;
 import spaceinvaders.entities.LargeAlien;
 import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.Player;
@@ -56,6 +57,7 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	@Override
 	protected void init() {
+		
 		Player player = new Player(data);
 
 		data.getUniverse().addGameEntity(new LeftWall(data));
@@ -67,7 +69,7 @@ public class Level extends GameLevelDefaultImpl {
 
 		for(int row = 1; row <= NB_ROWS; row++){
 			for(int cell = 1; cell <= NB_CELLS; cell++){
-				Enemy enemy = rulesToCreateEnemy(row, posX, posY);
+				EnemiesShooter enemy = rulesToCreateEnemy(row, posX, posY);
 				enemiesArray.add(enemy);
 				if(cell == NB_CELLS)
 					posY += enemy.getImage().getHeight();
@@ -86,15 +88,19 @@ public class Level extends GameLevelDefaultImpl {
 	 * @param posY
 	 * @return Returns the enemy created
 	 */
-	protected Enemy rulesToCreateEnemy(int row, int posX, int posY) {
-		switch(row) {
-			case 1:
-				return new LargeAlien(super.data, posX, posY, this);
-
-			case 2:
-			case 3:
-				return new MediumAlien(super.data, posX, posY, this);
+	protected EnemiesShooter rulesToCreateEnemy(int row, int posX, int posY) {
+		if(row == 1){
+			return new LargeAlien(data, posX, posY, this);
 		}
-		return new SmallAlien(super.data, posX, posY, this);
+		if(row == 2 || row == 3){
+			return new MediumAlien(data, posX, posY, this);
+		}
+		return new SmallAlien(data, posX, posY, this);
+	}
+	
+	//methode pour reset le lvl pour l'instant non fonctionnel
+	public void resetLevel(){
+		data.getUniverse().removeAllGameEntities();
+		init();
 	}
 }

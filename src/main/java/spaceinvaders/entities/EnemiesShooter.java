@@ -14,8 +14,10 @@ import spaceinvaders.Level;
  * this class represent the different type of enemies in the game
  * @author 
  */
-public abstract class Enemy extends Shooter implements MoveBlocker {
+public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 
+	/* ---- attributes ----- */
+	
 	/**
 	 * this class had 2 attributes
 	 * - point : the point win by the player if he is kill
@@ -23,7 +25,9 @@ public abstract class Enemy extends Shooter implements MoveBlocker {
 	 */
 	protected int point;
 	protected Level lvl;
-
+	
+	/* ----- constructor ----- */
+	
 	/**
 	 * Constructor
 	 * @param data : game data
@@ -31,13 +35,16 @@ public abstract class Enemy extends Shooter implements MoveBlocker {
 	 * @param posY : the position y of this enemy
 	 * @param lvl : the current level
 	 */
-	public Enemy(GameData data, int posX, int posY, Level level) {
+	public EnemiesShooter(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
+		//mis entre commentaire pour tester sans avoir le probleme de deplacement
 		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
 		lvl = level;
 	}
-
+	
+	/* ----- getters ----- */
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -53,14 +60,17 @@ public abstract class Enemy extends Shooter implements MoveBlocker {
 	public GameLevel getLevel(){
 		return lvl;
 	}
-
+	
 	/**
-	 * action to do after a move
+	 * getter for enemies point
+	 * @return the enemy point
 	 */
-	@Override
-	public void oneStepMoveAddedBehavior() {
-		shoot();
+	public int getPoint(){
+		return point;
 	}
+	
+	/* ---- Methods ---- */
+	
 
 	/**
 	 * {@inheritDoc}
@@ -68,8 +78,9 @@ public abstract class Enemy extends Shooter implements MoveBlocker {
 	@Override
 	public void shoot(){
 		Random rand = new Random();
-		if(canShoot() && (rand.nextInt(1000) % 350 == 0)){
+		if((rand.nextInt(1000) % 350 == 0)){
 			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
 		}
+
 	}
 }

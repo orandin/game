@@ -48,6 +48,23 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	public Rectangle getBoundingBox() {
 		return new Rectangle(position, new Dimension(image.getWidth(), image.getHeight()));
 	}
+	
+	/**
+	 * getter for game data
+	 * @return
+	 */
+	public GameData getData(){
+		return data;
+	}
+	
+	/**
+	 * getter for entity image
+	 * @return
+	 */
+	public DrawableImage getImage(){
+		return image;
+	}
+	/* ----- Methods ----- */
 
 	/**
 	 * method to draw an entitie on the canvas
@@ -56,7 +73,4 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	public void draw(Graphics g) {
 		data.getCanvas().drawImage(g, image.getImage(), position.x, position.y);
 	}
-
-	@Override
-	public void oneStepMoveAddedBehavior() {}
 }

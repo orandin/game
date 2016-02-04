@@ -1,7 +1,11 @@
 package spaceinvaders.entities;
 
+import java.awt.Point;
+
 import spaceinvaders.Level;
 import gameframework.game.GameData;
+import gameframework.motion.MoveStrategyStraightLine;
+import gameframework.motion.blocking.MoveBlocker;
 
 /**
  * @author Benjamin Szczapa
@@ -11,18 +15,20 @@ import gameframework.game.GameData;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
+public abstract class Alien extends EnemiesShooter  implements MoveBlocker{
 
-public abstract class Alien extends Enemy {
-
-	/**
-	 * Create an alien
-	 * @param data	The game data
-	 * @param posX	The initial x position where it spawn
-	 * @param posY	The initial y position where it spawn
-	 * @param array	The array when the alien is, this is for movement
-	 */	
 	public Alien(GameData data,int posX, int posY, Level lvl){
 		super(data, posX, posY, lvl);
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() , position.y)));
 	}
+	/* ----- Method ----- */
 
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		if(canShoot())
+			shoot();
+	}
 }

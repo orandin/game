@@ -22,6 +22,6 @@ public class RightWall extends Wall {
 	public RightWall(GameData data) {
 		super(data);
 		int posX       = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
-		this.pointWall = new Point(posX, 0);
+		pointWall = new Point(posX, 0);
 	}
 }

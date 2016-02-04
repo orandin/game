@@ -14,7 +14,7 @@ public class PlayerLaser extends Laser{
 	 * this class had 1 attribute
 	 * - enemy : the player who shoot this laser
 	 */
-	private Player player;
+	private Player p;
 
 	/**
 	 * constructor
@@ -23,9 +23,9 @@ public class PlayerLaser extends Laser{
 	 */
 	public PlayerLaser(GameData data, Player player) {
 		super(data, player);
-		this.player = player;
+		p = player;
 		position = new Point((player.getPosition().x + player.image.getWidth() / 2) -2, (player.getPosition().y - player.image.getHeight() / 2) -2);
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0)));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0),15));
 	}
 	
 	/**
@@ -34,6 +34,17 @@ public class PlayerLaser extends Laser{
 	 */
 	@Override
 	public Player getShooter(){
-		return player;
+		return p;
+	}
+	
+	/**
+	 * action to do after a move
+	 */
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		if(position.y <= 30){
+			data.getUniverse().removeGameEntity(this);
+			p.resetShoot();
+		}
 	}
 }

@@ -30,12 +30,11 @@ public class Game extends GameDefaultImpl {
 	 * Create the game
 	 */
 	public Game() {
-		super(new GameData(new GameConfiguration()));
+		super(new GameData(new GameConfiguration(36,36,16,3)));
 		gameWindow = new GameWindow("space invaders", data.getCanvas(), data);
 		gameWindow.createGUI();
 		universeViewPort = new GameUniverseViewPortDefaultImpl(data);
 		universeViewPort.setBackgroundImage("../../fond.png");
-
 		MoveBlockerRulesApplier applier = new MoveBlockerRules();
 		applier.setGameData(data);
 		data.getMoveBlockerChecker().setMoveBlockerRules(applier);
@@ -43,8 +42,9 @@ public class Game extends GameDefaultImpl {
 	}
 
 	public void endOfGame(){
-		this.universeViewPort.setBackgroundImage("../../game_over.png");
-		this.universeViewPort.paint();
+		data.getUniverse().removeAllGameEntities();
+		universeViewPort.setBackgroundImage("../../game_over.png");
+		universeViewPort.paint();
 	}
 	
 	public static void main (String[] args) throws IOException{

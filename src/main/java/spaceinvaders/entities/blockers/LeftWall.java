@@ -2,7 +2,9 @@ package spaceinvaders.entities.blockers;
 
 import gameframework.game.GameData;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 /**
  * @author Benjamin Szczapa
@@ -23,6 +25,15 @@ public class LeftWall extends Wall {
 	 */
 	public LeftWall(GameData data) {
 		super(data);
-		this.pointWall = new Point(-1, 0);
 	}
+	
+	/* ----- Getters ----- */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Rectangle getBoundingBox() {
+		return new Rectangle(new Point(0,0), new Dimension(1, height));
+	}
+
 }
