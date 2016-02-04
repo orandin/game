@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import spaceinvaders.entities.Enemy;
 import spaceinvaders.entities.LargeAlien;
-import spaceinvaders.entities.MediumAlienTest;
+import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.SmallAlien;
 
 public class LevelTest {
@@ -38,11 +38,11 @@ public class LevelTest {
 		
 		row = 2;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
-		assertEquals(MediumAlienTest.class, enemy.getClass());
+		assertEquals(MediumAlien.class, enemy.getClass());
 		
 		row = 3;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
-		assertEquals(MediumAlienTest.class, enemy.getClass());
+		assertEquals(MediumAlien.class, enemy.getClass());
 		
 		row = 4;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
