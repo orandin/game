@@ -54,7 +54,7 @@ public class Alien extends EnemiesShooter{
 	 */
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		lvl.getEnemiesArray().ReverseMoveStrategyForAll(position.x);
-		shoot();
+		if(canShoot())
+			shoot();
 	}
 }

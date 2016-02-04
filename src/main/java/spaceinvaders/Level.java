@@ -65,6 +65,7 @@ public class Level extends GameLevelDefaultImpl {
 	 */
 	@Override
 	protected void init() {
+		
 		Player player = new Player(data);
 		
 		data.getUniverse().addGameEntity(new LeftWall(data));
@@ -106,7 +107,7 @@ public class Level extends GameLevelDefaultImpl {
 	}
 	
 	//methode pour reset le lvl pour l'instant non fonctionnel
-	public void reset(){
+	public void resetLevel(){
 		data.getUniverse().removeAllGameEntities();
 		init();
 	}

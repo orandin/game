@@ -118,18 +118,13 @@ public class EnemiesArray {
 	}
 
 	// pas encore sur pour cette methode elle sert a inverser la strategy de déplacement pour tout les enemies 
-	public void ReverseMoveStrategyForAll(int posX){
-		if(posX == 0 || (posX + 42 >= data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize())){
+	public void ReverseMoveStrategyForAll(int nextGoal){
 			for(int i = 0 ; i < 5 ; i++){
 				for(int j = 0 ; j < 11 ; j++){
 					if(enemiesArray[i][j] != null){
-						int nextGoal = 0;
-						if(posX == 0)
-							nextGoal = data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize();
 						EnemiesShooter alien = enemiesArray[i][j];
 						alien.getPosition().y += 10;
 						alien.getDriver().setStrategy(new MoveStrategyStraightLine(alien.getPosition(), new Point(nextGoal, alien.getPosition(). y)));
-					}
 				}
 			}
 		}

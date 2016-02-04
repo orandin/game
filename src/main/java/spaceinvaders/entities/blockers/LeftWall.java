@@ -33,6 +33,6 @@ public class LeftWall extends Wall {
 	 */
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(new Point(-1,0), new Dimension(1, height));
+		return new Rectangle(new Point(0,0), new Dimension(1, height));
 	}
 }

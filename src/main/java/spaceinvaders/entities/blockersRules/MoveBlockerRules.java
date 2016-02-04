@@ -6,6 +6,8 @@ import spaceinvaders.entities.EnemiesShooter;
 import spaceinvaders.entities.EnemyLaser;
 import spaceinvaders.entities.Player;
 import spaceinvaders.entities.PlayerLaser;
+import spaceinvaders.entities.blockers.LeftWall;
+import spaceinvaders.entities.blockers.RightWall;
 import gameframework.motion.IllegalMoveException;
 import gameframework.motion.blocking.MoveBlockerRulesApplierDefaultImpl;
 
@@ -34,7 +36,7 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		laser.getShooter().getData().getScore().setValue(laser.getShooter().getData().getScore().getValue() + alien.getPoint());
 		if(((Level) alien.getLevel()).getEnemiesArray().allDead()){
 			System.out.println("you win");
-			((Level) alien.getLevel()).reset();
+			((Level) alien.getLevel()).resetLevel();
 			laser.getShooter().getData().increaseLife(1);
 		}
 		laser.getShooter().resetShoot();
@@ -62,6 +64,10 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		gameData.getUniverse().removeGameEntity(player);
 		player.getShooter().resetShoot();
 	}
+	
+	private void enemyChangeDirection(Alien alien, int nextGoal){
+		((Level) alien.getLevel()).getEnemiesArray().ReverseMoveStrategyForAll(nextGoal);
+	}
 	/* ----- Rules ----- */
 	
 	/* ---- Player laser VS Enemy ----- */
@@ -79,8 +85,6 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		kill(player, alien);
 		throw new IllegalMoveException();
 	}
-
-	
 	
 	/* ----- Enemy Laser VS Enemy ---- */
 	
@@ -128,6 +132,24 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	 */
 	public void moveBlockerRule(EnemyLaser alien, PlayerLaser player) throws IllegalMoveException{
 		lasersColisions(alien, player);
+		throw new IllegalMoveException();
+	}
+	
+	/* ----- Enemy vs Player ----- */
+	
+	public void moveBlockerRule(Player player, Alien alien) throws IllegalMoveException{
+		alien.getLevel().end();
+		throw new IllegalMoveException();
+	}
+	
+	/* ----- Enemy vs Wall -----*/
+	public void moveBlockerRule(Alien alien, RightWall wall) throws IllegalMoveException{
+		enemyChangeDirection(alien, 0);
+		throw new IllegalMoveException();
+	}
+	
+	public void moveBlockerRule(Alien alien, LeftWall wall) throws IllegalMoveException{
+		enemyChangeDirection(alien, gameData.getConfiguration().getNbColumns() * gameData.getConfiguration().getSpriteSize());
 		throw new IllegalMoveException();
 	}
 }

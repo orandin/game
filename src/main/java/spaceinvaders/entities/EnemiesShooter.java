@@ -39,7 +39,7 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 		super(data);
 		super.setPosition(new Point(posX, posY));
 		//mis entre commentaire pour tester sans avoir le probleme de deplacement
-		/*moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));*/
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
 		lvl = level;
 	}
 	
@@ -78,7 +78,7 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 	@Override
 	public void shoot(){
 		Random rand = new Random();
-		if(this.canShoot() && (rand.nextInt(1000) % 350 == 0)){
+		if((rand.nextInt(1000) % 350 == 0)){
 			data.getUniverse().addGameEntity(new EnemyLaser(data, this));
 		}
 
