@@ -3,8 +3,14 @@ package spaceinvaders.entities;
 import gameframework.drawing.DrawableImage;
 import gameframework.game.GameData;
 import gameframework.motion.blocking.MoveBlocker;
+import gameframework.motion.MoveStrategyStraightLine;
 
-public abstract class Laser extends EntiteMovable implements MoveBlocker {
+/**
+ * 
+ * @author Kevin Rico
+ *
+ */
+public abstract class Laser extends MovableEntity {
 	
 	/* ----- constructor ----- */
 	
@@ -16,6 +22,13 @@ public abstract class Laser extends EntiteMovable implements MoveBlocker {
 	public Laser(GameData data, Shooter shooter) {
 		super(data);
 		image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
+	}
+
+	//Method
+	
+	@Override
+	public void oneStepMoveAddedBehavior() {
+		// TODO Auto-generated method stub
 	}
 
 	/* ----- getter ----- */

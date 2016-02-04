@@ -2,6 +2,7 @@ package spaceinvaders.entities;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import gameframework.drawing.DrawableImage;
@@ -18,7 +19,7 @@ import gameframework.motion.GameMovable;
  * @author Theo Verschaeve
  * @author Simon Delberghe
  */
-public abstract class EntiteMovable extends GameMovable implements GameEntity {
+public abstract class MovableEntity extends GameMovable implements GameEntity {
 
 	/* ----- Attributes ----- */
 	
@@ -32,19 +33,23 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	protected DrawableImage image;
 	protected GameConfiguration config;
 	
-
-	/* ----- Constructor ------ */
-	
 	/**
 	 * Create an EntiteMovable
 	 * @param data
 	 * 		The game data
 	 */
-	public EntiteMovable(GameData gameData) {
-		moveDriver.setmoveBlockerChecker(gameData.getMoveBlockerChecker());
-		config = gameData.getConfiguration();
-		data = gameData;
+	public MovableEntity(GameData data) {
+		this.config = data.getConfiguration();
+		this.data = data;
+		super.moveDriver.setmoveBlockerChecker(data.getMoveBlockerChecker());
 	}
+	
+	/**
+	 * @return The position of the MovableEntity.
+	 */
+	public Point getPosition(){
+		return super.position;
+	}	
 	
 	/* ---- Getter ----- */
 	

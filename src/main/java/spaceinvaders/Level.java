@@ -1,5 +1,6 @@
 package spaceinvaders;
 
+
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;

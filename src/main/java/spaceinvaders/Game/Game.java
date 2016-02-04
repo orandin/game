@@ -21,7 +21,7 @@ import spaceinvaders.entities.blockersRules.MoveBlockerRules;
  * @author Simon Delberghe
  */
 public class Game extends GameDefaultImpl {
-	
+
 	protected GameWindow gameWindow;
 	protected GameUniverseViewPortDefaultImpl universeViewPort;
 	protected Thread livesChecker;
@@ -40,6 +40,10 @@ public class Game extends GameDefaultImpl {
 		applier.setGameData(data);
 		this.data.getMoveBlockerChecker().setMoveBlockerRules(applier);
 		this.data.addLevel(new Level(this.data, this.universeViewPort));
+	}
+	
+	public GameUniverseViewPortDefaultImpl getUniverseViewPort() {
+		return this.universeViewPort;
 	}
 
 	public void endOfGame(){

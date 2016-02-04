@@ -14,7 +14,7 @@ import gameframework.game.GameData;
  * @author Simon Delberghe
  */
 
-public abstract class Shooter extends EntiteMovable {
+public abstract class Shooter extends MovableEntity {
 
 	/* ----- Constructor ----- */
 	
@@ -26,6 +26,9 @@ public abstract class Shooter extends EntiteMovable {
 	public Shooter(GameData data) {
 		super(data);
 	}
+	
+	/**
+	 * @return the image of the shooter
 
 	/* ----- Getters ----- */
 	
@@ -44,6 +47,9 @@ public abstract class Shooter extends EntiteMovable {
 	public DrawableImage getImage(){
 		return image;
 	}
+	
+	/**
+	 * Method that allow a shooter to shoot.
 	
 	/**
 	 * @return <code>true</code> if the shooter can shoot <code>false</code> else

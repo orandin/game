@@ -4,16 +4,15 @@ import gameframework.game.GameData;
 import gameframework.game.GameLevel;
 import gameframework.motion.MoveStrategyStraightLine;
 import gameframework.motion.blocking.MoveBlocker;
-
 import java.awt.Point;
 import java.util.Random;
-
 import spaceinvaders.Level;
 
 /**
- * this class represent the different type of enemies in the game
- * @author 
+ * @author Kevin Rico
+ * @author Benjamin Szczapa
  */
+
 public abstract class Enemies extends Shooter implements MoveBlocker{
 
 	/* ---- attributes ----- */
@@ -26,6 +25,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	protected int point;
 	protected Level lvl;
 	
+
 	/* ----- constructor ----- */
 	
 	/**
@@ -67,7 +67,7 @@ public abstract class Enemies extends Shooter implements MoveBlocker{
 	 */
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		shoot();
+		// TODO
 	}
 
 	/**
