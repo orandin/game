@@ -13,15 +13,12 @@ import gameframework.game.GameData;
  * @author Simon Delberghe
  */
 public class MediumAlien extends Alien {
-	
+
 	/**
 	 * Create a medium alien
-	 * @param gameData
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
+	 * @param gameData	The game data
+	 * @param posX	The initial x position
+	 * @param posY	The initial y position
 	 */
 	public MediumAlien(GameData gameData, int posX, int posY, Level lvl) {
 		super(gameData, posX, posY, lvl);

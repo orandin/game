@@ -3,7 +3,7 @@ package spaceinvaders;
 import gameframework.drawing.GameUniverseViewPort;
 import gameframework.game.GameData;
 import gameframework.game.GameLevelDefaultImpl;
-import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.Enemy;
 import spaceinvaders.entities.LargeAlien;
 import spaceinvaders.entities.MediumAlien;
 import spaceinvaders.entities.Player;
@@ -20,9 +20,7 @@ import spaceinvaders.entities.blockers.RightWall;
  * @author Simon Delberghe
  */
 public class Level extends GameLevelDefaultImpl {
-	
-	/* ---- Attributes ----- */
-	
+
 	/**
 	 * this class had 3 attributes
 	 * NB_CELLS : the default number of cell
@@ -33,16 +31,11 @@ public class Level extends GameLevelDefaultImpl {
 	private final int NB_ROWS  = 5;
 	private EnemiesArray enemiesArray;
 
-	/* ----- Constructor ----- */
-	
 	/**
 	 * Create the Level
-	 * @param gameData
-	 * 		The game data
-	 * @param view
-	 * 		The game universe
-	 * @param player
-	 * 		The player
+	 * @param gameData The game data
+	 * @param view The game universe
+	 * @param player The player
 	 */
 	public Level(GameData gameData, GameUniverseViewPort view) {
 		super(gameData);
@@ -50,8 +43,6 @@ public class Level extends GameLevelDefaultImpl {
 		enemiesArray = new EnemiesArray(gameData);
 	}
 
-	/* ----- Getters ----- */
-	
 	/**
 	 * getter for enemiesArray
 	 * @return the enemies array
@@ -59,16 +50,14 @@ public class Level extends GameLevelDefaultImpl {
 	public EnemiesArray getEnemiesArray(){
 		return enemiesArray;
 	}
-	
-	/* ----- Methods ----- */
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	protected void init() {
 		Player player = new Player(data);
-		
+
 		data.getUniverse().addGameEntity(new LeftWall(data));
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
@@ -78,7 +67,7 @@ public class Level extends GameLevelDefaultImpl {
 
 		for(int row = 1; row <= NB_ROWS; row++){
 			for(int cell = 1; cell <= NB_CELLS; cell++){
-				Enemies enemy = rulesToCreateEnemy(row, posX, posY);
+				Enemy enemy = rulesToCreateEnemy(row, posX, posY);
 				enemiesArray.add(enemy);
 				if(cell == NB_CELLS)
 					posY += enemy.getImage().getHeight();
@@ -97,7 +86,7 @@ public class Level extends GameLevelDefaultImpl {
 	 * @param posY
 	 * @return Returns the enemy created
 	 */
-	protected Enemies rulesToCreateEnemy(int row, int posX, int posY) {
+	protected Enemy rulesToCreateEnemy(int row, int posX, int posY) {
 		switch(row) {
 			case 1:
 				return new LargeAlien(super.data, posX, posY, this);

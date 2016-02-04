@@ -5,7 +5,7 @@ import gameframework.motion.MoveStrategyStraightLine;
 
 import java.awt.Point;
 
-import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.Enemy;
 
 /**
  * this class represent enemies array, all the enemies present in the level
@@ -13,8 +13,6 @@ import spaceinvaders.entities.Enemies;
  *
  */
 public class EnemiesArray {
-
-	/* ----- Attributes ----- */
 
 	/**
 	 * this class had 5 attributes
@@ -28,10 +26,8 @@ public class EnemiesArray {
 	private GameData data;
 	private int x = 0;
 	private int y = 0;
-	private final Enemies[][] enemiesArray = new Enemies[5][11];
+	private final Enemy[][] enemiesArray = new Enemy[5][11];
 	private int nbEnemies = 0;
-
-	/* ----- Constructor ----- */
 
 	/**
 	 * Constructor
@@ -41,14 +37,12 @@ public class EnemiesArray {
 		data = gameData;
 	}
 
-	/* ----- Getter ----- */
-
 	/**
 	 * 
 	 * @param enemy : the enemy which search in the enemies array
 	 * @return the position of this enemy in the array
 	 */
-	public Point getEnemiesPositionInArray(Enemies enemy){
+	public Point getEnemiesPositionInArray(Enemy enemy){
 		Point p = null;
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 11 ; j++){
@@ -68,7 +62,7 @@ public class EnemiesArray {
 	 * @param enemy : the enemy which want to shoot
 	 * @return <code>true</code> true if he can <code>false</code> else
 	 */
-	public boolean EnemieCanShoot(Enemies enemy){
+	public boolean EnemieCanShoot(Enemy enemy){
 		try{
 			Point p = getEnemiesPositionInArray(enemy);
 			return enemiesArray[p.y + 1][p.x] == null;
@@ -77,13 +71,11 @@ public class EnemiesArray {
 		}
 	}
 
-	/* ----- Methods ----- */
-
 	/**
 	 * method to add an enemy in the enemies array
 	 * @param enemy : he enemy which want to be add in the array
 	 */
-	public void add(Enemies enemy){
+	public void add(Enemy enemy){
 		if(nbEnemies < 55){
 			enemiesArray[y][x] = enemy;
 			data.getUniverse().addGameEntity(enemy);
@@ -102,7 +94,7 @@ public class EnemiesArray {
 	 * method for remove an enemy in the enemies array (replace by <code>null</code>)
 	 * @param enemy : the enemy which want to be remove
 	 */
-	public void remove(Enemies enemy){
+	public void remove(Enemy enemy){
 		Point p = getEnemiesPositionInArray(enemy);
 		enemiesArray[p.y][p.x] = null;
 		nbEnemies --;
@@ -114,7 +106,7 @@ public class EnemiesArray {
 		for(int i = 0 ; i < 5 ; i++){
 			for(int j = 0 ; j < 11 ; j++){
 				if(enemiesArray[i][j] != null){
-					Enemies alien = enemiesArray[i][j];
+					Enemy alien = enemiesArray[i][j];
 					alien.getPosition().y += alien.getImage().getHeight();
 					alien.getDriver().setStrategy(line);
 				}

@@ -16,12 +16,9 @@ public class LargeAlien extends Alien {
 
 	/**
 	 * Create a large alien
-	 * @param gameData
-	 * 		The game data
-	 * @param posX
-	 * 		The initial x position
-	 * @param posY
-	 * 		The initial y position
+	 * @param gameData The game data
+	 * @param posX	The initial x position
+	 * @param posY	The initial y position
 	 */
 	public LargeAlien(GameData gameData, int posX, int posY, Level lvl){
 		super(gameData, posX, posY, lvl);
