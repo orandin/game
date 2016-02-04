@@ -9,25 +9,22 @@ import gameframework.game.GameData;
 import org.junit.Before;
 import org.junit.Test;
 
-import spaceinvaders.entities.Alien;
-import spaceinvaders.entities.Enemies;
+import spaceinvaders.entities.Enemy;
 import spaceinvaders.entities.LargeAlien;
-import spaceinvaders.entities.MediumAlien;
+import spaceinvaders.entities.MediumAlienTest;
 import spaceinvaders.entities.SmallAlien;
 
 public class LevelTest {
 	
-	GameUniverseViewPort view;
-	GameData gameData;
-	GameConfiguration config;
-	Level level;
-	Enemies enemy;
+	protected GameUniverseViewPort view;
+	protected GameData gameData;
+	protected Level level;
+	protected Enemy enemy;
 	
 	@Before
 	public void init() {
 		view = new GameUniverseViewPortDefaultImpl();
-		config = new GameConfiguration();
-		gameData = new GameData(config);
+		gameData = new GameData(new GameConfiguration());
 		level = new Level(gameData, view);
 	}
 
@@ -35,14 +32,18 @@ public class LevelTest {
 	public void rulesToCreateEnemyTest() {
 		int row = 1, posX = 200, posY = 200;
 		init();
+		
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
 		assertEquals(LargeAlien.class, enemy.getClass());
+		
 		row = 2;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
-		assertEquals(MediumAlien.class, enemy.getClass());
+		assertEquals(MediumAlienTest.class, enemy.getClass());
+		
 		row = 3;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
-		assertEquals(MediumAlien.class, enemy.getClass());
+		assertEquals(MediumAlienTest.class, enemy.getClass());
+		
 		row = 4;
 		enemy = level.rulesToCreateEnemy(row, posX, posY);
 		assertEquals(SmallAlien.class, enemy.getClass());
