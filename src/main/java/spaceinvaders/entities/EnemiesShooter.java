@@ -2,7 +2,6 @@ package spaceinvaders.entities;
 
 import gameframework.game.GameData;
 import gameframework.game.GameLevel;
-import gameframework.motion.MoveStrategyStraightLine;
 import gameframework.motion.blocking.MoveBlocker;
 
 import java.awt.Point;
@@ -25,7 +24,7 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 	 */
 	protected int point;
 	protected Level lvl;
-	
+	protected Point enemiesArrayPosition;
 	/* ----- constructor ----- */
 	
 	/**
@@ -38,8 +37,6 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 	public EnemiesShooter(GameData data, int posX, int posY, Level level) {
 		super(data);
 		super.setPosition(new Point(posX, posY));
-		//mis entre commentaire pour tester sans avoir le probleme de deplacement
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() ,position.y)));
 		lvl = level;
 	}
 	
@@ -69,6 +66,14 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 		return point;
 	}
 	
+	public Point getArrayPosition(){
+		return enemiesArrayPosition;
+	}
+	/* ----- Setter ----- */
+	
+	public void setArrayPosition(Point position){
+		enemiesArrayPosition = position;
+	}
 	/* ---- Methods ---- */
 	
 

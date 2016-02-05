@@ -38,37 +38,20 @@ public class EnemiesArray {
 	}
 
 	/**
-	 * 
-	 * @param enemy : the enemy which search in the enemies array
-	 * @return the position of this enemy in the array
-	 */
-	public Point getEnemiesPositionInArray(EnemiesShooter enemy){
-		Point p = null;
-		for(int i = 0; i < 5; i++){
-			for(int j = 0; j < 11 ; j++){
-				if(enemy.equals(enemiesArray[i][j])){
-					p = new Point(j, i);
-					break;
-				}
-			}
-			if(p != null)
-				break;
-		}
-		return p;
-	}
-
-	/**
 	 * method for know if an enemy is well placed for shoot
 	 * @param enemy : the enemy which want to shoot
 	 * @return <code>true</code> true if he can <code>false</code> else
 	 */
 	public boolean EnemieCanShoot(EnemiesShooter enemy){
-		try{
-			Point p = getEnemiesPositionInArray(enemy);
-			return enemiesArray[p.y + 1][p.x] == null;
-		} catch (IndexOutOfBoundsException e){
-			return true;
-		}
+			Point p = enemy.getArrayPosition();
+			boolean canShoot = true;
+			for(int i = p.y ; i < 4  ; i++){
+				if(enemiesArray[i + 1][p.x] != null){
+					canShoot = false;
+					break;
+				}
+			}
+			return canShoot;
 	}
 
 	/**
@@ -88,6 +71,7 @@ public class EnemiesArray {
 	public void add(EnemiesShooter enemy){
 		if(nbEnemies < 55){
 			enemiesArray[y][x] = enemy;
+			enemy.setArrayPosition(new Point(x,y));
 			data.getUniverse().addGameEntity(enemy);
 			nbEnemies++;
 			if(x == 10){
@@ -105,7 +89,7 @@ public class EnemiesArray {
 	 * @param enemy : the enemy which want to be remove
 	 */
 	public void remove(EnemiesShooter enemy){
-		Point p = getEnemiesPositionInArray(enemy);
+		Point p = enemy.getArrayPosition();
 		enemiesArray[p.y][p.x] = null;
 		nbEnemies --;
 		data.getUniverse().removeGameEntity(enemy);
@@ -117,8 +101,8 @@ public class EnemiesArray {
 				for(int j = 0 ; j < 11 ; j++){
 					if(enemiesArray[i][j] != null){
 						EnemiesShooter alien = enemiesArray[i][j];
-						alien.getPosition().y += 10;
-						alien.getDriver().setStrategy(new MoveStrategyStraightLine(alien.getPosition(), new Point(nextGoal, alien.getPosition(). y)));
+						alien.setPosition(new Point(alien.getPosition().x, alien.getPosition().y + 10));
+						alien.getDriver().setStrategy(new MoveStrategyStraightLine(alien.getPosition(), new Point(nextGoal, alien.getPosition().y), alien.getSpeedVector().getSpeed()));
 				}
 			}
 		}

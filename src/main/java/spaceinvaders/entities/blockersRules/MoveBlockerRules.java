@@ -104,6 +104,24 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 
 	/* ----- Enemy Laser VS Enemy ---- */
 	
+	public void moveBlockerRule(Alien alien, EnemyLaser laser){
+		//sert à gerer l'enjembement des deux move blocker
+	}
+
+	/* ---- For the different types of Alien ----- */
+	
+	public void moveBlockerRule(SmallAlien alien , EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
+	}
+
+	public void moveBlockerRule(MediumAlien alien, EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
+	}
+
+	public void moveBlockerRule(LargeAlien alien, EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
+	}
+	
 	/**
 	 * Defines the action when the enemy laser touches an enemy
 	 * do nothing because when the enemy shoot the two bounding boxs collided
@@ -190,7 +208,6 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	/* ----- LeftWall -----*/
 	
 	public void moveBlockerRule(Alien alien, LeftWall wall) throws IllegalMoveException{
-		System.out.println("l");
 		enemyChangeDirection(alien,gameData.getConfiguration().getNbColumns() * gameData.getConfiguration().getSpriteSize());
 		throw new IllegalMoveException();
 	}
@@ -229,6 +246,26 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
 	public void moveBlockerRule(LargeAlien alien, RightWall wall) throws IllegalMoveException{
 		moveBlockerRule((Alien) alien , wall);
+	}
+	
+	/* ----- Enemy vs Enemy ---- */
+	
+	public void moveBlockerRule(Alien Alien1, Alien alien2){
+		//sert à gerer l'enjembement des deux move blocker
+	}
+
+	/* ---- For the different types of Alien ----- */
+	
+	public void moveBlockerRule(SmallAlien alien1, SmallAlien alien2) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien1, (Alien) alien2);
+	}
+
+	public void moveBlockerRule(MediumAlien alien1, MediumAlien alien2) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien1, (Alien) alien2);
+	}
+
+	public void moveBlockerRule(LargeAlien alien1, LargeAlien alien2) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien1, (Alien) alien2);
 	}
 }
 

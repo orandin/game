@@ -30,7 +30,7 @@ public class Game extends GameDefaultImpl {
 	 * Create the game
 	 */
 	public Game() {
-		super(new GameData(new GameConfiguration(36,36,16,3)));
+		super(new GameData(new GameConfiguration(40,40,16,3)));
 		gameWindow = new GameWindow("space invaders", data.getCanvas(), data);
 		gameWindow.createGUI();
 		universeViewPort = new GameUniverseViewPortDefaultImpl(data);

@@ -72,9 +72,9 @@ public class Level extends GameLevelDefaultImpl {
 				EnemiesShooter enemy = rulesToCreateEnemy(row, posX, posY);
 				enemiesArray.add(enemy);
 				if(cell == NB_CELLS)
-					posY += enemy.getImage().getHeight();
+					posY += enemy.getImage().getHeight() + 10;
 				else
-					posX += enemy.getImage().getWidth();
+					posX += enemy.getImage().getWidth() + 10 ;
 			}
 			posX = spriteSize * 5;
 		}
@@ -95,7 +95,8 @@ public class Level extends GameLevelDefaultImpl {
 		if(row == 2 || row == 3){
 			return new MediumAlien(data, posX, posY, this);
 		}
-		return new SmallAlien(data, posX, posY, this);
+		else
+			return new SmallAlien(data, posX, posY, this);
 	}
 	
 	//methode pour reset le lvl pour l'instant non fonctionnel

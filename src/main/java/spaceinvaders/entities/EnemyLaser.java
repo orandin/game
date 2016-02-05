@@ -28,7 +28,7 @@ public class EnemyLaser extends Laser{
 	public EnemyLaser(GameData data , EnemiesShooter enemy) {
 		super(data, enemy);
 		position = new Point((enemy.getPosition().x + enemy.image.getWidth() / 2), (enemy.getPosition().y + enemy.image.getHeight()/2));
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()),15));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()),20));
 		enem = enemy;
 	}
 
