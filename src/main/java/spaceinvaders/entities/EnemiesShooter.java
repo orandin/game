@@ -18,13 +18,15 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 	/* ---- attributes ----- */
 	
 	/**
-	 * this class had 2 attributes
+	 * this class had 3 attributes
 	 * - point : the point win by the player if he is kill
-	 * - lvl : the current level ( to access enemies array principally)  
+	 * - lvl : the current level ( to access enemies array principally)
+	 * - enemiesArrayPosition : the position of this enemies in enemiesArray
 	 */
 	protected int point;
 	protected Level lvl;
 	protected Point enemiesArrayPosition;
+	
 	/* ----- constructor ----- */
 	
 	/**
@@ -66,11 +68,19 @@ public abstract class EnemiesShooter extends Shooter implements MoveBlocker{
 		return point;
 	}
 	
+	/**
+	 * getter for enemiesArrayPosition
+	 * @return the position of this enemy in enemiesArray
+	 */
 	public Point getArrayPosition(){
 		return enemiesArrayPosition;
 	}
 	/* ----- Setter ----- */
 	
+	/**
+	 * set enemiesArrayPosition attribute with the EnemiesArray position
+	 * @param position
+	 */
 	public void setArrayPosition(Point position){
 		enemiesArrayPosition = position;
 	}

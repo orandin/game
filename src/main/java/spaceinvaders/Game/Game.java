@@ -22,10 +22,18 @@ import spaceinvaders.entities.blockersRules.MoveBlockerRules;
  */
 public class Game extends GameDefaultImpl {
 
+	/* ----- Attributes ----- */
+	
+	/**
+	 * this class had 2 attributes
+	 * gameWindow : the game window
+	 * universeViewPort : the universeViewPort
+	 */
 	protected GameWindow gameWindow;
 	protected GameUniverseViewPortDefaultImpl universeViewPort;
-	protected Thread livesChecker;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the game
 	 */
@@ -41,11 +49,18 @@ public class Game extends GameDefaultImpl {
 		data.addLevel(new Level(data, universeViewPort));
 	}
 
+	/* ----- Method ------ */
+	
+	/**
+	 * method for change the window when the game is finished
+	 */
 	public void endOfGame(){
 		data.getUniverse().removeAllGameEntities();
 		universeViewPort.setBackgroundImage("../../game_over.png");
 		universeViewPort.paint();
 	}
+	
+	/* ----- Main method ----- */ 
 	
 	public static void main (String[] args) throws IOException{
 		Game game = new Game();

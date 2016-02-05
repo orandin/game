@@ -15,6 +15,8 @@ import java.awt.Point;
  */
 public class RightWall extends Wall {
 	
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the right wall
 	 * @param data The game data

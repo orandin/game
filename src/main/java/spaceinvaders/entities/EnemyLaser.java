@@ -12,6 +12,8 @@ import gameframework.motion.MoveStrategyStraightLine;
  */
 public class EnemyLaser extends Laser{
 
+	/* ----- Attributes ----- */
+	
 	/**
 	 * this class had 1 attribute
 	 * - enemy : the enemy who shoot this laser
@@ -32,6 +34,8 @@ public class EnemyLaser extends Laser{
 		enem = enemy;
 	}
 
+	/* ----- Getter ----- */
+	
 	/**
 	 * getter for enemy
 	 * @return the shooter
@@ -41,12 +45,14 @@ public class EnemyLaser extends Laser{
 		return this.enem;
 	}
 
+	/* ----- Method ----- */
+	
 	/**
 	 * action to do after a move
 	 */
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		if(position.y >= data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize())
+		if(position.y >= (data.getConfiguration().getNbRows() * data.getConfiguration().getSpriteSize()) - image.getHeight())
 			data.getUniverse().removeGameEntity(this);
 	}
 }

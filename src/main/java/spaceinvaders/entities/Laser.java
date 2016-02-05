@@ -6,6 +6,8 @@ import gameframework.motion.blocking.MoveBlocker;
 
 public abstract class Laser extends EntiteMovable implements MoveBlocker {
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Laser constructor
 	 * @param data ; game data
@@ -16,6 +18,7 @@ public abstract class Laser extends EntiteMovable implements MoveBlocker {
 		image = new DrawableImage("../../images/entite/laser.png", data.getCanvas());
 	}
 
+	/* ----- Getter ----- */
 	/**
 	 * getter for the shooter
 	 * @return the entitie who shoot

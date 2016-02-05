@@ -14,6 +14,8 @@ import spaceinvaders.entities.EnemiesShooter;
  */
 public class EnemiesArray {
 
+	/* ----- Attributes ----- */
+	
 	/**
 	 * this class had 5 attributes
 	 * - data : the game data
@@ -29,6 +31,8 @@ public class EnemiesArray {
 	private final EnemiesShooter[][] enemiesArray = new EnemiesShooter[5][11];
 	private int nbEnemies = 0;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Constructor
 	 * @param data : data game
@@ -37,6 +41,8 @@ public class EnemiesArray {
 		data = gameData;
 	}
 
+	/* ----- Getters ----- */
+	
 	/**
 	 * method for know if an enemy is well placed for shoot
 	 * @param enemy : the enemy which want to shoot
@@ -95,7 +101,10 @@ public class EnemiesArray {
 		data.getUniverse().removeGameEntity(enemy);
 	}
 
-	// pas encore sur pour cette methode elle sert a inverser la strategy de déplacement pour tout les enemies 
+	/**
+	 * reverse the direction of all alien presents in the game
+	 * @param nextGoal : the next goal
+	 */
 	public void ReverseMoveStrategyForAll(int nextGoal){
 			for(int i = 0 ; i < 5 ; i++){
 				for(int j = 0 ; j < 11 ; j++){
