@@ -19,8 +19,9 @@ public abstract class Alien extends EnemiesShooter  implements MoveBlocker{
 
 	public Alien(GameData data,int posX, int posY, Level lvl){
 		super(data, posX, posY, lvl);
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() , position.y)));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() , position.y), 3));
 	}
+
 	/* ----- Method ----- */
 
 	/**
@@ -28,7 +29,8 @@ public abstract class Alien extends EnemiesShooter  implements MoveBlocker{
 	 */
 	@Override
 	public void oneStepMoveAddedBehavior() {
-		if(canShoot())
+		if(canShoot()){
 			shoot();
+		}
 	}
 }

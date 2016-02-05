@@ -25,7 +25,7 @@ public class PlayerLaser extends Laser{
 		super(data, player);
 		p = player;
 		position = new Point((player.getPosition().x + player.image.getWidth() / 2) -2, (player.getPosition().y - player.image.getHeight() / 2) -2);
-		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0),15));
+		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0),25));
 	}
 	
 	/**
