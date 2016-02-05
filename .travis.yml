@@ -1,1 +1,6 @@
 language: java
+
+install:
+  - wget http://github.com/DamienCassou/lille-game-framework/archive/master.tar.gz
+  - tar -xzvf master.tar.gz
+  - cd lille-game-framework-master && mvn install
