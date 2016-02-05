@@ -20,7 +20,7 @@ public class LeftWallTest extends WallTest {
 
 	@Override
 	public Point test_getPointWall() {
-		return new Point(-1, 0);
+		return new Point(0, 0);
 	}
 
 }

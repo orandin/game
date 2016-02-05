@@ -1,13 +1,23 @@
-# Game Framework
+# Space invaders
 
-[![Build Status](https://travis-ci.org/DamienCassou/lille-game-framework.png?branch=master)](https://travis-ci.org/DamienCassou/lille-game-framework)
+## Instructions
 
-As far as I know, this game framework has mostly been written by David
-Auber and contains a lot of contributions from Philippe Narbel and
-Damien Cassou.
-
-Pour lancer les tests, tapez :
-
+Before to launch the game, we must install the framework manually or execute the file `install.sh` in your terminal. Then start the game with this command :
 ```bash
-$ mvn test
+$ mvn exec:java
 ```
+
+## User commands
+
+- `space` : To shoot
+- `← (left arrow)`: Move to the left
+- `→ (right arrow)`: Move to the right
+
+
+---- 
+## Team
+- Benjamin Szczapa *(@Wyzko)*
+- Kévin Rico *(@galadac)*
+- Matthieu Lepers *(@AireAyquaza)*
+- Théo Veschaeve *(@Yoshi80)*
+- Simon Delberghe *(@orandin)*
