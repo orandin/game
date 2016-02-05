@@ -2,7 +2,7 @@
 
 ## Instructions
 
-Before to launch the game, we must install the framework manually or execute the file `install.sh` in your terminal. Then start the game with this command :
+Before to launch the game, you must install the framework manually or execute the file `install.sh` in your terminal. Then start the game with this command :
 ```bash
 $ mvn exec:java
 ```
@@ -19,5 +19,6 @@ $ mvn exec:java
 - Benjamin Szczapa *(@Wyzko)*
 - Kévin Rico *(@galadac)*
 - Matthieu Lepers *(@AireAyquaza)*
+- Guillaume Maitrot *(@squik)*
 - Théo Veschaeve *(@Yoshi80)*
 - Simon Delberghe *(@orandin)*
