@@ -20,6 +20,8 @@ import gameframework.motion.GameMovable;
  */
 public abstract class EntiteMovable extends GameMovable implements GameEntity {
 
+	/* ----- Attributes ----- */
+	
 	/**
 	 * this class had 3 attributes
 	 * - data : game data
@@ -30,6 +32,8 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 	protected DrawableImage image;
 	protected GameConfiguration config;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create an EntiteMovable
 	 * @param data
@@ -41,6 +45,8 @@ public abstract class EntiteMovable extends GameMovable implements GameEntity {
 		data = gameData;
 	}
 
+	/* ----- Getters -----*/
+	
 	/**
 	 * @return the bounding box
 	 */

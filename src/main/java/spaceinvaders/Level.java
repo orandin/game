@@ -22,6 +22,8 @@ import spaceinvaders.entities.blockers.RightWall;
  */
 public class Level extends GameLevelDefaultImpl {
 
+	/* ----- Attributes ----- */
+	
 	/**
 	 * this class had 3 attributes
 	 * NB_CELLS : the default number of cell
@@ -32,6 +34,8 @@ public class Level extends GameLevelDefaultImpl {
 	private final int NB_ROWS  = 5;
 	private EnemiesArray enemiesArray;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * Create the Level
 	 * @param gameData The game data
@@ -44,6 +48,7 @@ public class Level extends GameLevelDefaultImpl {
 		enemiesArray = new EnemiesArray(gameData);
 	}
 
+	/* ----- Getter ----- */
 	/**
 	 * getter for enemiesArray
 	 * @return the enemies array
@@ -52,6 +57,8 @@ public class Level extends GameLevelDefaultImpl {
 		return enemiesArray;
 	}
 
+	/* -----Methods ----- */
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -64,6 +71,14 @@ public class Level extends GameLevelDefaultImpl {
 		data.getUniverse().addGameEntity(new RightWall(data));
 		data.getUniverse().addGameEntity(player);
 
+		initMonster();
+		
+	}
+	
+	/*
+	 * use for initialized all alien in the screen
+	 */
+	private void initMonster(){
 		int posX = spriteSize * 5;
 		int posY = posX;
 
@@ -78,7 +93,6 @@ public class Level extends GameLevelDefaultImpl {
 			}
 			posX = spriteSize * 5;
 		}
-		
 	}
 	
 	/**
@@ -99,9 +113,11 @@ public class Level extends GameLevelDefaultImpl {
 			return new SmallAlien(data, posX, posY, this);
 	}
 	
-	//methode pour reset le lvl pour l'instant non fonctionnel
+	/**
+	 * Method for reset the level if the player kill all enemies
+	 */
 	public void resetLevel(){
-		data.getUniverse().removeAllGameEntities();
-		init();
+		enemiesArray = new EnemiesArray(data);
+		initMonster();
 	}
 }

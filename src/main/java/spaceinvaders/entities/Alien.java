@@ -17,6 +17,15 @@ import gameframework.motion.blocking.MoveBlocker;
  */
 public abstract class Alien extends EnemiesShooter  implements MoveBlocker{
 
+	/* ---- Constructor ---- */
+	
+	/**
+	 * Constructor
+	 * @param data : game data
+	 * @param posX : x position
+	 * @param posY : y position
+	 * @param lvl : the current level
+	 */
 	public Alien(GameData data,int posX, int posY, Level lvl){
 		super(data, posX, posY, lvl);
 		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(data.getConfiguration().getNbColumns() * data.getConfiguration().getSpriteSize() , position.y), 3));

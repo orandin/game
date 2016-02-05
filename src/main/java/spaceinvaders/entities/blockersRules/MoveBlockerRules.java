@@ -67,12 +67,17 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		player.getShooter().resetShoot();
 	}
 	
+	/**
+	 * change Direction of all enemies presents in the game
+	 * @param alien : alien which touch the well
+	 * @param nextGoal : the nextGoal for the MoveStrategy
+	 */
 	private void enemyChangeDirection(Alien alien, int nextGoal){
 		((Level) alien.getLevel()).getEnemiesArray().ReverseMoveStrategyForAll(nextGoal);
 	}
 	/* ----- Rules ----- */
 	
-	/* ---- Player laser VS Enemy ----- */
+	/* ---- When the player touch Alien with laser ----- */
 	
 	/**
 	 * Defines the action when the player laser touches an enemy
@@ -100,55 +105,6 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 
 	public void moveBlockerRule(PlayerLaser player, LargeAlien alien) throws IllegalMoveException {
 		moveBlockerRule(player, (Alien) alien);
-	}
-
-	/* ----- Enemy Laser VS Enemy ---- */
-	
-	public void moveBlockerRule(Alien alien, EnemyLaser laser){
-		//sert à gerer l'enjembement des deux move blocker
-	}
-
-	/* ---- For the different types of Alien ----- */
-	
-	public void moveBlockerRule(SmallAlien alien , EnemyLaser laser) throws IllegalMoveException {
-		moveBlockerRule((Alien) alien, laser);
-	}
-
-	public void moveBlockerRule(MediumAlien alien, EnemyLaser laser) throws IllegalMoveException {
-		moveBlockerRule((Alien) alien, laser);
-	}
-
-	public void moveBlockerRule(LargeAlien alien, EnemyLaser laser) throws IllegalMoveException {
-		moveBlockerRule((Alien) alien, laser);
-	}
-	
-	/**
-	 * Defines the action when the enemy laser touches an enemy
-	 * do nothing because when the enemy shoot the two bounding boxs collided
-	 * so we have to define this rule to not stop the laser
-	 * @param laser
-	 * 		the enemy laser
-	 * @param alien
-	 * 		the enemy touch by it
-	 * @throws IllegalMoveException
-	 *  		Exception for stop the movement
-	 */
-	public void moveBlockerRule(EnemyLaser laser, Alien alien){
-		//sert à gerer l'enjembement des deux move blocker
-	}
-
-	/* ---- For the different types of Alien ----- */
-	
-	public void moveBlockerRule(EnemyLaser laser, SmallAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Alien) alien);
-	}
-
-	public void moveBlockerRule(EnemyLaser laser, MediumAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Alien) alien);
-	}
-
-	public void moveBlockerRule(EnemyLaser laser, LargeAlien alien) throws IllegalMoveException {
-		moveBlockerRule(laser, (Alien) alien);
 	}
 
 	/* ----- Enemy laser VS Player ----- */
@@ -185,6 +141,12 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
 	/* ----- Enemy vs Player ----- */
 	
+	/**
+	 * rule when en enemy touch the player
+	 * @param player
+	 * @param alien
+	 * @throws IllegalMoveException
+	 */
 	public void moveBlockerRule(Player player, Alien alien) throws IllegalMoveException{
 		alien.getLevel().end();
 		throw new IllegalMoveException();
@@ -207,6 +169,12 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
 	/* ----- LeftWall -----*/
 	
+	/**
+	 * rule when an alien touch left screen
+	 * @param alien
+	 * @param wall
+	 * @throws IllegalMoveException
+	 */
 	public void moveBlockerRule(Alien alien, LeftWall wall) throws IllegalMoveException{
 		enemyChangeDirection(alien,gameData.getConfiguration().getNbColumns() * gameData.getConfiguration().getSpriteSize());
 		throw new IllegalMoveException();
@@ -228,6 +196,12 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 	
 	/* ----- RighttWall -----*/
 	
+	/**
+	 * rules when en alien touch the right screen
+	 * @param alien
+	 * @param wall
+	 * @throws IllegalMoveException
+	 */
 	public void moveBlockerRule(Alien alien, RightWall wall) throws IllegalMoveException{
 		enemyChangeDirection(alien,0);
 		throw new IllegalMoveException();
@@ -248,10 +222,15 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 		moveBlockerRule((Alien) alien , wall);
 	}
 	
-	/* ----- Enemy vs Enemy ---- */
+	/* ----- Bug Fix ----- */
+	
+	/* this section is a set of rules to defines differents rules for fix bug */
+	
+	/* ----- Enemy touch an Enemy ---- */
 	
 	public void moveBlockerRule(Alien Alien1, Alien alien2){
-		//sert à gerer l'enjembement des deux move blocker
+		//sert à gerer l'enjembement des voisins dans le deplacement des Alien
+		//se qui evite les decalage
 	}
 
 	/* ---- For the different types of Alien ----- */
@@ -266,6 +245,59 @@ public class MoveBlockerRules extends MoveBlockerRulesApplierDefaultImpl {
 
 	public void moveBlockerRule(LargeAlien alien1, LargeAlien alien2) throws IllegalMoveException {
 		moveBlockerRule((Alien) alien1, (Alien) alien2);
+	}
+	
+	/* ----- when Enemy laser touch Alien ----- */
+	
+	/**
+	 * Defines the action when the enemy laser touches an enemy
+	 * do nothing because when the enemy shoot the two bounding boxs collided
+	 * so we have to define this rule to not stop the laser
+	 * @param laser
+	 * 		the enemy laser
+	 * @param alien
+	 * 		the enemy touch by it
+	 * @throws IllegalMoveException
+	 *  		Exception for stop the movement
+	 */
+	public void moveBlockerRule(EnemyLaser laser, Alien alien){
+		//sert à gerer l'enjembement des deux move blocker
+		//car quand un alien tir les 2 moveBlocker se chevauchent
+		//il faut donc gerer le conflit
+	}
+
+	/* ---- For the different types of Alien ----- */
+	
+	public void moveBlockerRule(EnemyLaser laser, SmallAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+
+	public void moveBlockerRule(EnemyLaser laser, MediumAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+
+	public void moveBlockerRule(EnemyLaser laser, LargeAlien alien) throws IllegalMoveException {
+		moveBlockerRule(laser, (Alien) alien);
+	}
+	
+	/* ----- Enemy Laser VS Enemy ---- */
+	
+	public void moveBlockerRule(Alien alien, EnemyLaser laser){
+		//sert à gerer l'enjembement des deux move blocker
+	}
+
+	/* ---- For the different types of Alien ----- */
+	
+	public void moveBlockerRule(SmallAlien alien , EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
+	}
+
+	public void moveBlockerRule(MediumAlien alien, EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
+	}
+
+	public void moveBlockerRule(LargeAlien alien, EnemyLaser laser) throws IllegalMoveException {
+		moveBlockerRule((Alien) alien, laser);
 	}
 }
 

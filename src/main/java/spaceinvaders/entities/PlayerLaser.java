@@ -10,12 +10,16 @@ import gameframework.motion.MoveStrategyStraightLine;
  */
 public class PlayerLaser extends Laser{
 
+	/* ----- Attributes ----- */
+	
 	/**
 	 * this class had 1 attribute
 	 * - enemy : the player who shoot this laser
 	 */
 	private Player p;
 
+	/* ----- Constructor ----- */
+	
 	/**
 	 * constructor
 	 * @param data : game data
@@ -28,6 +32,8 @@ public class PlayerLaser extends Laser{
 		moveDriver.setStrategy(new MoveStrategyStraightLine(position, new Point(position.x, 0),25));
 	}
 	
+	/* ----- Getter -----*/
+	
 	/**
 	 * getter for player
 	 * @return the shooter
@@ -36,6 +42,8 @@ public class PlayerLaser extends Laser{
 	public Player getShooter(){
 		return p;
 	}
+	
+	/* ----- Method ----- */
 	
 	/**
 	 * action to do after a move
