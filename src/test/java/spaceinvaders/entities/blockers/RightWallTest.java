@@ -3,11 +3,7 @@
  */
 package spaceinvaders.entities.blockers;
 
-import static org.junit.Assert.*;
-
 import java.awt.Point;
-
-import org.junit.Test;
 
 import gameframework.game.GameData;
 
