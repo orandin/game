@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dependencies.factories.GameDataFactory;
-import gameframework.game.GameConfiguration;
 import gameframework.game.GameData;
 
 /**
